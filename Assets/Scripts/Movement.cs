@@ -3,14 +3,15 @@ using System.Collections;
 
 public class Movement : MonoBehaviour {
     Rigidbody2D myRB;
-    public float speed = 1f;
+    public float speed;
     public float fan = 1f;
     float timer;
     bool moving;
     public bool movingRight;
     public bool isTouchingWall;
-    public Vector3 vel;
-    Vector3 pos;
+    RaycastHit2D hit;
+    SpriteRenderer spriteRend;
+    
 	// Use this for initialization
 	void Start () {
         myRB = GetComponent<Rigidbody2D>();
@@ -18,14 +19,32 @@ public class Movement : MonoBehaviour {
         moving = false;
         movingRight = true;
         isTouchingWall = false;
+        spriteRend = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
+        if (movingRight)
+        {
+            hit = Physics2D.Raycast(transform.position, transform.right, .6f);
+            spriteRend.flipX = false;
+            if (hit && hit.collider.tag == "Wall")
+            {
+                movingRight = false;
+            }
+        }
+        else
+        {
+            hit = Physics2D.Raycast(transform.position, -transform.right, .6f);
+            spriteRend.flipX = true;
+            if (hit && hit.collider.tag == "Wall")
+            {
+                movingRight = true;
+            }
+        }
+        if (hit)
         
-        vel = ((transform.position - pos) / Time.deltaTime).normalized;
-        pos = transform.position;
         if (!moving)
         {
             timer += Time.deltaTime;
@@ -46,11 +65,11 @@ public class Movement : MonoBehaviour {
     {
         if (moving && movingRight)
         {
-            transform.Translate(speed * Time.deltaTime, 0, 0);  
+            myRB.velocity = new Vector2(speed * Time.deltaTime, myRB.velocity.y);
         }
         else if(moving && !movingRight)
         {
-            transform.Translate(-speed * Time.deltaTime, 0, 0);  
+            myRB.velocity = new Vector2(-speed * Time.deltaTime, myRB.velocity.y);
         }
     }
 
@@ -72,7 +91,7 @@ public class Movement : MonoBehaviour {
             Debug.Log("gaemover");
             Destroy(collision.gameObject);
         }
-       else if (collision.gameObject.tag == "Wall" && movingRight && !isTouchingWall)
+      /* else if (collision.gameObject.tag == "Wall" && movingRight && !isTouchingWall)
         {
             movingRight = false;
             Debug.Log("a");
@@ -83,19 +102,19 @@ public class Movement : MonoBehaviour {
             movingRight = true;
             Debug.Log("a");
             isTouchingWall = true;
-        }
+        }*/
     }
     
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Wall" && isTouchingWall)
+       /* if (collision.gameObject.tag == "Wall" && isTouchingWall)
         {
             isTouchingWall = false;
         }
         else
         {
             isTouchingWall = true;
-        }
+        }*/
     }
     
 }

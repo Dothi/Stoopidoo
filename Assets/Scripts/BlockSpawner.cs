@@ -33,6 +33,7 @@ public class BlockSpawner : MonoBehaviour {
 
         if (Input.GetMouseButtonUp(0))
         {
+            spawn.GetComponent<BoxCollider2D>().enabled = true;
             spawn = null;
         }
     }
