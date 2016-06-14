@@ -7,17 +7,25 @@ public class Movement : MonoBehaviour {
     public float fan = 1f;
     float timer;
     bool moving;
-    bool movingRight;
+    public bool movingRight;
+    public bool isTouchingWall;
+    public Vector3 vel;
+    Vector3 pos;
 	// Use this for initialization
 	void Start () {
         myRB = GetComponent<Rigidbody2D>();
         timer = 0f;
         moving = false;
         movingRight = true;
+        isTouchingWall = false;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
+        
+        vel = ((transform.position - pos) / Time.deltaTime).normalized;
+        pos = transform.position;
         if (!moving)
         {
             timer += Time.deltaTime;
@@ -32,6 +40,7 @@ public class Movement : MonoBehaviour {
             Debug.Log("jloj");
             moving = true;
         }
+        
 	}
     void FixedUpdate()
     {
@@ -63,16 +72,30 @@ public class Movement : MonoBehaviour {
             Debug.Log("gaemover");
             Destroy(collision.gameObject);
         }
-    }
-    void OnTriggerEnter(Collider2D other)
-    {
-        if (other.gameObject.tag == "Wall" && movingRight)
+       else if (collision.gameObject.tag == "Wall" && movingRight && !isTouchingWall)
         {
             movingRight = false;
+            Debug.Log("a");
+            isTouchingWall = true;
         }
-        if (other.gameObject.tag == "Wall" && !movingRight)
+        else if (collision.gameObject.tag == "Wall" && !movingRight && !isTouchingWall)
         {
             movingRight = true;
+            Debug.Log("a");
+            isTouchingWall = true;
         }
     }
+    
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall" && isTouchingWall)
+        {
+            isTouchingWall = false;
+        }
+        else
+        {
+            isTouchingWall = true;
+        }
+    }
+    
 }
