@@ -27,13 +27,13 @@ public class BlockSpawner : MonoBehaviour {
             var pos = Input.mousePosition;
             pos.z = -Camera.main.transform.position.z;
             spawn.transform.position = Camera.main.ScreenToWorldPoint(pos);
-
-            
         }
-
         if (Input.GetMouseButtonUp(0))
         {
-            spawn.GetComponent<BoxCollider2D>().enabled = true;
+            if (spawn != null)
+            {
+                spawn.GetComponent<BoxCollider2D>().enabled = true;
+            }
             spawn = null;
         }
     }

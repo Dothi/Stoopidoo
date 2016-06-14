@@ -29,21 +29,31 @@ public class Movement : MonoBehaviour {
         {
             hit = Physics2D.Raycast(transform.position, transform.right, .6f);
             spriteRend.flipX = false;
-            if (hit && hit.collider.tag == "Wall")
+            
+            if (moving && myRB.velocity.x == 0f)
             {
                 movingRight = false;
             }
+          /*  if (hit && hit.collider.tag == "Wall")
+            {
+                movingRight = false;
+            }*/
         }
         else
         {
             hit = Physics2D.Raycast(transform.position, -transform.right, .6f);
             spriteRend.flipX = true;
-            if (hit && hit.collider.tag == "Wall")
+
+            if (moving && myRB.velocity.x == 0f)
             {
                 movingRight = true;
             }
+           /* if (hit && hit.collider.tag == "Wall")
+            {
+                movingRight = true;
+            }*/
         }
-        if (hit)
+        
         
         if (!moving)
         {
@@ -63,6 +73,7 @@ public class Movement : MonoBehaviour {
 	}
     void FixedUpdate()
     {
+        Debug.Log(myRB.velocity);
         if (moving && movingRight)
         {
             myRB.velocity = new Vector2(speed * Time.deltaTime, myRB.velocity.y);
