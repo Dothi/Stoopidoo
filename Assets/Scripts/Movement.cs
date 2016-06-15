@@ -6,11 +6,14 @@ public class Movement : MonoBehaviour {
     public float speed;
     public float fan = 1f;
     float timer;
+    public float idleTimer;
     bool moving;
     public bool movingRight;
     public bool isTouchingWall;
     RaycastHit2D hit;
     SpriteRenderer spriteRend;
+    LayerMask layerMask;
+
     
 	// Use this for initialization
 	void Start () {
@@ -20,41 +23,43 @@ public class Movement : MonoBehaviour {
         movingRight = true;
         isTouchingWall = false;
         spriteRend = GetComponent<SpriteRenderer>();
-	}
+        idleTimer = 0f;
+    }
 	
 	// Update is called once per frame
 	void Update () 
     {
         if (movingRight)
         {
-            hit = Physics2D.Raycast(transform.position, transform.right, .6f);
+            
             spriteRend.flipX = false;
             
             if (moving && myRB.velocity.x == 0f)
             {
-                movingRight = false;
+                idleTimer += 1 * Time.deltaTime;
+                if (idleTimer >= .3f)
+                {
+                    movingRight = false;
+                    idleTimer = 0f;
+                }
             }
-          /*  if (hit && hit.collider.tag == "Wall")
-            {
-                movingRight = false;
-            }*/
         }
         else
         {
-            hit = Physics2D.Raycast(transform.position, -transform.right, .6f);
+            
             spriteRend.flipX = true;
 
             if (moving && myRB.velocity.x == 0f)
             {
-                movingRight = true;
+                idleTimer += 1 * Time.deltaTime;
+                if (idleTimer >= .3f)
+                {
+                    movingRight = true;
+                    idleTimer = 0f;
+                }
+                
             }
-           /* if (hit && hit.collider.tag == "Wall")
-            {
-                movingRight = true;
-            }*/
         }
-        
-        
         if (!moving)
         {
             timer += Time.deltaTime;
@@ -68,12 +73,10 @@ public class Movement : MonoBehaviour {
         {
             Debug.Log("jloj");
             moving = true;
-        }
-        
+        }  
 	}
     void FixedUpdate()
     {
-        Debug.Log(myRB.velocity);
         if (moving && movingRight)
         {
             myRB.velocity = new Vector2(speed * Time.deltaTime, myRB.velocity.y);
@@ -89,7 +92,7 @@ public class Movement : MonoBehaviour {
         if(collider.tag == "Fan")
         {
             //transform.Translate(0, fan * Time.deltaTime, 0);
-            myRB.velocity = new Vector2(0, fan);
+            myRB.velocity = new Vector2(myRB.velocity.x, fan);
             Debug.Log("puhallin puhuroi");            
         }
     }
@@ -102,30 +105,5 @@ public class Movement : MonoBehaviour {
             Debug.Log("gaemover");
             Destroy(collision.gameObject);
         }
-      /* else if (collision.gameObject.tag == "Wall" && movingRight && !isTouchingWall)
-        {
-            movingRight = false;
-            Debug.Log("a");
-            isTouchingWall = true;
-        }
-        else if (collision.gameObject.tag == "Wall" && !movingRight && !isTouchingWall)
-        {
-            movingRight = true;
-            Debug.Log("a");
-            isTouchingWall = true;
-        }*/
-    }
-    
-    void OnCollisionExit2D(Collision2D collision)
-    {
-       /* if (collision.gameObject.tag == "Wall" && isTouchingWall)
-        {
-            isTouchingWall = false;
-        }
-        else
-        {
-            isTouchingWall = true;
-        }*/
-    }
-    
+    }   
 }

@@ -7,6 +7,8 @@ public class BlockSpawner : MonoBehaviour {
     int mediumBlocks;
     int largeBlocks;
 
+    public bool isRotating = false;
+
     public Transform[] prefabs;
 
     private Transform spawn;
@@ -29,7 +31,11 @@ public class BlockSpawner : MonoBehaviour {
             pos.z = -Camera.main.transform.position.z;
             if (Input.GetKeyDown(KeyCode.Z))
             {
-
+                isRotating = true;
+            }
+            else if(Input.GetKeyUp(KeyCode.Z))
+            {
+                isRotating = false;
             }
             spawn.transform.position = Camera.main.ScreenToWorldPoint(pos);  
         }
