@@ -1,35 +1,48 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class VictoryLose : MonoBehaviour {
-    public Transform Victory;
-    public Transform Lose;
-    bool victory;
-    bool lose;
+    public Text WinLose;
+    float timer = 0;
+    bool win;
 	// Use this for initialization
-	void Start () {
-        victory = false;
-        lose = false;
+	void Start ()
+    {
+        WinLose.gameObject.SetActive(false);
+        win = false;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+    {
+	if(win)
+        {
+            timer += Time.deltaTime;
+            if(timer >= 10)
+            {
+                Destroy(this.gameObject);
+            }
+        }
 	}
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Goal")
         {
             Debug.Log("Victoryyyy!");
-            Debug.Log("gaemover");
-            Destroy(this.gameObject);
-            Victory.gameObject.SetActive(true);
+            WinLose.gameObject.SetActive(true);
+            WinLose.text = "Victory";
+            win = true;
+
+            //Victory.gameObject.SetActive(true);
         }
         if (collision.gameObject.tag == "LoseBlock")
         {
             Debug.Log("Loseeeeer!");
             Destroy(this.gameObject);
-            Lose.gameObject.SetActive(true);
+            WinLose.gameObject.SetActive(true);
+            WinLose.text = "You Lose";
+            //Lose.gameObject.SetActive(true);
         }
     }
 }

@@ -87,15 +87,15 @@ public class Movement : MonoBehaviour {
         }
     }
 
-    void OnTriggerStay2D(Collider2D collider)
-    {
-        if(collider.tag == "Fan")
-        {
-            //transform.Translate(0, fan * Time.deltaTime, 0);
-            myRB.velocity = new Vector2(myRB.velocity.x, fan);
-            Debug.Log("puhallin puhuroi");            
-        }
-    }
+    //void OnTriggerStay2D(Collider2D collider)
+    //{
+    //    if(collider.tag == "Fan")
+    //    {
+    //        //transform.Translate(0, fan * Time.deltaTime, 0);
+    //        myRB.velocity = new Vector2(myRB.velocity.x, fan);
+    //        Debug.Log("puhallin puhuroi");            
+    //    }
+    //}
 
     void OnCollisionEnter2D(Collision2D collision)
     {
