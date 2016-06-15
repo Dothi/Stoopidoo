@@ -3,9 +3,9 @@ using System.Collections;
 
 public class BlockSpawner : MonoBehaviour {
 
-    int smallBlocks;
-    int mediumBlocks;
-    int largeBlocks;
+    public int smallBlocks;
+    public int mediumBlocks;
+    public int largeBlocks;
 
     public float speed;
     public float friction;
