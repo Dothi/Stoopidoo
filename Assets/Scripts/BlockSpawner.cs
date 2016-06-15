@@ -24,9 +24,14 @@ public class BlockSpawner : MonoBehaviour {
 
         if (Input.GetMouseButton(0) && spawn != null)
         {
+            
             var pos = Input.mousePosition;
             pos.z = -Camera.main.transform.position.z;
-            spawn.transform.position = Camera.main.ScreenToWorldPoint(pos);
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+
+            }
+            spawn.transform.position = Camera.main.ScreenToWorldPoint(pos);  
         }
         if (Input.GetMouseButtonUp(0))
         {
