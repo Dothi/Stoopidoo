@@ -5,8 +5,8 @@ public class MoveCamera : MonoBehaviour {
     float speed = 10f;
     public Transform player;
     public Transform goal;
-    public int pOffset;
-    public int gOffset;
+     int pOffset = 7;
+     int gOffset = 7;
     Vector3 pos;
     Vector3 goalPos;
 	// Use this for initialization
