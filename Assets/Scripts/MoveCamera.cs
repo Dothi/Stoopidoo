@@ -15,7 +15,7 @@ public class MoveCamera : MonoBehaviour {
 
     void LateUpdate ()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !BlockSpawner.instance.isDragging)
         {
             Debug.Log("lol");
             if (Input.GetAxis("Mouse X") > 0)

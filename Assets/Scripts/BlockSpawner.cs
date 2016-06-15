@@ -8,12 +8,24 @@ public class BlockSpawner : MonoBehaviour {
     int largeBlocks;
 
     public bool isRotating = false;
-
+    public bool isDragging = false;
+    public static BlockSpawner instance;
     public Transform[] prefabs;
 
     private Transform spawn;
     private Rect[] rect = { new Rect(50, 310, 100, 50), new Rect(160, 310, 110, 50), new Rect(280, 310, 100, 50) };
 
+    void Awake()
+    {
+        if(instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     void Start()
     {
         smallBlocks = 2;
@@ -37,7 +49,8 @@ public class BlockSpawner : MonoBehaviour {
             {
                 isRotating = false;
             }
-            spawn.transform.position = Camera.main.ScreenToWorldPoint(pos);  
+            spawn.transform.position = Camera.main.ScreenToWorldPoint(pos);
+            isDragging = true;
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -46,6 +59,7 @@ public class BlockSpawner : MonoBehaviour {
                 spawn.GetComponent<BoxCollider2D>().enabled = true;
             }
             spawn = null;
+            isDragging = false;
         }
     }
 

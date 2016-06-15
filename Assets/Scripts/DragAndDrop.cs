@@ -6,6 +6,11 @@ public class DragAndDrop : MonoBehaviour
 
     private Vector3 screenPoint;
     private Vector3 offset;
+    public bool dragging;
+    void Start()
+    {
+        dragging = false;
+    }
 
     void OnMouseDown()
     {
