@@ -104,7 +104,7 @@ public class BlockSpawner : MonoBehaviour {
             spawn = Instantiate(prefabs[1], pos, Quaternion.identity) as Transform;
             mediumBlocks--;
         }
-        if (e.type == EventType.MouseDown && rect[2].Contains(e.mousePosition) && largeBlocks > 0)
+        if (e.type == EventType.MouseDown && rect[2].Contains(e.mousePosition) && longBlocks > 0)
         {
             var pos = Input.mousePosition;
             pos.z = -Camera.main.transform.position.z;
