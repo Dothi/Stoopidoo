@@ -38,7 +38,7 @@ public class VictoryLose : MonoBehaviour {
 	}
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Goal")
+        if (collision.gameObject.tag == "Goal" && !win)
         {
             Debug.Log("Victoryyyy!");
             WinLose.gameObject.SetActive(true);
@@ -47,7 +47,7 @@ public class VictoryLose : MonoBehaviour {
 
             //Victory.gameObject.SetActive(true);
         }
-        if (collision.gameObject.tag == "LoseBlock")
+        if (collision.gameObject.tag == "LoseBlock" && !lose)
         {
             Debug.Log("Loseeeeer!");
             //Destroy(this.gameObject);

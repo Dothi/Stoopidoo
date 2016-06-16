@@ -25,7 +25,6 @@ public class MoveCamera : MonoBehaviour {
     {
         if (Input.GetMouseButton(0) && !BlockSpawner.instance.isDragging)
         {
-            Debug.Log("lol");
             if (Input.GetAxis("Mouse X") > 0)
             {
                 transform.position -= new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * speed, 0.0f, 0);
