@@ -42,8 +42,8 @@ public class Movement : MonoBehaviour
 
             if (moving && myRB.velocity.x == 0f)
             {
-                idleTimer += 1 * Time.deltaTime;
-                if (idleTimer >= .3f)
+                idleTimer += 10 * Time.deltaTime;
+                if (idleTimer >= 3f)
                 {
                     movingRight = false;
                     idleTimer = 0f;
@@ -57,8 +57,8 @@ public class Movement : MonoBehaviour
 
             if (moving && myRB.velocity.x == 0f)
             {
-                idleTimer += 1 * Time.deltaTime;
-                if (idleTimer >= .3f)
+                idleTimer += 10 * Time.deltaTime;
+                if (idleTimer >= 3f)
                 {
                     movingRight = true;
                     idleTimer = 0f;
@@ -80,16 +80,14 @@ public class Movement : MonoBehaviour
             Debug.Log("jloj");
             moving = true;
         }
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1.2f, layerMask);
         
-
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1f, layerMask);
+        
         if (hit && hit.transform.tag == "Ground")
         {
             Debug.Log(hit.transform);
             isGrounded = true;
         }
-        
-        
         else
         {
             isGrounded = false;
@@ -102,9 +100,6 @@ public class Movement : MonoBehaviour
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector2.up, Vector3.zero), 5f * Time.deltaTime);
         }
-        
-
-        
     }
     void FixedUpdate()
     {
