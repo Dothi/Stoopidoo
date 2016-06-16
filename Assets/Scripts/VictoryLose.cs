@@ -13,6 +13,7 @@ public class VictoryLose : MonoBehaviour {
         WinLose.gameObject.SetActive(false);
         win = false;
         lose = false;
+        Time.timeScale = 1;
 	}
 	
 	// Update is called once per frame
@@ -44,6 +45,7 @@ public class VictoryLose : MonoBehaviour {
             WinLose.gameObject.SetActive(true);
             WinLose.text = "Victory";
             win = true;
+            Time.timeScale = 0;
 
             //Victory.gameObject.SetActive(true);
         }
@@ -54,6 +56,7 @@ public class VictoryLose : MonoBehaviour {
             WinLose.gameObject.SetActive(true);
             WinLose.text = "You Lose";
             lose = true;
+            
             //Lose.gameObject.SetActive(true);
         }
     }
