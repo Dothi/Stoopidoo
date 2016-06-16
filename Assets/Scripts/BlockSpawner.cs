@@ -5,7 +5,7 @@ public class BlockSpawner : MonoBehaviour {
 
     public int smallBlocks;
     public int mediumBlocks;
-    public int largeBlocks;
+    public int longBlocks;
 
     public float speed;
     public float friction;
@@ -34,13 +34,7 @@ public class BlockSpawner : MonoBehaviour {
             instance = this;
         }
     }
-    void Start()
-    {
-        smallBlocks = 2;
-        mediumBlocks = 1;
-        largeBlocks = 1;
-    }
-
+    
     void Update()
     {
         
@@ -116,11 +110,11 @@ public class BlockSpawner : MonoBehaviour {
             pos.z = -Camera.main.transform.position.z;
             pos = Camera.main.ScreenToWorldPoint(pos);
             spawn = Instantiate(prefabs[2], pos, Quaternion.identity) as Transform;
-            largeBlocks--;
+            longBlocks--;
         }
 
         GUI.Button(rect[0], "Small block x" + smallBlocks);
         GUI.Button(rect[1], "Medium block x" + mediumBlocks);
-        GUI.Button(rect[2], "Large block x" + largeBlocks);
+        GUI.Button(rect[2], "Long block x" + longBlocks);
     }
 }
