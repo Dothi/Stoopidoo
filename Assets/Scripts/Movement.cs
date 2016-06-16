@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     RaycastHit2D hit;
     SpriteRenderer spriteRend;
     LayerMask layerMask;
+    VictoryLose vl;
 
 
     // Use this for initialization
@@ -30,11 +31,16 @@ public class Movement : MonoBehaviour
         idleTimer = 0f;
         layerMask = 1 << LayerMask.NameToLayer("Player");
         layerMask = ~layerMask;
+        vl = GetComponent<VictoryLose>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (vl.lose)
+        {
+            this.enabled = false;
+        }
         if (movingRight)
         {
 
@@ -130,6 +136,7 @@ public class Movement : MonoBehaviour
             Debug.Log("trappe'd");
             Debug.Log("gaemover");
             Destroy(collision.gameObject);
+            vl.lose = true;
         }
     }
 }

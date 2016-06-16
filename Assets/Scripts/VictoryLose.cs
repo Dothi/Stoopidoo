@@ -6,7 +6,7 @@ public class VictoryLose : MonoBehaviour {
     public Text WinLose;
     float timer = 0;
     bool win;
-    bool lose;
+    public bool lose;
 	// Use this for initialization
 	void Start ()
     {
@@ -30,6 +30,8 @@ public class VictoryLose : MonoBehaviour {
         }
     if(lose)
         {
+            WinLose.gameObject.SetActive(true);
+            WinLose.text = "You Lose";
             timer += Time.deltaTime;
             if(timer >5)
             {
@@ -53,8 +55,7 @@ public class VictoryLose : MonoBehaviour {
         {
             Debug.Log("Loseeeeer!");
             //Destroy(this.gameObject);
-            WinLose.gameObject.SetActive(true);
-            WinLose.text = "You Lose";
+            
             lose = true;
             
             //Lose.gameObject.SetActive(true);

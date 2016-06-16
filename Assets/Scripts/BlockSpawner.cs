@@ -54,12 +54,6 @@ public class BlockSpawner : MonoBehaviour {
             {
                 Vector3 newPos = spawn.transform.position;
                 spawn.transform.position = newPos;
-               /* xDeg -= Input.GetAxis("Mouse X") * speed * friction;
-                yDeg += Input.GetAxis("Mouse Y") * speed * friction;
-                fromRotation = spawn.transform.rotation;
-                toRotation = Quaternion.Euler(0, 0, yDeg);
-                spawn.transform.rotation = Quaternion.Lerp(fromRotation, toRotation, Time.deltaTime * lerpSpeed);*/
-
                 Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
                 Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
                 lookPos = lookPos - spawn.transform.position;
