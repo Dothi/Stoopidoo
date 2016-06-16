@@ -87,7 +87,7 @@ public class Movement : MonoBehaviour
             moving = true;
         }
         
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1f, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1.2f, layerMask);
         
         if (hit && hit.transform.tag == "Ground")
         {
