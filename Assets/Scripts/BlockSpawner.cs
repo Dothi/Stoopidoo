@@ -21,7 +21,7 @@ public class BlockSpawner : MonoBehaviour {
     public Transform[] prefabs;
 
     private Transform spawn;
-    private Rect[] rect = { new Rect(50, 310, 100, 50), new Rect(160, 310, 110, 50), new Rect(280, 310, 100, 50) };
+    private Rect[] rect = { new Rect(Screen.width / 2 - Screen.width / 2 + 50, Screen.height / 2 + 300, 100, 50), new Rect(Screen.width / 2 - Screen.width / 2 + 150, Screen.height / 2 + 300, 110, 50), new Rect(Screen.width / 2 - Screen.width / 2 + 260, Screen.height / 2 + 300, 100, 50) };
 
     void Awake()
     {

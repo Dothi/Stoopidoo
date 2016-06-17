@@ -46,6 +46,7 @@ public class VictoryLose : MonoBehaviour {
             Debug.Log("Victoryyyy!");
             WinLose.gameObject.SetActive(true);
             WinLose.text = "Victory";
+            WinLose.color = Color.green;
             win = true;
             Time.timeScale = 0;
 
