@@ -49,7 +49,8 @@ public class Movement : MonoBehaviour
             if (moving && myRB.velocity.x == 0f)
             {
                 idleTimer += 10 * Time.deltaTime;
-                if (idleTimer >= 3f)
+                Debug.Log(idleTimer);
+                if (idleTimer >= .3f)
                 {
                     movingRight = false;
                     idleTimer = 0f;
@@ -64,7 +65,7 @@ public class Movement : MonoBehaviour
             if (moving && myRB.velocity.x == 0f)
             {
                 idleTimer += 10 * Time.deltaTime;
-                if (idleTimer >= 3f)
+                if (idleTimer >= .3f)
                 {
                     movingRight = true;
                     idleTimer = 0f;

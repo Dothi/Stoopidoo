@@ -33,7 +33,7 @@ public class VictoryLose : MonoBehaviour {
             WinLose.gameObject.SetActive(true);
             WinLose.text = "You Lose";
             timer += Time.deltaTime;
-            if(timer >5)
+            if(timer >= 3)
             {
                 Application.LoadLevel(Application.loadedLevel);
             }
