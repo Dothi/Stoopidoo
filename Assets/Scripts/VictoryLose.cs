@@ -3,14 +3,14 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class VictoryLose : MonoBehaviour {
-    public Text WinLose;
+    //public Text WinLose;
     float timer = 0;
     bool win;
     public bool lose;
 	// Use this for initialization
 	void Start ()
     {
-        WinLose.gameObject.SetActive(false);
+        //WinLose.gameObject.SetActive(false);
         win = false;
         lose = false;
         Time.timeScale = 1;
@@ -30,8 +30,10 @@ public class VictoryLose : MonoBehaviour {
         }
     if(lose)
         {
-            WinLose.gameObject.SetActive(true);
-            WinLose.text = "You Lose";
+            //WinLose.gameObject.SetActive(true);
+            uiManager.instance.WinLose.gameObject.SetActive(true);
+            uiManager.instance.WinLose.text = "You Lose";
+            //WinLose.text = "You Lose";
             timer += Time.deltaTime;
             if(timer >= 3)
             {
@@ -44,10 +46,12 @@ public class VictoryLose : MonoBehaviour {
         if (collision.gameObject.tag == "Goal" && !win)
         {
             Debug.Log("Victoryyyy!");
-            WinLose.gameObject.SetActive(true);
-            WinLose.text = "Victory";
-            WinLose.color = Color.green;
+            //WinLose.gameObject.SetActive(true);
+            uiManager.instance.WinLose.gameObject.SetActive(true);
+            uiManager.instance.WinLose.text = "Victory";
+            uiManager.instance.WinLose.color = Color.green;
             win = true;
+            uiManager.instance.ScoreStars();
             Time.timeScale = 0;
 
             //Victory.gameObject.SetActive(true);

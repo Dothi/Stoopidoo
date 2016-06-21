@@ -7,6 +7,7 @@ public class BlockSpawner : MonoBehaviour {
     public int mediumBlocks;
     public int longBlocks;
 
+    public int blocksUsed;
     public float speed;
     public float friction;
     public float lerpSpeed;
@@ -35,6 +36,10 @@ public class BlockSpawner : MonoBehaviour {
         }
     }
     
+    void Start()
+    {
+
+    }
     void Update()
     {
         
@@ -89,6 +94,7 @@ public class BlockSpawner : MonoBehaviour {
             pos = Camera.main.ScreenToWorldPoint(pos);
             spawn = Instantiate(prefabs[0], pos, Quaternion.identity) as Transform;
             smallBlocks--;
+            blocksUsed++;
         }
         if (e.type == EventType.MouseDown && rect[1].Contains(e.mousePosition) && mediumBlocks > 0)
         {
@@ -97,6 +103,7 @@ public class BlockSpawner : MonoBehaviour {
             pos = Camera.main.ScreenToWorldPoint(pos);
             spawn = Instantiate(prefabs[1], pos, Quaternion.identity) as Transform;
             mediumBlocks--;
+            blocksUsed++;
         }
         if (e.type == EventType.MouseDown && rect[2].Contains(e.mousePosition) && longBlocks > 0)
         {
@@ -105,6 +112,7 @@ public class BlockSpawner : MonoBehaviour {
             pos = Camera.main.ScreenToWorldPoint(pos);
             spawn = Instantiate(prefabs[2], pos, Quaternion.identity) as Transform;
             longBlocks--;
+            blocksUsed++;
         }
 
         GUI.Button(rect[0], "Small block x" + smallBlocks);
