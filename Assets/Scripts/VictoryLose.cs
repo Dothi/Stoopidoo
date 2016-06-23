@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class VictoryLose : MonoBehaviour {
     //public Text WinLose;
     float timer = 0;
-    bool win;
+    public bool win;
     public bool lose;
 	// Use this for initialization
 	void Start ()
@@ -50,8 +50,10 @@ public class VictoryLose : MonoBehaviour {
             uiManager.instance.WinLose.gameObject.SetActive(true);
             uiManager.instance.WinLose.text = "Victory";
             uiManager.instance.WinLose.color = Color.green;
-            win = true;
+            uiManager.instance.Victory.gameObject.SetActive(true);
             uiManager.instance.ScoreStars();
+            win = true;
+            
             Time.timeScale = 0;
 
             //Victory.gameObject.SetActive(true);

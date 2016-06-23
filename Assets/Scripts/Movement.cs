@@ -17,7 +17,6 @@ public class Movement : MonoBehaviour
     LayerMask layerMask;
     VictoryLose vl;
 
-
     // Use this for initialization
     void Start()
     {
@@ -41,36 +40,39 @@ public class Movement : MonoBehaviour
         {
             this.enabled = false;
         }
-        if (movingRight)
+        if (!vl.win)
         {
-
-            spriteRend.flipX = false;
-
-            if (moving && myRB.velocity.x == 0f)
+            if (movingRight)
             {
-                idleTimer += 10 * Time.deltaTime;
-                Debug.Log(idleTimer);
-                if (idleTimer >= 1f)
+
+                spriteRend.flipX = false;
+
+                if (moving && myRB.velocity.x == 0f)
                 {
-                    movingRight = false;
-                    idleTimer = 0f;
+                    idleTimer += 10 * Time.deltaTime;
+                    Debug.Log(idleTimer);
+                    if (idleTimer >= 1f)
+                    {
+                        movingRight = false;
+                        idleTimer = 0f;
+                    }
                 }
             }
-        }
-        else
-        {
-
-            spriteRend.flipX = true;
-
-            if (moving && myRB.velocity.x == 0f)
+            else
             {
-                idleTimer += 10 * Time.deltaTime;
-                if (idleTimer >= 1f)
-                {
-                    movingRight = true;
-                    idleTimer = 0f;
-                }
 
+                spriteRend.flipX = true;
+
+                if (moving && myRB.velocity.x == 0f)
+                {
+                    idleTimer += 10 * Time.deltaTime;
+                    if (idleTimer >= 1f)
+                    {
+                        movingRight = true;
+                        idleTimer = 0f;
+                    }
+
+                }
             }
         }
         if (!moving)
@@ -110,25 +112,20 @@ public class Movement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (moving && movingRight)
+        if (!vl.win)
         {
-            myRB.velocity = new Vector2(speed * Time.deltaTime, myRB.velocity.y);
-        }
-        else if (moving && !movingRight)
-        {
-            myRB.velocity = new Vector2(-speed * Time.deltaTime, myRB.velocity.y);
+            if (moving && movingRight)
+            {
+                myRB.velocity = new Vector2(speed * Time.deltaTime, myRB.velocity.y);
+            }
+            else if (moving && !movingRight)
+            {
+                myRB.velocity = new Vector2(-speed * Time.deltaTime, myRB.velocity.y);
+            }
         }
     }
 
-    //void OnTriggerStay2D(Collider2D collider)
-    //{
-    //    if(collider.tag == "Fan")
-    //    {
-    //        //transform.Translate(0, fan * Time.deltaTime, 0);
-    //        myRB.velocity = new Vector2(myRB.velocity.x, fan);
-    //        Debug.Log("puhallin puhuroi");            
-    //    }
-    //}
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {
