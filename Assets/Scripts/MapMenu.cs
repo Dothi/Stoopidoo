@@ -11,17 +11,9 @@ public class MapMenu : MonoBehaviour
     {
         levels = new List<GameObject>();
 
-        var levelObjects = GameObject.FindGameObjectsWithTag("Level");
-        var levelCount = levelObjects.Length;
-
-        System.Array.Reverse(levelObjects);
-
-        for (int i = 0; i < levelObjects.Length; i++)
+        for (int i = 1; i <= 5; i++)
         {
-            if (!levels.Contains(levelObjects[i]))
-            {
-                levels.Add(levelObjects[i]);
-            }
+            levels.Add(GameObject.Find("Level_" + i));
         }
     }
 
