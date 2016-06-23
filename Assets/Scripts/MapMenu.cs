@@ -25,7 +25,7 @@ public class MapMenu : MonoBehaviour
             if (ray && ray.collider == levels[0].GetComponent<CircleCollider2D>())
             {
                 Debug.Log("jee");
-                Application.LoadLevel("JonnaTest");
+                Application.LoadLevel("JonnaTestMobile");
             }
         }
 

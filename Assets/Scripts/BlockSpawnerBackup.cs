@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BlockSpawner : MonoBehaviour {
+public class BlockSpawnerBackup : MonoBehaviour {
 
-    public int smallBlocks;
+	public int smallBlocks;
     public int mediumBlocks;
     public int longBlocks;
 
@@ -18,13 +18,12 @@ public class BlockSpawner : MonoBehaviour {
 
     public bool isRotating = false;
     public bool isDragging = false;
-    public static BlockSpawner instance;
+    public static BlockSpawnerBackup instance;
     public Transform[] prefabs;
-    
-    
-    public Touch[] myTouches;
-    public Transform spawn;
-    private Rect[] rect = { new Rect(Screen.width / 2 - Screen.width / 2 + 50, Screen.height / 2 + 260, 100, 50), new Rect(Screen.width / 2 - Screen.width / 2 + 150, Screen.height / 2 + 260, 110, 50), new Rect(Screen.width / 2 - Screen.width / 2 + 260, Screen.height / 2 + 260, 100, 50) };
+    public GameObject rotatebutton;
+
+    private Transform spawn;
+    private Rect[] rect = { new Rect(Screen.width / 2 - Screen.width / 2 + 50, Screen.height / 2 + 140, 100, 50), new Rect(Screen.width / 2 - Screen.width / 2 + 150, Screen.height / 2 + 140, 110, 50), new Rect(Screen.width / 2 - Screen.width / 2 + 260, Screen.height / 2 + 140, 100, 50) };
 
     void Awake()
     {
@@ -40,22 +39,28 @@ public class BlockSpawner : MonoBehaviour {
     
     void Start()
     {
-        
+
     }
     void Update()
     {
-        myTouches = Input.touches;
-
-        if (myTouches.Length > 0 && spawn != null)
+        
+        if (Input.GetMouseButton(0) && spawn != null)
         {
-            var pos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, -Camera.main.transform.position.z);
-            // pos.z = -Camera.main.transform.position.z;
-
+            var pos = Input.mousePosition;
+            pos.z = -Camera.main.transform.position.z;
+            if (Input.GetKey(KeyCode.Z) && spawn != null)
+            {
+                isRotating = true;
+            }
+            else
+            {
+                isRotating = false;
+            }
             if (isRotating)
             {
                 Vector3 newPos = spawn.transform.position;
                 spawn.transform.position = newPos;
-                Vector3 mousePos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, 10);
+                Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
                 Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
                 lookPos = lookPos - spawn.transform.position;
                 float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
@@ -67,40 +72,26 @@ public class BlockSpawner : MonoBehaviour {
                 spawn.transform.position = Camera.main.ScreenToWorldPoint(pos);
             }
             isDragging = true;
-
-            
         }
-        else
+        if (Input.GetMouseButtonUp(0))
         {
-            isDragging = false;
-        }
-        if (myTouches.Length < 1)
-        {
-            Debug.Log("sad");
             if (spawn != null)
             {
                 spawn.GetComponent<BoxCollider2D>().enabled = true;
             }
             spawn = null;
-        }  
-    }
-    public void Rotate()
-    {
-        isRotating = true;
-    }
-    public void StopRotate()
-    {
-        isRotating = false;
+            isDragging = false;
+        }
     }
 
     void OnGUI()
     {
-       Event e = Event.current;
+        Event e = Event.current;
 
         if (e.type == EventType.MouseDown && rect[0].Contains(e.mousePosition) && smallBlocks > 0)
         {
-            var pos = Input.touches[0].position;
-           // pos.z = -Camera.main.transform.position.z;
+            var pos = Input.mousePosition;
+            pos.z = -Camera.main.transform.position.z;
             pos = Camera.main.ScreenToWorldPoint(pos);
             spawn = Instantiate(prefabs[0], pos, Quaternion.identity) as Transform;
             smallBlocks--;
@@ -108,8 +99,8 @@ public class BlockSpawner : MonoBehaviour {
         }
         if (e.type == EventType.MouseDown && rect[1].Contains(e.mousePosition) && mediumBlocks > 0)
         {
-            var pos = Input.touches[0].position;
-           // pos.z = -Camera.main.transform.position.z;
+            var pos = Input.mousePosition;
+            pos.z = -Camera.main.transform.position.z;
             pos = Camera.main.ScreenToWorldPoint(pos);
             spawn = Instantiate(prefabs[1], pos, Quaternion.identity) as Transform;
             mediumBlocks--;
@@ -117,20 +108,18 @@ public class BlockSpawner : MonoBehaviour {
         }
         if (e.type == EventType.MouseDown && rect[2].Contains(e.mousePosition) && longBlocks > 0)
         {
-            var pos = Input.touches[0].position;
-           // pos.z = -Camera.main.transform.position.z;
+            var pos = Input.mousePosition;
+            pos.z = -Camera.main.transform.position.z;
             pos = Camera.main.ScreenToWorldPoint(pos);
             spawn = Instantiate(prefabs[2], pos, Quaternion.identity) as Transform;
             longBlocks--;
             blocksUsed++;
         }
-        
 
         GUI.Button(rect[0], "Small block x" + smallBlocks);
         GUI.Button(rect[1], "Medium block x" + mediumBlocks);
         GUI.Button(rect[2], "Long block x" + longBlocks);
     }
-    
     
 }
 
