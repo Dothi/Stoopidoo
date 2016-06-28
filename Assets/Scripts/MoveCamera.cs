@@ -29,16 +29,11 @@ public class MoveCamera : MonoBehaviour {
         if (Input.GetMouseButton(0) && !BlockSpawnerBackup.instance.isDragging)
         {
             mouseClicked = true;
-            Debug.Log("WOHO");
             if (transform.position.x >= xMin)
             {
                 if (Input.GetAxis("Mouse X") > 0)
                 {
                     transform.position -= new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * speed, 0.0f, 0);
-                }
-                else if (transform.position.x >= xMax)
-                {
-                   
                 }
             }
             if (transform.position.x <= xMax)
@@ -53,67 +48,27 @@ public class MoveCamera : MonoBehaviour {
             mouseClicked = false;
     }
 
-    void LateUpdate()
-    {
-        if (!mouseClicked)
-        {
-            if (Movement.instance.movingRight)
-            {
-                pOffset += Time.deltaTime * 5;
-                if (pOffset >= 3)
-                    pOffset = 3;
-                //pos.x = player.position.x + pOffset;
-                //pOffset += Time.deltaTime * 2;
-                //if(pOffset >= 3)
-                //{
-                //    pOffset = 3;
-                //}
-            }
-            if (!Movement.instance.movingRight)
-            {
-                pOffset -= Time.deltaTime * 5;
-                if (pOffset <= -3)
-                    pOffset = -3;
-                //pos.x = player.position.x + pOffset;
-                //pOffset -= Time.deltaTime;
-                //if(pOffset <= -3)
-                //{
-                //    pOffset = -3;
-                //}
-            }
-            pos.x = player.position.x + pOffset;
-            transform.position = new Vector3(Mathf.Clamp(pos.x, xMin, xMax), transform.position.y, transform.position.z);
-            //if (Movement.instance.movingRight)
-            //{
-            //    pos.x = player.position.x + pOffset;
-            //    endPos.x = rightEnd.position.x - gOffset;
-            //    if (transform.position.x < player.position.x + pOffset)
-            //    {
-            //        transform.position = pos;
-            //    }
-            //    if (transform.position.x > rightEnd.position.x - gOffset)
-            //    {
-            //        transform.position = endPos;
-            //    }
-
-            //}
-
-            //if (!Movement.instance.movingRight)
-            //{
-            //    pos.x = player.position.x - pOffset;
-            //    endPos.x = leftEnd.position.x + gOffset;
-            //    if (transform.position.x > player.position.x - pOffset)
-            //    {
-            //        transform.position = pos;
-            //    }
-            //    if (transform.position.x < leftEnd.position.x + gOffset)
-            //    {
-            //        transform.position = endPos;
-            //    }
-            //}
-
-        }
-    }
+    //void LateUpdate()
+    //{
+    //    if (!mouseClicked)
+    //    {
+    //        pos.x = player.position.x;
+    //        if (Movement.instance.movingRight)
+    //        {
+    //            pOffset +=Time.deltaTime * 3;
+    //            if (pOffset >= 3)
+    //                pOffset = 3;
+    //        }
+    //        if (!Movement.instance.movingRight)
+    //        {
+    //            pOffset -= Time.deltaTime * 3;
+    //            if (pOffset <= -3)
+    //                pOffset = -3;
+    //        }
+            
+    //        transform.position = new Vector3(Mathf.Clamp(pos.x + pOffset, xMin, xMax), transform.position.y, transform.position.z);
+    //    }
+    //}
 
     void asd()
     {

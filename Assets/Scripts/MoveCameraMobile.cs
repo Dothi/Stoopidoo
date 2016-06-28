@@ -24,14 +24,14 @@ public class MoveCameraMobile : MonoBehaviour
             Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
             transform.Translate(-touchDeltaPosition.x * Time.deltaTime * speed, 0, 0);
         }
-        if (transform.position.x < player.position.x + pOffset)
-        {
-            transform.position = pos;
-        }
-        if (transform.position.x > goal.position.x - gOffset)
-        {
-            transform.position = goalPos;
-        }
+        //if (transform.position.x < player.position.x + pOffset)
+        //{
+        //    transform.position = pos;
+        //}
+        //if (transform.position.x > goal.position.x - gOffset)
+        //{
+        //    transform.position = goalPos;
+        //}
     }
 }
 
