@@ -20,11 +20,14 @@ public class BlockSpawner : MonoBehaviour {
     public bool isDragging = false;
     public static BlockSpawner instance;
     public Transform[] prefabs;
-    
-    
+
+    Vector3 newPos;
+    Vector3 mousePos;
+    Vector3 GOpos;
+    Vector3 offset;
     public Touch[] myTouches;
     public Transform spawn;
-    private Rect[] rect = { new Rect(Screen.width / 2 - Screen.width / 2 + 50, Screen.height / 2 + 260, 100, 50), new Rect(Screen.width / 2 - Screen.width / 2 + 150, Screen.height / 2 + 260, 110, 50), new Rect(Screen.width / 2 - Screen.width / 2 + 260, Screen.height / 2 + 260, 100, 50) };
+    private Rect[] rect = { new Rect(Screen.width / 2 - Screen.width / 2 + 50, Screen.height / 2 + 260, 150, 100), new Rect(Screen.width / 2 - Screen.width / 2 + 200, Screen.height / 2 + 260, 160, 100), new Rect(Screen.width / 2 - Screen.width / 2 + 360, Screen.height / 2 + 260, 150, 100) };
 
     void Awake()
     {
@@ -50,25 +53,24 @@ public class BlockSpawner : MonoBehaviour {
         {
             var pos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, -Camera.main.transform.position.z);
             // pos.z = -Camera.main.transform.position.z;
-
+            
             if (isRotating)
             {
-                Vector3 newPos = spawn.transform.position;
+                newPos = spawn.transform.position;
                 spawn.transform.position = newPos;
-                Vector3 mousePos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, 10);
+                mousePos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, 10);
                 Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
                 lookPos = lookPos - spawn.transform.position;
                 float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
                 spawn.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
+                offset = spawn.transform.position - Camera.main.ScreenToWorldPoint(pos);
             }
             else
             {
-                spawn.transform.position = Camera.main.ScreenToWorldPoint(pos);
+
+                spawn.transform.position = Camera.main.ScreenToWorldPoint(pos) + offset;
             }
             isDragging = true;
-
-            
         }
         else
         {
@@ -80,6 +82,7 @@ public class BlockSpawner : MonoBehaviour {
             if (spawn != null)
             {
                 spawn.GetComponent<BoxCollider2D>().enabled = true;
+                offset = Vector3.zero;
             }
             spawn = null;
         }  
@@ -129,6 +132,11 @@ public class BlockSpawner : MonoBehaviour {
         GUI.Button(rect[0], "Small block x" + smallBlocks);
         GUI.Button(rect[1], "Medium block x" + mediumBlocks);
         GUI.Button(rect[2], "Long block x" + longBlocks);
+
+        if (GUI.Button(new Rect(Screen.width - 170, Screen.height / 2 + 260, 150, 100), "Restart"))
+        {
+            Application.LoadLevel(Application.loadedLevel);
+        }
     }
     
     
