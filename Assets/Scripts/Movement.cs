@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Movement : MonoBehaviour
 {
-    Rigidbody2D myRB;
+    public Rigidbody2D myRB;
     public float speed;
     public float fan = 1f;
     float timer;
