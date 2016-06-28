@@ -34,6 +34,7 @@ public class FanRaycast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        raycast();
     }
 
     void raycast()
@@ -44,7 +45,7 @@ public class FanRaycast : MonoBehaviour
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
             distance = Vector2.Distance(transform.position, rayOrigin);
             percent = (distance / maxDistance) * 5;
-            rayLength /= percent;
+            rayLength -= percent;
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, rayLength);
             Debug.DrawRay(rayOrigin, Vector2.up * rayLength, Color.red);
             if (hit && hit.transform.tag == "Player")
@@ -54,7 +55,7 @@ public class FanRaycast : MonoBehaviour
                 velocity.x = player.GetComponent<Rigidbody2D>().velocity.x;
                 player.GetComponent<Rigidbody2D>().velocity = velocity;
             }
-            rayLength = 2;
+            rayLength += percent;
         }
     }
     void asdRaycastOrigins()

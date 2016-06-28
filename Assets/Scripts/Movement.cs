@@ -16,8 +16,19 @@ public class Movement : MonoBehaviour
     SpriteRenderer spriteRend;
     LayerMask layerMask;
     VictoryLose vl;
-
+    public static Movement instance;
     // Use this for initialization
+    void Awake()
+    {
+        if(instance !=null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
