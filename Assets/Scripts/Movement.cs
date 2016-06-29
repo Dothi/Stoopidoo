@@ -102,11 +102,14 @@ public class Movement : MonoBehaviour
         }
         
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1.2f, layerMask);
-        
-        if (hit && hit.transform.tag == "Ground")
+
+        if (hit && hit.transform.tag == "Ground" || hit && hit.transform.tag == "SmallBlock" || hit && hit.transform.tag == "MediumBlock" || hit && hit.transform.tag == "LongBlock")
         {
             Debug.Log(hit.transform);
-            isGrounded = true;
+            if (!hit.collider.isTrigger)
+            {
+                isGrounded = true;
+            }
         }
         else
         {
