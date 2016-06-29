@@ -54,6 +54,8 @@ public class BlockSpawner : MonoBehaviour {
             isDragging = true;
             
             var pos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, -Camera.main.transform.position.z);
+
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(pos), Vector2.zero);
             // pos.z = -Camera.main.transform.position.z;
             if (myTouches.Length == 2)
             {
@@ -76,7 +78,7 @@ public class BlockSpawner : MonoBehaviour {
             }
             else
             {
-
+                if (hit && hit.collider == spawn.GetComponent<Collider2D>())
                 spawn.transform.position = Camera.main.ScreenToWorldPoint(pos);
             }
             
