@@ -265,6 +265,7 @@ public class BlockSpawner : MonoBehaviour
             {
                 longBlocks++;
             }
+            blocksUsed--;
             Destroy(spawn.gameObject);
             spawn = null;
         }

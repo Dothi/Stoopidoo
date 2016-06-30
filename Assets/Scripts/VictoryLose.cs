@@ -7,6 +7,7 @@ public class VictoryLose : MonoBehaviour {
     float timer = 0;
     public bool win;
     public bool lose;
+    GameObject Canvas;
 	// Use this for initialization
 	void Start ()
     {
@@ -14,6 +15,7 @@ public class VictoryLose : MonoBehaviour {
         win = false;
         lose = false;
         Time.timeScale = 1;
+        Canvas = GameObject.FindGameObjectWithTag("Canvas");
 	}
 	
 	// Update is called once per frame
@@ -21,6 +23,7 @@ public class VictoryLose : MonoBehaviour {
     {
 	if(win)
         {
+            
             timer += Time.deltaTime;
             if(timer >= 10)
             {
@@ -45,6 +48,7 @@ public class VictoryLose : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Goal" && !win)
         {
+            
             Debug.Log("Victoryyyy!");
             //WinLose.gameObject.SetActive(true);
             uiManager.instance.WinLose.gameObject.SetActive(true);

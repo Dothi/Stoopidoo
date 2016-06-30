@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     LayerMask layerMask;
     VictoryLose vl;
     public static Movement instance;
+    Animator anim;
     // Use this for initialization
     void Awake()
     {
@@ -32,6 +33,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         timer = 0f;
         moving = false;
         movingRight = true;
@@ -126,6 +128,15 @@ public class Movement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (myRB.velocity.x > 0)
+        {
+            anim.SetFloat("speed", myRB.velocity.x);
+        }
+        else if (myRB.velocity.x < 0)
+        {
+            anim.SetFloat("speed", -myRB.velocity.x);
+        }
+
         if (!vl.win)
         {
             if (moving && movingRight)
