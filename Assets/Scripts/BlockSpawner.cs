@@ -27,12 +27,14 @@ public class BlockSpawner : MonoBehaviour
     Vector3 mousePos;
     Vector3 GOpos;
     Vector3 offset;
+    
     public GameObject confirmButton;
     public GameObject cancelButton;
     public GameObject restartButton;
     public Touch[] myTouches;
     public Transform spawn;
     public Rect[] rect;
+    public float oldAngle;
     void Awake()
     {
         if (instance != null && instance != this)
@@ -111,20 +113,48 @@ public class BlockSpawner : MonoBehaviour
                 if (isRotating)
                 {
                     
-                        newPos = spawn.transform.position;
-                        spawn.transform.position = newPos;
+                        /*newPos = spawn.transform.position;
+                        spawn.transform.position = newPos;*/
                         if (myTouches.Length == 2)
                         {
-                            mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);
+                            /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
+                            
+                            var v2 = myTouches[0].position - myTouches[1].position;
+                            var newAngle = Mathf.Atan2(v2.y, v2.x);
+                           // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
+                            
+                           // oldAngle = newAngle;
+                            
+                            spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                            
+                        }
+                        else if (myTouches.Length == 2 && isHit)
+                        {
+                             
+                        
+                            /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
+                            
+                            var v2 = myTouches[0].position - myTouches[1].position;
+                            var newAngle = Mathf.Atan2(v2.y, v2.x);
+                           // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
+                            
+                           // oldAngle = newAngle;
+                            
+                            spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
                         }
                         else
                         {
-                            mousePos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, 10);
+                            /*mousePos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, 10);
+                            Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+                            lookPos = lookPos - spawn.transform.position;
+                            float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
+                            spawn.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);*/
                         }
-                        Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+                      /*  Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
                         lookPos = lookPos - spawn.transform.position;
                         float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
-                        spawn.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                        spawn.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);*/
+
                     
                     
                 }
