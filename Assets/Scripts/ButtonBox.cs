@@ -11,6 +11,7 @@ public class ButtonBox : MonoBehaviour
     bool Rotating;
 
     //TODO: Make block rotate also clockwise
+    public bool clockWise;
 
     float temp = 0f;
 
@@ -33,10 +34,11 @@ public class ButtonBox : MonoBehaviour
             {
                 Rotating = false;
                 temp = 0f;
+                Debug.Log(rotatingBlocks[0].transform.eulerAngles.z);
             }
             else
             {
-                
+
 
                 RotateBlocks();
                 float rotationVal = Mathf.Lerp(0, 90f, Time.deltaTime);
@@ -45,27 +47,50 @@ public class ButtonBox : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < rotatingBlocks.Count; i++)
+            if (clockWise)
             {
-                if (rotatingBlocks[i].transform.eulerAngles.z < 90)
+                for (int i = 0; i < rotatingBlocks.Count; i++)
                 {
-                    rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 0);
+                    if (rotatingBlocks[i].transform.eulerAngles.z > 271)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 0);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z < 90 && rotatingBlocks[i].transform.eulerAngles.z > 0)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 90);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z < 180 && rotatingBlocks[i].transform.eulerAngles.z > 91)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 180);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z < 270 && rotatingBlocks[i].transform.eulerAngles.z > 181)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 270);
+                    }
                 }
-                else if (rotatingBlocks[i].transform.eulerAngles.z > 90 && rotatingBlocks[i].transform.eulerAngles.z < 180)
+            }
+            else
+            {
+                for (int i = 0; i < rotatingBlocks.Count; i++)
                 {
-                    rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 90);
-                }
-                else if (rotatingBlocks[i].transform.eulerAngles.z > 180 && rotatingBlocks[i].transform.eulerAngles.z < 270)
-                {
-                    rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 180);
-                }
-                else if (rotatingBlocks[i].transform.eulerAngles.z > 270)
-                {
-                    rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 270);
+                    if (rotatingBlocks[i].transform.eulerAngles.z < 90)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 0);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z > 90 && rotatingBlocks[i].transform.eulerAngles.z < 180)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 90);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z > 180 && rotatingBlocks[i].transform.eulerAngles.z < 270)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 180);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z > 270)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 270);
+                    }
                 }
 
-
-                
             }
         }
     }
@@ -75,10 +100,22 @@ public class ButtonBox : MonoBehaviour
 
         for (int i = 0; i < rotatingBlocks.Count; i++)
         {
-            Vector3 destination = new Vector3(0, 0, 90);
-            Vector3 fromRot = rotatingBlocks[i].transform.eulerAngles;
+            if (clockWise)
+            {
+                Vector3 destination = new Vector3(0, 0, -90);
+                Vector3 fromRot = rotatingBlocks[i].transform.eulerAngles;
 
-            rotatingBlocks[i].transform.eulerAngles += Vector3.Lerp(transform.rotation.eulerAngles, destination, Time.deltaTime);
+                rotatingBlocks[i].transform.eulerAngles += Vector3.Lerp(transform.rotation.eulerAngles, destination, Time.deltaTime);
+            }
+            else
+            {
+                Vector3 destination = new Vector3(0, 0, 90);
+                Vector3 fromRot = rotatingBlocks[i].transform.eulerAngles;
+
+                rotatingBlocks[i].transform.eulerAngles += Vector3.Lerp(transform.rotation.eulerAngles, destination, Time.deltaTime);
+            }
+
+
         }
     }
     void OnTriggerEnter2D(Collider2D other)
