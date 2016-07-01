@@ -11,10 +11,11 @@ public class MapMenu : MonoBehaviour
     public Transform gameLevels;
     public bool levelSelect;
     Vector3 levelPos;
-    int theme;
+    public int theme;
     public int star01, star02, star03;
     public List<GameObject> star1, star2, star3;
-    public int forest1, forest2, forest3, japan1, japan2, japan3, winter1, winter2, winter3, hell1, hell2, hell3, desert1, desert2, desert3;
+    
+
     
     void Start()
     {
@@ -28,6 +29,15 @@ public class MapMenu : MonoBehaviour
         levels = new List<GameObject>();
         gameLevel = new List<GameObject>();
         highlight.gameObject.SetActive(false);
+
+        levelPos = GameManager.instance.levelPos;
+        if(GameManager.instance.continued)
+        {
+            highlight.gameObject.SetActive(true);
+            levelSelect = true;
+            gameLevels.position = GameManager.instance.levelPos;
+            theme = GameManager.instance.theme;
+        }
         for (int i = 1; i <= 5; i++)
         {
             levels.Add(GameObject.Find("Level_" + i));
@@ -64,6 +74,7 @@ public class MapMenu : MonoBehaviour
     void Highlighter()
     {
         gameLevels.transform.position = levelPos;
+        GameManager.instance.levelPos = levelPos;
         highlight.gameObject.SetActive(true);
         gameLevels.gameObject.SetActive(true);
     }
@@ -105,33 +116,33 @@ public class MapMenu : MonoBehaviour
     {
         if (theme == 0)
         {
-            star01 = forest1;
-            star02 = forest2;
-            star03 = forest3;
+            star01 = GameManager.instance.levelNumber[0];
+            star02 = GameManager.instance.levelNumber[1];
+            star03 = GameManager.instance.levelNumber[2];
         }
         if (theme == 1)
         {
-            star01 = japan1;
-            star02 = japan2;
-            star03 = japan3;
+            star01 = GameManager.instance.levelNumber[3];
+            star02 = GameManager.instance.levelNumber[4];
+            star03 = GameManager.instance.levelNumber[5];
         }
         if (theme == 2)
         {
-            star01 = winter1;
-            star02 = winter2;
-            star03 = winter3;
+            star01 = GameManager.instance.levelNumber[6];
+            star02 = GameManager.instance.levelNumber[7];
+            star03 = GameManager.instance.levelNumber[8];
         }
         if (theme == 3)
         {
-            star01 = hell1;
-            star02 = hell2;
-            star03 = hell3;
+            star01 = GameManager.instance.levelNumber[9];
+            star02 = GameManager.instance.levelNumber[10];
+            star03 = GameManager.instance.levelNumber[11];
         }
         if (theme == 4)
         {
-            star01 = desert1;
-            star02 = desert1;
-            star03 = desert1;
+            star01 = GameManager.instance.levelNumber[12];
+            star02 = GameManager.instance.levelNumber[13];
+            star03 = GameManager.instance.levelNumber[14];
         }
     }
     void levelSelection()
@@ -157,6 +168,7 @@ public class MapMenu : MonoBehaviour
                         Highlighter();
                         levelSelect = true;
                         theme = i;
+                        GameManager.instance.theme = i;
                         Debug.Log(theme + " theme");
 
                     }
@@ -173,14 +185,19 @@ public class MapMenu : MonoBehaviour
                             {
                                 if (j == 0)
                                 {
+                                    GameManager.instance.selectedNumber = 0;
+                                    Application.LoadLevel("asdf");
                                     Debug.Log("eka themen eka kenttä");
                                 }
                                 if (j == 1)
                                 {
+                                    GameManager.instance.selectedNumber = 1;
+                                    Application.LoadLevel("qwerty");
                                     Debug.Log("eka themen toinen kenttä");
                                 }
                                 if (j == 2)
                                 {
+                                    GameManager.instance.selectedNumber = 2;
                                     Debug.Log("eka themen viimeinen kenttä");  
                                 }
                             }
@@ -188,14 +205,17 @@ public class MapMenu : MonoBehaviour
                             {
                                 if (j == 0)
                                 {
+                                    GameManager.instance.selectedNumber = 3;
                                     Debug.Log("toisen themen eka kenttä");  
                                 }
                                 if (j == 1)
                                 {
+                                    GameManager.instance.selectedNumber = 4;
                                     Debug.Log("toisen themen toinen kenttä");     
                                 }
                                 if (j == 2)
                                 {
+                                    GameManager.instance.selectedNumber = 5;
                                     Debug.Log("toisen themen viimeinen kenttä");         
                                 }
                             }
@@ -203,14 +223,17 @@ public class MapMenu : MonoBehaviour
                             {
                                 if (j == 0)
                                 {
+                                    GameManager.instance.selectedNumber = 6;
                                     Debug.Log("kolmannen themen eka kenttä");
                                 }
                                 if (j == 1)
                                 {
+                                    GameManager.instance.selectedNumber = 7;
                                     Debug.Log("kolmannen themen toinen kenttä"); 
                                 }
                                 if (j == 2)
                                 {
+                                    GameManager.instance.selectedNumber = 8;
                                     Debug.Log("kolmannen themen viimeinen kenttä");     
                                 }
                             }
@@ -218,14 +241,17 @@ public class MapMenu : MonoBehaviour
                             {
                                 if (j == 0)
                                 {
+                                    GameManager.instance.selectedNumber = 9;
                                     Debug.Log("neljännen themen eka kenttä");      
                                 }
                                 if (j == 1)
                                 {
+                                    GameManager.instance.selectedNumber = 10;
                                     Debug.Log("neljännen themen toinen kenttä");                           
                                 }
                                 if (j == 2)
                                 {
+                                    GameManager.instance.selectedNumber = 11;
                                     Debug.Log("neljännen themen viimeinen kenttä");
                                 }
                             }
@@ -233,14 +259,17 @@ public class MapMenu : MonoBehaviour
                             {
                                 if (j == 0)
                                 {
+                                    GameManager.instance.selectedNumber = 12;
                                     Debug.Log("viidennen themen eka kenttä");
                                 }
                                 if (j == 1)
                                 {
+                                    GameManager.instance.selectedNumber = 13;
                                     Debug.Log("viidennen themen toinen kenttä");
                                 }
                                 if (j == 2)
                                 {
+                                    GameManager.instance.selectedNumber = 14;
                                     Debug.Log("viidennen themen viimeinen kenttä");
                                 }
                             }

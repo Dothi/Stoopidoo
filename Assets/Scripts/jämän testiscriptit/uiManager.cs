@@ -13,7 +13,8 @@ public class uiManager : MonoBehaviour
     public Image star01;
     public Image star02;
     public Image star03;
-
+    int starAmount;
+    int threeStar, twoStar, oneStar;
 
     public static uiManager instance;
     // Use this for initialization
@@ -38,36 +39,65 @@ public class uiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void ScoreStars()
     {
-        Debug.Log("adsofija");
-            if (BlockSpawner.instance.blocksUsed <= 5)
+        string level = Application.loadedLevelName;
+        if (level == "asdf")
+        {
+            threeStar = 4;
+            twoStar = 6;  
+        }
+        if(level == "qwerty")
+        {
+            threeStar = 6;
+            twoStar = 7;
+        }
+            if (BlockSpawnerBackup.instance.blocksUsed <= threeStar)
             {
-            Debug.Log(BlockSpawner.instance.blocksUsed);
-            star01.color = new Color(1f, 1f, 1f, 1f);
-            star02.color = new Color(1f, 1f, 1f, 1f);
-            star03.color = new Color(1f, 1f, 1f, 1f);
+                ThreeStars();
+                Debug.Log(BlockSpawnerBackup.instance.blocksUsed);
+
             }
-            else if (BlockSpawner.instance.blocksUsed <= 7)
+            else if (BlockSpawnerBackup.instance.blocksUsed <= twoStar)
             {
-            Debug.Log(BlockSpawner.instance.blocksUsed);
-            star01.color = new Color(1f, 1f, 1f, 1f);
-            star02.color = new Color(1f, 1f, 1f, 1f);
-            star03.color = new Color(0f, 0f, 0f, 0.4f);
+                Debug.Log(BlockSpawnerBackup.instance.blocksUsed);
+                TwoStars();
             }
             else
             {
-            Debug.Log(BlockSpawner.instance.blocksUsed);
-            star01.color = new Color(1f, 1f, 1f, 1f);
-            star02.color = new Color(0f, 0f, 0f, 0.4f);
-            star03.color = new Color(0f, 0f, 0f, 0.4f);
+                Debug.Log(BlockSpawnerBackup.instance.blocksUsed);
+                OneStar();
             }        
     }
 
+    public void ThreeStars()
+    {
+        starAmount = 3;
+        star01.color = new Color(1f, 1f, 1f, 1f);
+        star02.color = new Color(1f, 1f, 1f, 1f);
+        star03.color = new Color(1f, 1f, 1f, 1f);
+    }
+    public void TwoStars()
+    {
+        starAmount = 2;
+        star01.color = new Color(1f, 1f, 1f, 1f);
+        star02.color = new Color(1f, 1f, 1f, 1f);
+        star03.color = new Color(0f, 0f, 0f, 0.4f);
+    }
+    public void OneStar()
+    {
+        starAmount = 1;
+        star01.color = new Color(1f, 1f, 1f, 1f);
+        star02.color = new Color(0f, 0f, 0f, 0.4f);
+        star03.color = new Color(0f, 0f, 0f, 0.4f);
+    }
     public void ContinueGame()
     {
+        GameManager.instance.levelNumber[GameManager.instance.selectedNumber] = starAmount;
+        GameManager.instance.continued = true;
         Application.LoadLevel("MenuMap");
     }
 }
