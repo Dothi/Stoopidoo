@@ -40,10 +40,25 @@ public class MapMenu : MonoBehaviour
 
     void Update()
     {
-        
-        
-
         levelSelection();
+        showStars();
+        if(Input.touchCount > 0)
+        {
+            foreach(Touch touch in Input.touches)
+            {
+                if(touch.fingerId < 1)
+                {
+                    switch(touch.phase)
+                    {
+                        case TouchPhase.Began:
+                            levelSelectionMobile();
+                            break;
+                        case TouchPhase.Moved:
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     void Highlighter()
@@ -51,12 +66,10 @@ public class MapMenu : MonoBehaviour
         gameLevels.transform.position = levelPos;
         highlight.gameObject.SetActive(true);
         gameLevels.gameObject.SetActive(true);
-        Debug.Log("Lol");
-
-
     }
-    void stars()
+    void showStars()
     {
+        themeSelect();
         for (int x = 0; x < star01; x++)
         {
             star1[x].GetComponent<SpriteRenderer>().enabled = true;
@@ -71,24 +84,62 @@ public class MapMenu : MonoBehaviour
             Debug.Log(star1[j]);
         }
     }
+    void hideStars()
+    {
+        for (int x = 0; x < 3; x++)
+        {
+            star1[x].GetComponent<SpriteRenderer>().enabled = false;
+        }
+        for (int k = 0; k < 3; k++)
+        {
+            star2[k].GetComponent<SpriteRenderer>().enabled = false;
+        }
+        for (int j = 0; j < 3; j++)
+        {
+            star3[j].GetComponent<SpriteRenderer>().enabled = false;
+            Debug.Log(star1[j]);
+        }
+
+    }
+    void themeSelect()
+    {
+        if (theme == 0)
+        {
+            star01 = forest1;
+            star02 = forest2;
+            star03 = forest3;
+        }
+        if (theme == 1)
+        {
+            star01 = japan1;
+            star02 = japan2;
+            star03 = japan3;
+        }
+        if (theme == 2)
+        {
+            star01 = winter1;
+            star02 = winter2;
+            star03 = winter3;
+        }
+        if (theme == 3)
+        {
+            star01 = hell1;
+            star02 = hell2;
+            star03 = hell3;
+        }
+        if (theme == 4)
+        {
+            star01 = desert1;
+            star02 = desert1;
+            star03 = desert1;
+        }
+    }
     void levelSelection()
     {
         RaycastHit2D ray = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
         if (Input.GetMouseButtonDown(0))
         {
-            for (int x = 0; x < 3; x++)
-            {
-                star1[x].GetComponent<SpriteRenderer>().enabled = false;
-            }
-            for (int k = 0; k < 3; k++)
-            {
-                star2[k].GetComponent<SpriteRenderer>().enabled = false;
-            }
-            for (int j = 0; j < 3; j++)
-            {
-                star3[j].GetComponent<SpriteRenderer>().enabled = false;
-                Debug.Log(star1[j]);
-            }
+            hideStars();
             if (ray)
             {
                 if (ray && ray.collider.GetComponent<CircleCollider2D>())
@@ -107,40 +158,11 @@ public class MapMenu : MonoBehaviour
                         levelSelect = true;
                         theme = i;
                         Debug.Log(theme + " theme");
-                        if(theme == 0)
-                        {
-                            star01 = forest1;
-                            star02 = forest2;
-                            star03 = forest3;
-                        }
-                        if (theme == 1)
-                        {
-                            star01 = japan1;
-                            star02 = japan2;
-                            star03 = japan3;
-                        }
-                        if (theme == 2)
-                        {
-                            star01 = winter1;
-                            star02 = winter2;
-                            star03 = winter3;
-                        }
-                        if (theme == 3)
-                        {
-                            star01 = hell1;
-                            star02 = hell2;
-                            star03 = hell3;
-                        }
-                        if (theme == 4)
-                        {
-                            star01 = desert1;
-                            star02 = desert1;
-                            star03 = desert1;
-                        }
+
                     }
 
                 }
-                stars();
+                //showStars();
                 if (levelSelect)
                 {                    
                     for (int j = 0; j < 3; j++)
@@ -234,5 +256,125 @@ public class MapMenu : MonoBehaviour
                 gameLevels.gameObject.SetActive(false);
             }
         }
+    }
+
+    void levelSelectionMobile()
+    {
+        RaycastHit2D ray = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector2.zero);
+        hideStars();
+            if (ray)
+            {
+                if (ray && ray.collider.GetComponent<CircleCollider2D>())
+                {
+                    highlight.transform.position = ray.collider.gameObject.transform.position;
+
+                }
+                levelPos = ray.collider.gameObject.transform.position;
+                levelPos.y += 2;
+                levelPos.z = -10;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (ray && ray.collider == levels[i].GetComponent<CircleCollider2D>())
+                    {
+                        Highlighter();
+                        levelSelect = true;
+                        theme = i;
+                    }
+
+                }
+                //showStars();
+                if (levelSelect)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (ray & ray.collider == gameLevel[j].GetComponent<BoxCollider2D>())
+                        {
+                            if (theme == 0)
+                            {
+                                if (j == 0)
+                                {
+                                    Debug.Log("eka themen eka kenttä");
+                                }
+                                if (j == 1)
+                                {
+                                    Debug.Log("eka themen toinen kenttä");
+                                }
+                                if (j == 2)
+                                {
+                                    Debug.Log("eka themen viimeinen kenttä");
+                                }
+                            }
+                            if (theme == 1)
+                            {
+                                if (j == 0)
+                                {
+                                    Debug.Log("toisen themen eka kenttä");
+                                }
+                                if (j == 1)
+                                {
+                                    Debug.Log("toisen themen toinen kenttä");
+                                }
+                                if (j == 2)
+                                {
+                                    Debug.Log("toisen themen viimeinen kenttä");
+                                }
+                            }
+                            if (theme == 2)
+                            {
+                                if (j == 0)
+                                {
+                                    Debug.Log("kolmannen themen eka kenttä");
+                                }
+                                if (j == 1)
+                                {
+                                    Debug.Log("kolmannen themen toinen kenttä");
+                                }
+                                if (j == 2)
+                                {
+                                    Debug.Log("kolmannen themen viimeinen kenttä");
+                                }
+                            }
+                            if (theme == 3)
+                            {
+                                if (j == 0)
+                                {
+                                    Debug.Log("neljännen themen eka kenttä");
+                                }
+                                if (j == 1)
+                                {
+                                    Debug.Log("neljännen themen toinen kenttä");
+                                }
+                                if (j == 2)
+                                {
+                                    Debug.Log("neljännen themen viimeinen kenttä");
+                                }
+                            }
+                            if (theme == 4)
+                            {
+                                if (j == 0)
+                                {
+                                    Debug.Log("viidennen themen eka kenttä");
+                                }
+                                if (j == 1)
+                                {
+                                    Debug.Log("viidennen themen toinen kenttä");
+                                }
+                                if (j == 2)
+                                {
+                                    Debug.Log("viidennen themen viimeinen kenttä");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if (!ray)
+            {
+                levelSelect = false;
+                highlight.gameObject.SetActive(false);
+                gameLevels.gameObject.SetActive(false);
+            }
+        
     }
 }
