@@ -1,0 +1,167 @@
+fileFormatVersion: 2
+guid: b12e67c2ada81574ebdf0028b180d716
+timeCreated: 1467577730
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: mapmenu_button_placeholders_0
+    21300002: mapmenu_button_placeholders_1
+    21300004: mapmenu_button_placeholders_2
+    21300006: mapmenu_button_placeholders_3
+    21300008: mapmenu_button_placeholders_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: mapmenu_button_placeholders_0
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 60
+        width: 132
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -49, y: 66}
+        - {x: -66, y: 40}
+        - {x: -66, y: -23}
+        - {x: -55, y: -43}
+        - {x: -40, y: -63}
+        - {x: -32, y: -66}
+        - {x: 36, y: -66}
+        - {x: 66, y: -39}
+        - {x: 66, y: 52}
+        - {x: 45, y: 66}
+    - name: mapmenu_button_placeholders_1
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 60
+        width: 132
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -49, y: 66}
+        - {x: -66, y: 40}
+        - {x: -66, y: -23}
+        - {x: -55, y: -43}
+        - {x: -40, y: -63}
+        - {x: -32, y: -66}
+        - {x: 36, y: -66}
+        - {x: 66, y: -39}
+        - {x: 66, y: 52}
+        - {x: 45, y: 66}
+    - name: mapmenu_button_placeholders_2
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 60
+        width: 132
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -49, y: 66}
+        - {x: -66, y: 40}
+        - {x: -66, y: -23}
+        - {x: -55, y: -43}
+        - {x: -40, y: -63}
+        - {x: -32, y: -66}
+        - {x: 36, y: -66}
+        - {x: 66, y: -39}
+        - {x: 66, y: 52}
+        - {x: 45, y: 66}
+    - name: mapmenu_button_placeholders_3
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 60
+        width: 132
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -49, y: 66}
+        - {x: -66, y: 40}
+        - {x: -66, y: -23}
+        - {x: -55, y: -43}
+        - {x: -40, y: -63}
+        - {x: -32, y: -66}
+        - {x: 36, y: -66}
+        - {x: 66, y: -39}
+        - {x: 66, y: 52}
+        - {x: 45, y: 66}
+    - name: mapmenu_button_placeholders_4
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 60
+        width: 132
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -49, y: 66}
+        - {x: -66, y: 40}
+        - {x: -66, y: -23}
+        - {x: -55, y: -43}
+        - {x: -40, y: -63}
+        - {x: -32, y: -66}
+        - {x: 36, y: -66}
+        - {x: 66, y: -39}
+        - {x: 66, y: 52}
+        - {x: 45, y: 66}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

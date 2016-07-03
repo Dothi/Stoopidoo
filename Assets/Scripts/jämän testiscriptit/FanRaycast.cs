@@ -3,7 +3,7 @@ using System.Collections;
 public class FanRaycast : MonoBehaviour
 {
     public float rayLength = 5f;
-    public Transform player;
+    GameObject player;
     public int verticalRayCount = 4;
     Vector3 velocity;
     float verticalRaySpacing;
@@ -19,6 +19,7 @@ public class FanRaycast : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        player = GameObject.Find("Player");
         asdRaycastOrigins();
         CalculateRaySpacing();
         Debug.Log(verticalRayCount);

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MapMenu : MonoBehaviour
 {
@@ -14,9 +15,16 @@ public class MapMenu : MonoBehaviour
     public int theme;
     public int star01, star02, star03;
     public List<GameObject> star1, star2, star3;
-    
+    public AudioClip plob;
+    public Button playButton;
+    public Image mainMenuPic;
+    public SpriteRenderer map;
+    public SpriteRenderer map1;
+    public int overAllStars;
 
-    
+    float currentTime = 0;
+    float TimeitTakesToFade = 2;
+    float fadeValue = 1;
     void Start()
     {
         //levelPos.z = -10;
@@ -50,6 +58,10 @@ public class MapMenu : MonoBehaviour
 
     void Update()
     {
+        if(overAllStars >= 3)
+        {
+            changePic();
+        }
         levelSelection();
         showStars();
         if(Input.touchCount > 0)
@@ -165,6 +177,7 @@ public class MapMenu : MonoBehaviour
                 {
                     if (ray && ray.collider == levels[i].GetComponent<CircleCollider2D>())
                     {
+                        AudioSource.PlayClipAtPoint(plob, transform.position);
                         Highlighter();
                         levelSelect = true;
                         theme = i;
@@ -186,18 +199,19 @@ public class MapMenu : MonoBehaviour
                                 if (j == 0)
                                 {
                                     GameManager.instance.selectedNumber = 0;
-                                    Application.LoadLevel("asdf");
+                                    Application.LoadLevel("jmlevelsuunnittelu");
                                     Debug.Log("eka themen eka kenttä");
                                 }
                                 if (j == 1)
                                 {
                                     GameManager.instance.selectedNumber = 1;
-                                    Application.LoadLevel("qwerty");
+                                    Application.LoadLevel("jmlevelsuunnittelu1");
                                     Debug.Log("eka themen toinen kenttä");
                                 }
                                 if (j == 2)
                                 {
                                     GameManager.instance.selectedNumber = 2;
+                                    Application.LoadLevel("jmlevelsuunnittelu2");
                                     Debug.Log("eka themen viimeinen kenttä");  
                                 }
                             }
@@ -206,16 +220,19 @@ public class MapMenu : MonoBehaviour
                                 if (j == 0)
                                 {
                                     GameManager.instance.selectedNumber = 3;
+                                    Application.LoadLevel("Winter level 3");
                                     Debug.Log("toisen themen eka kenttä");  
                                 }
                                 if (j == 1)
                                 {
                                     GameManager.instance.selectedNumber = 4;
+                                    Application.LoadLevel("Winter1 leve 2");
                                     Debug.Log("toisen themen toinen kenttä");     
                                 }
                                 if (j == 2)
                                 {
                                     GameManager.instance.selectedNumber = 5;
+                                    Application.LoadLevel("Winter1 level");
                                     Debug.Log("toisen themen viimeinen kenttä");         
                                 }
                             }
@@ -305,7 +322,8 @@ public class MapMenu : MonoBehaviour
                 {
                     if (ray && ray.collider == levels[i].GetComponent<CircleCollider2D>())
                     {
-                        Highlighter();
+                    AudioSource.PlayClipAtPoint(plob, transform.position);
+                    Highlighter();
                         levelSelect = true;
                         theme = i;
                     }
@@ -405,5 +423,23 @@ public class MapMenu : MonoBehaviour
                 gameLevels.gameObject.SetActive(false);
             }
         
+    }
+
+   public void playGame()
+    {
+        AudioSource.PlayClipAtPoint(plob, transform.position);
+        playButton.gameObject.SetActive(false);
+        mainMenuPic.gameObject.SetActive(false);
+        levels[0].GetComponent<CircleCollider2D>().enabled = true;
+
+    }
+    void changePic()
+    {
+        currentTime += Time.deltaTime;
+        if(currentTime <= TimeitTakesToFade)
+        {
+            fadeValue = 1 - (currentTime / TimeitTakesToFade);
+            map.color = new Color(1, 1, 1, fadeValue);
+        }
     }
 }

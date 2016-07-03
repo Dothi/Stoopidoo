@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
     {
         myRB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        bb = GameObject.FindGameObjectWithTag("ButtonBoxController").GetComponent<ButtonBox>();
+       // bb = GameObject.FindGameObjectWithTag("ButtonBoxController").GetComponent<ButtonBox>();
         timer = 0f;
         moving = false;
         movingRight = true;
@@ -163,9 +163,9 @@ public class Movement : MonoBehaviour
             Destroy(collision.gameObject);
             vl.lose = true;
         }
-        else if (collision.gameObject.tag == "ButtonBox")
-        {
-            bb.Rotating = true;
-        }
+        //else if (collision.gameObject.tag == "ButtonBox")
+        //{
+        //    bb.Rotating = true;
+        //}
     }
 }
