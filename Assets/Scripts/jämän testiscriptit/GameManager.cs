@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour {
     public int[] levelNumber = new int[15];
     public bool continued;
     public Vector3 levelPos = new Vector3(-15, 0, -10);
+    public Vector3 highlightPos;
+    public Vector3 camPos;
+    public bool gameStarted;
+    public bool firstUnlock;
+    public bool moving;
     void Awake()
     {
         if(instance != null && instance != this)
