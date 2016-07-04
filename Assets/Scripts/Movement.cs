@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     SpriteRenderer spriteRend;
     LayerMask layerMask;
     VictoryLose vl;
-    ButtonBox bb;
+    
     public static Movement instance;
     Animator anim;
     // Use this for initialization
@@ -35,7 +35,6 @@ public class Movement : MonoBehaviour
     {
         myRB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-       // bb = GameObject.FindGameObjectWithTag("ButtonBoxController").GetComponent<ButtonBox>();
         timer = 0f;
         moving = false;
         movingRight = true;
@@ -153,7 +152,6 @@ public class Movement : MonoBehaviour
     }
 
 
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Trap")
@@ -163,9 +161,6 @@ public class Movement : MonoBehaviour
             Destroy(collision.gameObject);
             vl.lose = true;
         }
-        //else if (collision.gameObject.tag == "ButtonBox")
-        //{
-        //    bb.Rotating = true;
-        //}
     }
+    
 }

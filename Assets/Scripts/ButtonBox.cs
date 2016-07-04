@@ -50,7 +50,7 @@ public class ButtonBox : MonoBehaviour
                     temp += rotationVal;
                 }
             }
-            else if (Rotating)
+            else
             {
 
                 if (clockWise)
