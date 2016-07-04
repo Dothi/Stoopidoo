@@ -16,13 +16,14 @@ public class Movement : MonoBehaviour
     SpriteRenderer spriteRend;
     LayerMask layerMask;
     VictoryLose vl;
-    
+    public LayerMask DefaultTerrainLayerMask;
+
     public static Movement instance;
     Animator anim;
     // Use this for initialization
     void Awake()
     {
-        if(instance !=null && instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
         }
@@ -43,6 +44,8 @@ public class Movement : MonoBehaviour
         spriteRend = GetComponent<SpriteRenderer>();
         idleTimer = 0f;
         layerMask = 1 << LayerMask.NameToLayer("Player");
+
+
         layerMask = ~layerMask;
         vl = GetComponent<VictoryLose>();
     }
@@ -103,29 +106,84 @@ public class Movement : MonoBehaviour
             Debug.Log("jloj");
             moving = true;
         }
-        
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1.2f, layerMask);
 
-        if (hit && hit.transform.tag == "Ground" || hit && hit.transform.tag == "SmallBlock" || hit && hit.transform.tag == "MediumBlock" || hit && hit.transform.tag == "LongBlock")
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1f, DefaultTerrainLayerMask);
+       // RaycastHit2D rightHit = Physics2D.Raycast(transform.position + transform.right * 1f, -transform.up, 1f, DefaultTerrainLayerMask);
+
+        Debug.DrawRay(transform.position, -transform.up * 1f, Color.green);
+       // Debug.DrawRay(transform.position + -transform.right * 1f, -transform.up * 1f, Color.green);
+
+
+        //if moving left
+       /* if (!movingRight)
         {
-            Debug.Log(hit.transform);
-            if (!hit.collider.isTrigger)
+            RaycastHit2D overrideLeftHitInfo = Physics2D.Raycast(transform.position, -transform.right, 1f, DefaultTerrainLayerMask);
+            
+            if (overrideLeftHitInfo)
             {
-                isGrounded = true;
+                leftHit = overrideLeftHitInfo;
             }
         }
+        //if moving right
         else
         {
-            isGrounded = false;
-        }
-        if (isGrounded)
+            RaycastHit2D overrideRightHitInfo = Physics2D.Raycast(transform.position, transform.right, 1f, DefaultTerrainLayerMask);
+
+
+            if (overrideRightHitInfo)
+            {
+                rightHit = overrideRightHitInfo;
+            }
+
+        }*/
+
+        if (hit)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector2.up, hit.normal), 5f * Time.deltaTime);
+            
+            
+
+            Vector3 averageNormal = hit.normal;
+            Debug.Log(averageNormal);
+            Vector3 averagePoint = hit.point;
+            Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
+            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 4f);
+           
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 10f * Time.deltaTime);
+
         }
+        
+        
+        
         else
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector2.up, Vector3.zero), 5f * Time.deltaTime);
+            
+            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 4f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 10f * Time.deltaTime);
         }
+
+
+        /*  RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1.2f, layerMask);
+
+          if (hit && hit.transform.tag == "Ground" || hit && hit.transform.tag == "SmallBlock" || hit && hit.transform.tag == "MediumBlock" || hit && hit.transform.tag == "LongBlock")
+          {
+              Debug.Log(hit.transform);
+              if (!hit.collider.isTrigger)
+              {
+                  isGrounded = true;
+              }
+          }
+          else
+          {
+              isGrounded = false;
+          }
+          if (isGrounded)
+          {
+              transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector2.up, hit.normal), 5f * Time.deltaTime);
+          }
+          else
+          {
+              transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector2.up, Vector3.zero), 5f * Time.deltaTime);
+          }*/
     }
     void FixedUpdate()
     {
@@ -162,5 +220,8 @@ public class Movement : MonoBehaviour
             vl.lose = true;
         }
     }
-    
+
+
+
+
 }
