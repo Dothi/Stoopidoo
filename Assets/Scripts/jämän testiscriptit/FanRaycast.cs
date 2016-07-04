@@ -6,6 +6,7 @@ public class FanRaycast : MonoBehaviour
     GameObject player;
     public int verticalRayCount = 4;
     Vector3 velocity;
+    LayerMask hurricaneMask;
     float verticalRaySpacing;
     float horizontalRaySpacing;
     int horizontalRayCount;
@@ -20,12 +21,14 @@ public class FanRaycast : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        hurricaneMask = 1 << LayerMask.NameToLayer("Hurricane") | 1 << LayerMask.NameToLayer("UI");
         asdRaycastOrigins();
         CalculateRaySpacing();
         Debug.Log(verticalRayCount);
         //velocity = transform.position;
         //float directionY = Mathf.Sign(velocity.y);
         raycast();
+        hurricaneMask = ~hurricaneMask;
     }
 
     void Awake()
@@ -47,7 +50,7 @@ public class FanRaycast : MonoBehaviour
             distance = Vector2.Distance(transform.position, rayOrigin);
             percent = (distance / maxDistance) * 5;
             rayLength -= percent;
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, rayLength);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, rayLength, hurricaneMask);
             Debug.DrawRay(rayOrigin, Vector2.up * rayLength, Color.red);
             if (hit && hit.transform.tag == "Player")
             {
