@@ -4,14 +4,15 @@ using System.Collections;
 public class Movement : MonoBehaviour
 {
     public Rigidbody2D myRB;
-    public float speed;
+    public float speed = 50f;
     public float fan = 1f;
     float timer;
     public float idleTimer;
-    bool moving;
+    public bool moving;
     public bool isGrounded;
     public bool movingRight;
     public bool isTouchingWall;
+    public bool iceWalk;
     RaycastHit2D hit;
     SpriteRenderer spriteRend;
     LayerMask layerMask;
@@ -53,6 +54,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (vl.lose)
         {
             this.enabled = false;
@@ -107,7 +109,7 @@ public class Movement : MonoBehaviour
             moving = true;
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1f, DefaultTerrainLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1.5f, DefaultTerrainLayerMask);
        // RaycastHit2D rightHit = Physics2D.Raycast(transform.position + transform.right * 1f, -transform.up, 1f, DefaultTerrainLayerMask);
 
         Debug.DrawRay(transform.position, -transform.up * 1f, Color.green);
@@ -139,8 +141,6 @@ public class Movement : MonoBehaviour
 
         if (hit)
         {
-            
-            
 
             Vector3 averageNormal = hit.normal;
             Debug.Log(averageNormal);
@@ -148,12 +148,9 @@ public class Movement : MonoBehaviour
             Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
             Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 4f);
            
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 10f * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 10f * Time.deltaTime);
 
         }
-        
-        
-        
         else
         {
             
@@ -198,13 +195,29 @@ public class Movement : MonoBehaviour
 
         if (!vl.win)
         {
-            if (moving && movingRight)
+            if (!iceWalk)
             {
-                myRB.velocity = new Vector2(speed * Time.deltaTime, myRB.velocity.y);
+                if (moving && movingRight)
+                {
+                    myRB.velocity = new Vector2(speed * Time.deltaTime, myRB.velocity.y);
+                }
+                else if (moving && !movingRight)
+                {
+                    myRB.velocity = new Vector2(-speed * Time.deltaTime, myRB.velocity.y);
+                }
             }
-            else if (moving && !movingRight)
+            else
             {
-                myRB.velocity = new Vector2(-speed * Time.deltaTime, myRB.velocity.y);
+                if (iceWalk && movingRight)
+                {
+                    myRB.AddForce(new Vector2(speed * 2 * Time.deltaTime, myRB.velocity.y));
+                }
+                else if (iceWalk && !movingRight)
+                {
+                    
+                    myRB.AddForce(new Vector2(speed * 2 * Time.deltaTime, myRB.velocity.y));
+                }
+                
             }
         }
     }
