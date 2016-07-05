@@ -7,6 +7,7 @@ public class uiManager : MonoBehaviour
 
     public Text WinLose;
     public Transform Victory;
+    public Text startTime;
     //public Transform star1;
     //public Transform star2;
     //public Transform star3;
@@ -33,6 +34,8 @@ public class uiManager : MonoBehaviour
     {
         WinLose.gameObject.SetActive(false);
         Victory.gameObject.SetActive(false);
+        startTime = GameObject.Find("StartTime").GetComponent<Text>();
+        startTime.enabled = true;
 
     }
 
@@ -55,20 +58,20 @@ public class uiManager : MonoBehaviour
             threeStar = 6;
             twoStar = 7;
         }
-            if (BlockSpawnerBackup.instance.blocksUsed <= threeStar)
+            if (BlockSpawner.instance.blocksUsed <= threeStar)
             {
                 ThreeStars();
-                Debug.Log(BlockSpawnerBackup.instance.blocksUsed);
+                Debug.Log(BlockSpawner.instance.blocksUsed);
 
             }
-            else if (BlockSpawnerBackup.instance.blocksUsed <= twoStar)
+            else if (BlockSpawner.instance.blocksUsed <= twoStar)
             {
-                Debug.Log(BlockSpawnerBackup.instance.blocksUsed);
+                Debug.Log(BlockSpawner.instance.blocksUsed);
                 TwoStars();
             }
             else
             {
-                Debug.Log(BlockSpawnerBackup.instance.blocksUsed);
+                Debug.Log(BlockSpawner.instance.blocksUsed);
                 OneStar();
             }        
     }
@@ -98,6 +101,12 @@ public class uiManager : MonoBehaviour
     {
         GameManager.instance.levelNumber[GameManager.instance.selectedNumber] = starAmount;
         GameManager.instance.continued = true;
+        Time.timeScale = 1;
+        Application.LoadLevel("MenuMap");
+        
+    }
+    public void returnMapMenu()
+    {
         Application.LoadLevel("MenuMap");
     }
 }

@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour {
     public int[] levelNumber = new int[15];
     public bool continued;
     public Vector3 levelPos = new Vector3(-15, 0, -10);
+    public Vector3 highlightPos;
+    public bool firstUnlock, secondUnlock;
+    public bool gameStarted;
     void Awake()
     {
         if(instance != null && instance != this)
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         continued = false;
+        gameStarted = false;
 	}
 	
 	// Update is called once per frame

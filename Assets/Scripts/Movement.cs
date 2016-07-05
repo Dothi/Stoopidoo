@@ -38,7 +38,7 @@ public class Movement : MonoBehaviour
     {
         myRB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        timer = 0f;
+        timer = 5f;
         moving = false;
         movingRight = true;
         isTouchingWall = false;
@@ -98,11 +98,13 @@ public class Movement : MonoBehaviour
         }
         if (!moving && !started)
         {
-            timer += Time.deltaTime;
+            timer -= Time.deltaTime;
+            uiManager.instance.startTime.text = "" + (int)(timer + 1);
         }
-        if (timer >= 5 && !moving && !started)
+        if (timer <= 0 && !moving && !started)
         {
             Debug.Log(timer);
+            uiManager.instance.startTime.enabled = false;
             moving = true;
             started = true;
         }
