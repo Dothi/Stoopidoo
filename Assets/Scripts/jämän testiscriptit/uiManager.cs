@@ -6,7 +6,6 @@ public class uiManager : MonoBehaviour
 {
 
     public Text WinLose;
-    public Text startTime;
     public Transform Victory;
     //public Transform star1;
     //public Transform star2;
@@ -34,8 +33,7 @@ public class uiManager : MonoBehaviour
     {
         WinLose.gameObject.SetActive(false);
         Victory.gameObject.SetActive(false);
-        startTime = GameObject.Find("StartTime").GetComponent<Text>();
-        startTime.enabled = true;
+
     }
 
     // Update is called once per frame
@@ -47,30 +45,30 @@ public class uiManager : MonoBehaviour
     public void ScoreStars()
     {
         string level = Application.loadedLevelName;
-        if (level == "jmlevelsuunnittelu")
+        if (level == "asdf")
         {
             threeStar = 4;
             twoStar = 6;  
         }
-        if(level == "jmlevelsuunnittelu1")
+        if(level == "qwerty")
         {
             threeStar = 6;
             twoStar = 7;
         }
-            if (BlockSpawner.instance.blocksUsed <= threeStar)
+            if (BlockSpawnerBackup.instance.blocksUsed <= threeStar)
             {
                 ThreeStars();
-                Debug.Log(BlockSpawner.instance.blocksUsed);
+                Debug.Log(BlockSpawnerBackup.instance.blocksUsed);
 
             }
-            else if (BlockSpawner.instance.blocksUsed <= twoStar)
+            else if (BlockSpawnerBackup.instance.blocksUsed <= twoStar)
             {
-                Debug.Log(BlockSpawner.instance.blocksUsed);
+                Debug.Log(BlockSpawnerBackup.instance.blocksUsed);
                 TwoStars();
             }
             else
             {
-                Debug.Log(BlockSpawner.instance.blocksUsed);
+                Debug.Log(BlockSpawnerBackup.instance.blocksUsed);
                 OneStar();
             }        
     }
@@ -100,12 +98,6 @@ public class uiManager : MonoBehaviour
     {
         GameManager.instance.levelNumber[GameManager.instance.selectedNumber] = starAmount;
         GameManager.instance.continued = true;
-        Time.timeScale = 1;
-        Application.LoadLevel("MenuMap");
-    }
-
-    public void returnMapMenu()
-    {
         Application.LoadLevel("MenuMap");
     }
 }
