@@ -22,10 +22,15 @@ public class MoveCameraMobileTest : MonoBehaviour
     private float MinZoom;
     public float speed;
 
+    public GameObject FollowDogButton;
+    public GameObject player;
+
+    public bool followDoge;
+
     public void Start()
     {
         Sprite = Area.transform.GetComponent<SpriteRenderer>().sprite;
-
+        player = GameObject.FindGameObjectWithTag("Player");
         CalculatePixelUnits();
         CalculateSize();
         Refresh();
@@ -97,6 +102,21 @@ public class MoveCameraMobileTest : MonoBehaviour
 
     public void Update()
     {
+        if (Input.touchCount > 0)
+        {
+            Vector3 wp = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
+            Vector2 touchPos = new Vector2(wp.x, wp.y);
+
+            if (Input.touches[0].phase == TouchPhase.Stationary && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+            {
+                followDoge = true;
+            }
+            else
+            {
+                followDoge = false;
+            }
+        }
+
         //You would typically hook into Refresh on a screen rotation or aspect ratio change
         //In demo, we call it non stop to demonstrate the camera system 
         Refresh();
@@ -115,6 +135,16 @@ public class MoveCameraMobileTest : MonoBehaviour
         Vector3 v3 = transform.position;
         v3.x = Mathf.Clamp(v3.x, Left, Right);
         v3.y = Mathf.Clamp(v3.y, Bottom, Top);
-        transform.position = v3;
+        if (followDoge)
+        {
+            v3.x = Mathf.Clamp(player.transform.position.x, Left, Right);
+            transform.position = v3;
+        }
+        else
+        {
+            
+            transform.position = v3;
+        }
     }
+    
 }

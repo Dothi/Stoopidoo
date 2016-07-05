@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     public bool movingRight;
     public bool isTouchingWall;
     public bool iceWalk;
+    bool started;
     RaycastHit2D hit;
     SpriteRenderer spriteRend;
     LayerMask layerMask;
@@ -42,6 +43,7 @@ public class Movement : MonoBehaviour
         movingRight = true;
         isTouchingWall = false;
         isGrounded = false;
+        started = false;
         spriteRend = GetComponent<SpriteRenderer>();
         idleTimer = 0f;
         layerMask = 1 << LayerMask.NameToLayer("Player");
@@ -94,16 +96,17 @@ public class Movement : MonoBehaviour
                 }
             }
         }
-        if (!moving)
+        if (!moving && !started)
         {
             timer += Time.deltaTime;
         }
-        if (timer >= 5 && !moving)
+        if (timer >= 5 && !moving && !started)
         {
             Debug.Log(timer);
             moving = true;
+            started = true;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && !moving)
+        if (Input.GetKeyDown(KeyCode.Space) && !moving && !started)
         {
             Debug.Log("jloj");
             moving = true;
@@ -111,6 +114,23 @@ public class Movement : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1.5f, DefaultTerrainLayerMask);
        // RaycastHit2D rightHit = Physics2D.Raycast(transform.position + transform.right * 1f, -transform.up, 1f, DefaultTerrainLayerMask);
+        if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ice"))
+        {
+            
+                iceWalk = true;
+                moving = false;
+            
+        }
+        else
+        {
+            iceWalk = false;
+        }
+        if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            moving = true;
+            Debug.Log("Hit ground");
+        }
+        
 
         Debug.DrawRay(transform.position, -transform.up * 1f, Color.green);
        // Debug.DrawRay(transform.position + -transform.right * 1f, -transform.up * 1f, Color.green);
@@ -197,6 +217,13 @@ public class Movement : MonoBehaviour
         {
             if (!iceWalk)
             {
+                if (!moving)
+                {
+                    Vector3 newVel = myRB.velocity;
+                    myRB.velocity = newVel;
+
+                    
+                }
                 if (moving && movingRight)
                 {
                     myRB.velocity = new Vector2(speed * Time.deltaTime, myRB.velocity.y);
@@ -210,11 +237,12 @@ public class Movement : MonoBehaviour
             {
                 if (iceWalk && movingRight)
                 {
+                    moving = false;
                     myRB.AddForce(new Vector2(speed * 2 * Time.deltaTime, myRB.velocity.y));
                 }
                 else if (iceWalk && !movingRight)
                 {
-                    
+                    moving = false;
                     myRB.AddForce(new Vector2(speed * 2 * Time.deltaTime, myRB.velocity.y));
                 }
                 
@@ -232,7 +260,23 @@ public class Movement : MonoBehaviour
             Destroy(collision.gameObject);
             vl.lose = true;
         }
+        
+        
     }
+   /* void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ice"))
+        {
+            iceWalk = true;
+        }
+    }
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ice"))
+        {
+            iceWalk = false;
+        }
+    }*/
 
 
 

@@ -278,6 +278,10 @@ public class BlockSpawner : MonoBehaviour
             Application.LoadLevel(Application.loadedLevel);
         }
     }
+    public void CameraFollowDog()
+    {
+
+    }
     void OnGUI()
     {
         /*Event e = Event.current;
