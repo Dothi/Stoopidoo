@@ -48,12 +48,12 @@ public class uiManager : MonoBehaviour
     public void ScoreStars()
     {
         string level = Application.loadedLevelName;
-        if (level == "asdf")
+        if (level == "Jonna Forest 1")
         {
             threeStar = 4;
             twoStar = 6;  
         }
-        if(level == "qwerty")
+        if(level == "JonnaTestMobile")
         {
             threeStar = 6;
             twoStar = 7;
@@ -72,7 +72,7 @@ public class uiManager : MonoBehaviour
             else
             {
                 Debug.Log(BlockSpawner.instance.blocksUsed);
-                OneStar();
+            ThreeStars();
             }        
     }
 

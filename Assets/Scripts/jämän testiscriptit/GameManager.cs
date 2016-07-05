@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public bool continued;
     public Vector3 levelPos = new Vector3(-15, 0, -10);
     public Vector3 highlightPos;
+    public Vector3 camPos;
     public bool firstUnlock, secondUnlock;
     public bool gameStarted;
     void Awake()
@@ -35,6 +36,6 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        camPos.z = -10;
 	}
 }

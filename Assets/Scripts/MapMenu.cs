@@ -23,9 +23,9 @@ public class MapMenu : MonoBehaviour
     public SpriteRenderer[] mappi;
     public int overAllStars;
 
-    float currentTime, curTime = 0;
+    float currentTime = 0;
     float TimeitTakesToFade = 2;
-    float fadeValue, feidi = 1;
+    float fadeValue = 1;
     bool faded;
     //public bool themeClicked;
     //public int clickCounter = 0;
@@ -41,7 +41,7 @@ public class MapMenu : MonoBehaviour
         for (int i = 1; i <= 3; i++) { star3.Add(GameObject.Find("star30" + i)); }
         levels = new List<GameObject>();
         gameLevel = new List<GameObject>();
-        highlight.gameObject.SetActive(false);
+        //highlight.gameObject.SetActive(false);
         for (int i = 0; i < GameManager.instance.levelNumber.Length; i++)
         {
             overAllStars += GameManager.instance.levelNumber[i];
@@ -75,15 +75,15 @@ public class MapMenu : MonoBehaviour
     void Update()
     {
 
-        if (overAllStars >= 3)
+        if (overAllStars >= 3 && overAllStars <=5)
         {
             GameManager.instance.firstUnlock = true;
-            firstUnlock();
+            Unlock();
         }
         if(overAllStars >= 6)
         {
             GameManager.instance.secondUnlock = true;
-            secondUnlock();
+            Unlock();
         }
         levelSelection();
         showStars();
@@ -127,7 +127,6 @@ public class MapMenu : MonoBehaviour
         for (int j = 0; j < star03; j++)
         {
             star3[j].GetComponent<SpriteRenderer>().enabled = true;
-            Debug.Log(star1[j]);
         }
     }
     void hideStars()
@@ -222,19 +221,19 @@ public class MapMenu : MonoBehaviour
                                 if (j == 0)
                                 {
                                     GameManager.instance.selectedNumber = 0;
-                                    Application.LoadLevel("jmlevelsuunnittelu");
+                                    Application.LoadLevel("Jonna Forest 1");
                                     Debug.Log("eka themen eka kenttä");
                                 }
                                 if (j == 1)
                                 {
                                     GameManager.instance.selectedNumber = 1;
-                                    Application.LoadLevel("jmlevelsuunnittelu1");
+                                    Application.LoadLevel("JonnaTestMobile");
                                     Debug.Log("eka themen toinen kenttä");
                                 }
                                 if (j == 2)
                                 {
                                     GameManager.instance.selectedNumber = 2;
-                                    Application.LoadLevel("jmlevelsuunnittelu2");
+                                    Application.LoadLevel("jmlevelsuunnittelu");
                                     Debug.Log("eka themen viimeinen kenttä");
                                 }
                             }
@@ -322,7 +321,7 @@ public class MapMenu : MonoBehaviour
             {
                 Debug.Log("ei osu :l");
                 //levelSelect = false;
-                highlight.gameObject.SetActive(false);
+                //highlight.gameObject.SetActive(false);
                 //gameLevels.gameObject.SetActive(false);
 
             }
@@ -471,10 +470,10 @@ public class MapMenu : MonoBehaviour
         levels[0].GetComponent<CircleCollider2D>().enabled = true;
 
     }
-    void firstUnlock()
+    void Unlock()
     {
         currentTime += Time.deltaTime;
-        if(GameManager.instance.firstUnlock)
+        if(GameManager.instance.firstUnlock && !GameManager.instance.secondUnlock)
         {
             if (currentTime <= TimeitTakesToFade)
             {
@@ -482,26 +481,26 @@ public class MapMenu : MonoBehaviour
                 fadeValue = 1 - (currentTime / TimeitTakesToFade);
                 mappi[0].color = new Color(1, 1, 1, fadeValue);
                 levels[1].GetComponent<CircleCollider2D>().enabled = true;
-                levels[1].GetComponent<SpriteRenderer>().enabled = true;
-                
+                levels[1].GetComponent<SpriteRenderer>().enabled = true;                
+            }
+        }
+        if (GameManager.instance.secondUnlock)
+        {
+            if (currentTime <= TimeitTakesToFade)
+            {
+                Debug.Log("sescond unlock");
+                fadeValue = 1 - (currentTime / TimeitTakesToFade);
+                mappi[1].color = new Color(1, 1, 1, fadeValue);
+                levels[2].GetComponent<CircleCollider2D>().enabled = true;
+                levels[2].GetComponent<SpriteRenderer>().enabled = true;
             }
         }
 
     }
     void secondUnlock()
     {
-        curTime += Time.deltaTime;
-        if (GameManager.instance.secondUnlock)
-        {
-            if (currentTime <= TimeitTakesToFade)
-            {
-                Debug.Log("sescond unlock");
-                feidi = 1 - (currentTime / TimeitTakesToFade);
-                mappi[1].color = new Color(1, 1, 1, fadeValue);
-                levels[2].GetComponent<CircleCollider2D>().enabled = true;
-                levels[2].GetComponent<SpriteRenderer>().enabled = true;
-            }
-        }
+        currentTime += Time.deltaTime;
+
     }
     void unlocking()
     {
