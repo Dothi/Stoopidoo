@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
     public Rigidbody2D myRB;
     public float speed = 50f;
     public float fan = 1f;
+    float hitLength;
     float timer;
     public float idleTimer;
     public bool moving;
@@ -19,7 +20,7 @@ public class Movement : MonoBehaviour
     LayerMask layerMask;
     VictoryLose vl;
     public LayerMask DefaultTerrainLayerMask;
-
+    public Vector3 vel;
     public static Movement instance;
     Animator anim;
     // Use this for initialization
@@ -57,6 +58,11 @@ public class Movement : MonoBehaviour
     void Update()
     {
         
+        vel = myRB.velocity;
+        if (iceWalk)
+        {
+            moving = false;
+        }
         if (vl.lose)
         {
             this.enabled = false;
@@ -113,8 +119,15 @@ public class Movement : MonoBehaviour
             Debug.Log("jloj");
             moving = true;
         }
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1.5f, DefaultTerrainLayerMask);
+        if (!iceWalk)
+        {
+            hitLength = 1f;
+        }
+        else
+        {
+            hitLength = 1.5f;
+        }
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(-.4f, 0f), -transform.up, hitLength, DefaultTerrainLayerMask);
        // RaycastHit2D rightHit = Physics2D.Raycast(transform.position + transform.right * 1f, -transform.up, 1f, DefaultTerrainLayerMask);
         if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ice"))
         {
@@ -127,15 +140,15 @@ public class Movement : MonoBehaviour
         {
             iceWalk = false;
         }
-        if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground") && started)
         {
             moving = true;
             Debug.Log("Hit ground");
         }
-        
 
-        Debug.DrawRay(transform.position, -transform.up * 1f, Color.green);
-       // Debug.DrawRay(transform.position + -transform.right * 1f, -transform.up * 1f, Color.green);
+
+        Debug.DrawRay(transform.position + new Vector3(-.4f, 0f), -transform.up * hitLength, Color.green);
+        //Debug.DrawRay(transform.position + -transform.right * 1f, -transform.up * 1f, Color.green);
 
 
         //if moving left
@@ -168,16 +181,26 @@ public class Movement : MonoBehaviour
             Debug.Log(averageNormal);
             Vector3 averagePoint = hit.point;
             Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
-            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 4f);
-           
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 10f * Time.deltaTime);
+            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 8f);
+           if (iceWalk)
+           {
+               transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
+           }
+           else
+           {
+               transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 10f * Time.deltaTime);
+           }
+            
 
         }
         else
         {
             
             Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 4f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 10f * Time.deltaTime);
+            
+           
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 10f * Time.deltaTime);
+            
         }
 
 
@@ -237,15 +260,25 @@ public class Movement : MonoBehaviour
             }
             else
             {
-                if (iceWalk && movingRight)
+                if (iceWalk && myRB.velocity.x > 0 && myRB.velocity.y < 0)
                 {
                     moving = false;
                     myRB.AddForce(new Vector2(speed * 2 * Time.deltaTime, myRB.velocity.y));
                 }
-                else if (iceWalk && !movingRight)
+                else if (iceWalk && myRB.velocity.x > 0 && myRB.velocity.y > 0)
+                {
+                    Vector3 newVel = myRB.velocity;
+                    myRB.velocity = newVel;
+                }
+                else if (iceWalk && myRB.velocity.x < 0 && movingRight && myRB.velocity.y < 0)
                 {
                     moving = false;
-                    myRB.AddForce(new Vector2(speed * 2 * Time.deltaTime, myRB.velocity.y));
+                    myRB.AddForce(new Vector2(-speed * Time.deltaTime, myRB.velocity.y));
+                }
+                else if (iceWalk && myRB.velocity.x < 0 && myRB.velocity.y > 0)
+                {
+                    Vector3 newVel = myRB.velocity;
+                    myRB.velocity = newVel;
                 }
                 
             }
@@ -262,19 +295,22 @@ public class Movement : MonoBehaviour
             Destroy(collision.gameObject);
             vl.lose = true;
         }
-        
+       /* if (collision.gameObject.layer == LayerMask.NameToLayer("Ice") && !iceWalk && !hit)
+        {
+            iceWalk = true;
+        }*/
         
     }
    /* void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ice"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ice") && !iceWalk)
         {
             iceWalk = true;
         }
     }
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ice"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ice") && iceWalk)
         {
             iceWalk = false;
         }
