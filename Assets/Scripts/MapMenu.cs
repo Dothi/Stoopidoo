@@ -221,19 +221,22 @@ public class MapMenu : MonoBehaviour
                                 if (j == 0)
                                 {
                                     GameManager.instance.selectedNumber = 0;
-                                    Application.LoadLevel("Jonna Forest 1");
+                                    //Application.LoadLevel("Jonna Forest 1");
+                                    ScreenManager.instance.StartCoroutine(ScreenManager.instance.LoadSceneAsync("Jonna Forest 1"));
                                     Debug.Log("eka themen eka kenttä");
                                 }
                                 if (j == 1)
                                 {
                                     GameManager.instance.selectedNumber = 1;
-                                    Application.LoadLevel("JonnaTestMobile");
+                                    //Application.LoadLevel("JonnaTestMobile");
+                                    StartCoroutine(ScreenManager.instance.LoadSceneAsync("JonnaTestMobile"));
                                     Debug.Log("eka themen toinen kenttä");
                                 }
                                 if (j == 2)
                                 {
                                     GameManager.instance.selectedNumber = 2;
-                                    Application.LoadLevel("jmlevelsuunnittelu");
+                                    //Application.LoadLevel("jmlevelsuunnittelu");
+                                    StartCoroutine(ScreenManager.instance.LoadSceneAsync("jmlevelsuunnittelu"));
                                     Debug.Log("eka themen viimeinen kenttä");
                                 }
                             }
@@ -242,19 +245,22 @@ public class MapMenu : MonoBehaviour
                                 if (j == 0)
                                 {
                                     GameManager.instance.selectedNumber = 3;
-                                    Application.LoadLevel("Winter1 level");
+                                    //Application.LoadLevel("Winter1 level");
+                                    StartCoroutine(ScreenManager.instance.LoadSceneAsync("Winter1 level"));
                                     Debug.Log("toisen themen eka kenttä");
                                 }
                                 if (j == 1)
                                 {
                                     GameManager.instance.selectedNumber = 4;
-                                    Application.LoadLevel("Winter1 leve 2");
+                                    //Application.LoadLevel("Winter1 leve 2");
+                                    StartCoroutine(ScreenManager.instance.LoadSceneAsync("Winter1 leve 2"));
                                     Debug.Log("toisen themen toinen kenttä");
                                 }
                                 if (j == 2)
                                 {
                                     GameManager.instance.selectedNumber = 5;
-                                    Application.LoadLevel("Winter level 3");
+                                    //Application.LoadLevel("Winter level 3");
+                                    StartCoroutine(ScreenManager.instance.LoadSceneAsync("Winter level 3"));
                                     Debug.Log("toisen themen viimeinen kenttä");
                                 }
                             }

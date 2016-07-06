@@ -106,7 +106,7 @@ public class cameramenu : MonoBehaviour
         //You would typically hook into Refresh on a screen rotation or aspect ratio change
         //In demo, we call it non stop to demonstrate the camera system 
         Refresh();
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && !BlockSpawner.instance.isDragging)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
             Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
             transform.Translate(-touchDeltaPosition.x * Time.deltaTime * speed, 0, 0);

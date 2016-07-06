@@ -29,6 +29,7 @@ public class MoveCameraMobileTest : MonoBehaviour
 
     public void Start()
     {
+        GameManager.instance.camePos = transform.position;
         Sprite = Area.transform.GetComponent<SpriteRenderer>().sprite;
         player = GameObject.FindGameObjectWithTag("Player");
         CalculatePixelUnits();
