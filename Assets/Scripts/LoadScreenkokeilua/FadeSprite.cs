@@ -1,53 +1,20 @@
-﻿// ************************************************************************ 
-// File Name:   FadeSprite.cs 
-// Purpose:    	Fades sprite in or out.
-// Project:		Framework
-// Author:      Sarah Herzog  
-// Copyright: 	2013 Bounder Games
-// ************************************************************************ 
-
-
-// ************************************************************************ 
-// Imports 
-// ************************************************************************ 
+﻿
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-
-// ************************************************************************ 
-// Class: FadeSprite
-// ************************************************************************ 
 public class FadeSprite : MonoBehaviour
 {
 
+    public bool m_startsVisible = false;
+    public bool m_fadeOnAwake = false;
+    public bool m_continuous = false;
+    public float m_fadeSpeed = 1.0f;
+    public float m_minAlpha = 0;
+    public float m_maxAlpha = 1.0f;
 
-    // ********************************************************************
-    // Exposed Data Members 
-    // ********************************************************************
-    [SerializeField]
-    private bool m_startsVisible = false;
-    [SerializeField]
-    private bool m_fadeOnAwake = false;
-    [SerializeField]
-    private bool m_continuous = false;
-    [SerializeField]
-    private float m_fadeSpeed = 1.0f;
-    [SerializeField]
-    private float m_minAlpha = 0;
-    [SerializeField]
-    private float m_maxAlpha = 1.0f;
-
-
-    // ********************************************************************
-    // Private Data Members 
-    // ********************************************************************
     private SpriteRenderer m_sprite = null;
 
-
-    // ********************************************************************
-    // Properties 
-    // ********************************************************************
     public bool isVisible
     {
         get
@@ -87,11 +54,6 @@ public class FadeSprite : MonoBehaviour
         set { m_continuous = value; }
     }
 
-
-    // ********************************************************************
-    // Function:	Start()
-    // Purpose:		Run when new instance of the object is created.
-    // ********************************************************************
     void Start()
     {
         m_sprite = GetComponent<SpriteRenderer>();
@@ -121,10 +83,6 @@ public class FadeSprite : MonoBehaviour
     }
 
 
-    // ********************************************************************
-    // Function:	Fade()
-    // Purpose:		Tells the sprite to fade in or out
-    // ********************************************************************
     public IEnumerator FadeIn()
     {
         Color spriteColor = m_sprite.color;
@@ -143,10 +101,6 @@ public class FadeSprite : MonoBehaviour
             StartCoroutine(FadeOut());
     }
 
-    // ********************************************************************
-    // Function:	FadeIn()
-    // Purpose:		Tells the sprite to fade in
-    // ********************************************************************
     public IEnumerator FadeOut()
     {
         Color spriteColor = m_sprite.color;
