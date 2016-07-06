@@ -134,16 +134,30 @@ public class Movement : MonoBehaviour
             
                 iceWalk = true;
                 moving = false;
-            
+                isGrounded = true;
+        }
+        
+        else if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = true;
+            if (started)
+            {
+                moving = true;
+                Debug.Log("Hit ground");
+            }
         }
         else
         {
+            isGrounded = false;
             iceWalk = false;
         }
-        if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground") && started)
+        if (isGrounded)
         {
-            moving = true;
-            Debug.Log("Hit ground");
+            anim.SetBool("falling", false);
+        }
+        else
+        {
+            anim.SetBool("falling", true);
         }
 
 
