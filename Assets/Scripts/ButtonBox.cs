@@ -12,7 +12,7 @@ public class ButtonBox : MonoBehaviour
     public bool Rotating;
 
     //TODO: Make block rotate also clockwise
-    public bool clockWise;
+   // public bool clockWise;
 
     float temp = 0f;
 
@@ -52,11 +52,12 @@ public class ButtonBox : MonoBehaviour
             }
             else
             {
-
-                if (clockWise)
-                {
+                
+                
                     for (int i = 0; i < rotatingBlocks.Count; i++)
                     {
+                        if (rotatingBlocks[i].GetComponent<RotatingBoxRotation>().clockWise)
+                {
                         if (rotatingBlocks[i].transform.eulerAngles.z > 271)
                         {
                             rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 0);
@@ -73,12 +74,13 @@ public class ButtonBox : MonoBehaviour
                         {
                             rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 270);
                         }
+                        
                     }
-                }
+                  
+                
                 else
                 {
-                    for (int i = 0; i < rotatingBlocks.Count; i++)
-                    {
+                    
                         if (rotatingBlocks[i].transform.eulerAngles.z < 90)
                         {
                             rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 0);
@@ -105,7 +107,7 @@ public class ButtonBox : MonoBehaviour
 
         for (int i = 0; i < rotatingBlocks.Count; i++)
         {
-            if (clockWise)
+            if (rotatingBlocks[i].GetComponent<RotatingBoxRotation>().clockWise)
             {
                 Vector3 destination = new Vector3(0, 0, -90);
                 Vector3 fromRot = rotatingBlocks[i].transform.eulerAngles;
