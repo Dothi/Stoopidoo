@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
     public bool continued;
     public Vector3 levelPos = new Vector3(-15, 0, -10);
     public Vector3 highlightPos;
-    public Vector3 camPos;
+    public Vector3 camPos = new Vector3(0, 0, -10);
     public Vector3 camePos;
     public bool firstUnlock, secondUnlock;
     public bool gameStarted;
@@ -33,10 +33,16 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         continued = false;
         gameStarted = false;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        camPos.z = -10;
+        
 	}
+
+   public void sceneLoader(string sceneName)
+    {
+        camePos = Camera.main.transform.position;
+        ScreenManager.instance.StartCoroutine(ScreenManager.instance.LoadSceneAsync(sceneName));
+    }
 }

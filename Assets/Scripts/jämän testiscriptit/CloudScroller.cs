@@ -20,6 +20,7 @@ public class CloudScroller : MonoBehaviour {
 
     public void PlayGame()
     {
-        ScreenManager.instance.StartCoroutine(ScreenManager.instance.LoadSceneAsync("MenuMap"));
+        Debug.Log("ADSF");
+        GameManager.instance.sceneLoader("MenuMap");
     }
 }

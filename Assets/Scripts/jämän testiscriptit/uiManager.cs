@@ -102,11 +102,12 @@ public class uiManager : MonoBehaviour
         GameManager.instance.levelNumber[GameManager.instance.selectedNumber] = starAmount;
         GameManager.instance.continued = true;
         Time.timeScale = 1;
-        Application.LoadLevel("MenuMap");
-        
+        GameManager.instance.sceneLoader("MenuMap");
+
     }
     public void returnMapMenu()
     {
-        Application.LoadLevel("MenuMap");
+        GameManager.instance.continued = true;
+        GameManager.instance.sceneLoader("MenuMap");
     }
 }
