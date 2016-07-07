@@ -21,6 +21,10 @@ public class MoveCameraMobileTest : MonoBehaviour
     private float MaxZoom;
     private float MinZoom;
     public float speed;
+    float lerpTime = 1f;
+    float currentLerpTime;
+
+
 
     public GameObject FollowDogButton;
     public GameObject player;
@@ -103,20 +107,34 @@ public class MoveCameraMobileTest : MonoBehaviour
 
     public void Update()
     {
+        
+        
         if (Input.touchCount > 0)
         {
             Vector3 wp = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
             Vector2 touchPos = new Vector2(wp.x, wp.y);
 
-            if (Input.touches[0].phase == TouchPhase.Stationary && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+            
+            if (Input.touches[0].phase == TouchPhase.Began && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+            {
+                currentLerpTime = 0f;
+                followDoge = true;
+            }
+            else if (Input.touches[0].phase == TouchPhase.Stationary && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
             {
                 followDoge = true;
             }
-            else
+            else if (Input.touches[0].phase == TouchPhase.Moved && !FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+            {
+                followDoge = false;
+            }
+
+            else if (Input.touches[0].phase == TouchPhase.Ended && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
             {
                 followDoge = false;
             }
         }
+        
 
         //You would typically hook into Refresh on a screen rotation or aspect ratio change
         //In demo, we call it non stop to demonstrate the camera system 
@@ -146,18 +164,30 @@ public class MoveCameraMobileTest : MonoBehaviour
     {
         //Clamp camera inside of our bounds
         Vector3 v3 = transform.position;
-        v3.x = Mathf.Clamp(v3.x, Left, Right);
+        
         v3.y = Mathf.Clamp(v3.y, Bottom, Top);
         if (followDoge)
         {
             v3.x = Mathf.Clamp(player.transform.position.x, Left, Right);
-            transform.position = v3;
+            
+
+            currentLerpTime += Time.deltaTime;
+
+            if (currentLerpTime > lerpTime)
+            {
+                currentLerpTime = lerpTime;
+            }
+
+            float perc = currentLerpTime / lerpTime;
+            
+            transform.position = Vector3.Lerp(transform.position, v3, perc);
         }
         else
         {
-            
+            v3.x = Mathf.Clamp(v3.x, Left, Right);
             transform.position = v3;
         }
     }
+    
     
 }
