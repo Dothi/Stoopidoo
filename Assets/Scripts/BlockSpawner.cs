@@ -27,6 +27,8 @@ public class BlockSpawner : MonoBehaviour
     Vector3 mousePos;
     Vector3 GOpos;
     Vector3 offset;
+
+    LayerMask UIMask;
     
     public GameObject confirmButton;
     public GameObject cancelButton;
@@ -49,7 +51,8 @@ public class BlockSpawner : MonoBehaviour
 
     void Start()
     {
-
+        UIMask = 1 << LayerMask.NameToLayer("UI");
+        UIMask = ~UIMask;
     }
     void Update()
     {
@@ -73,7 +76,7 @@ public class BlockSpawner : MonoBehaviour
 
 
 
-                if (myTouches[0].phase == TouchPhase.Began && spawn.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                if (myTouches[0].phase == TouchPhase.Began && spawn.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask))
                 {
                     Debug.Log("hit");
                     isHit = true;

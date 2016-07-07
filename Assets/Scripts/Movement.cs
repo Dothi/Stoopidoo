@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     SpriteRenderer spriteRend;
     LayerMask layerMask;
     VictoryLose vl;
+    BlockSpawner bs;
     public LayerMask DefaultTerrainLayerMask;
     public Vector3 vel;
     public static Movement instance;
@@ -39,6 +40,7 @@ public class Movement : MonoBehaviour
     {
         myRB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        bs = GameObject.FindGameObjectWithTag("BlockSpawner").GetComponent<BlockSpawner>();
         timer = 5f;
         moving = false;
         movingRight = true;
@@ -127,16 +129,36 @@ public class Movement : MonoBehaviour
         {
             hitLength = 1.5f;
         }
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(-.4f, 0f), -transform.up, hitLength, DefaultTerrainLayerMask);
+        RaycastHit2D hit;
+        if (movingRight)
+        {
+            hit = Physics2D.Raycast(transform.position + new Vector3(-.4f, 0f), -transform.up, hitLength, DefaultTerrainLayerMask);
+        }
+        else
+        {
+            hit = Physics2D.Raycast(transform.position + new Vector3(.4f, 0f), -transform.up, hitLength, DefaultTerrainLayerMask);
+        }
        // RaycastHit2D rightHit = Physics2D.Raycast(transform.position + transform.right * 1f, -transform.up, 1f, DefaultTerrainLayerMask);
-        if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ice"))
+        if (hit && !hit.collider.isTrigger && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ice"))
         {
             
                 iceWalk = true;
                 moving = false;
-                isGrounded = true;
+                if (!isGrounded)
+                {
+                    isGrounded = true;
+                }
+                
+                
         }
-        
+        else if (hit && hit.collider.isTrigger && hit.collider == bs.spawn.GetComponent<Collider2D>())
+        {
+            if (isGrounded)
+            {
+                isGrounded = true;
+            }
+        }
+
         else if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGrounded = true;
@@ -148,7 +170,10 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            isGrounded = false;
+            if (isGrounded)
+            {
+                isGrounded = false;
+            }
             iceWalk = false;
         }
         if (isGrounded)
@@ -157,11 +182,20 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            anim.SetBool("falling", true);
+            if (myRB.velocity.y > 1f || myRB.velocity.y < -1f)
+            {
+                anim.SetBool("falling", true);
+            }
         }
 
-
-        Debug.DrawRay(transform.position + new Vector3(-.4f, 0f), -transform.up * hitLength, Color.green);
+        if (movingRight)
+        {
+            Debug.DrawRay(transform.position + new Vector3(-.4f, 0f), -transform.up * hitLength, Color.green);
+        }
+        else
+        {
+            Debug.DrawRay(transform.position + new Vector3(.4f, 0f), -transform.up * hitLength, Color.green);
+        }
         //Debug.DrawRay(transform.position + -transform.right * 1f, -transform.up * 1f, Color.green);
 
 
@@ -188,7 +222,7 @@ public class Movement : MonoBehaviour
 
         }*/
 
-        if (hit)
+        if (hit && !hit.collider.isTrigger)
         {
 
             Vector3 averageNormal = hit.normal;

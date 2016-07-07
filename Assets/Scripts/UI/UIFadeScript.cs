@@ -9,8 +9,9 @@ public class UIFadeScript : MonoBehaviour
     public List<Image> uiImages = new List<Image>();
     BlockSpawner bs;
     MoveCameraMobileTest cameraScript;
+    Movement playerMovement;
 
-    float fadeTime = 5f;
+    float fadeTime = 3f;
     float currentTime;
     float alphaTime;
 
@@ -18,6 +19,7 @@ public class UIFadeScript : MonoBehaviour
     {
         bs = GameObject.FindGameObjectWithTag("BlockSpawner").GetComponent<BlockSpawner>();
         cameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MoveCameraMobileTest>();
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         currentTime = 0f;
         alphaTime = 1f;
         var gos = GameObject.FindGameObjectsWithTag("UI");
@@ -53,13 +55,26 @@ public class UIFadeScript : MonoBehaviour
             }
             
         }
-        else if (bs.isDragging || cameraScript.followDoge)
+        else if (bs.isDragging)
         {
             currentTime = 0f;
             alphaTime = 1f;
-            for (int i = 0; i < uiImages.Count; i++)
+            for (int i = 0; i < 6; i++)
             {
-                uiImages[i].color = new Color(1f, 1f, 1f, 1f);
+                uiImages[i].color = new Color(1f, 1f, 1f, 0f);
+            }
+            for (int i = 6; i < uiImages.Count; i++)
+            {
+                uiImages[i].color = new Color(1f, 1f, 1f, alphaTime);
+            }
+        }
+        else 
+        {
+            
+            
+            for (int i = 0; i < 6; i++)
+            {
+                uiImages[i].color = new Color(1f, 1f, 1f, alphaTime);
             }
         }
     }
