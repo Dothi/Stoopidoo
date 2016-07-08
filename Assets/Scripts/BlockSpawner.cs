@@ -51,7 +51,7 @@ public class BlockSpawner : MonoBehaviour
 
     void Start()
     {
-        UIMask = 1 << LayerMask.NameToLayer("UI");
+        UIMask = 1 << LayerMask.NameToLayer("UI") | 1 << LayerMask.NameToLayer("Ground");
         UIMask = ~UIMask;
     }
     void Update()

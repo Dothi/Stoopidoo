@@ -175,7 +175,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        else if (groundHit && groundHit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        else if (groundHit && groundHit.transform.gameObject.layer == LayerMask.NameToLayer("Ground") || groundHit && groundHit.transform.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
             
             isGrounded = true;
@@ -237,25 +237,67 @@ public class Movement : MonoBehaviour
 
         }*/
 
-        if (hit && !hit.collider.isTrigger || hit2 && !hit2.collider.isTrigger || hit && hit2 && !hit.collider.isTrigger && !hit2.collider.isTrigger)
+        if (hit && hit2)
         {
+            if (!hit.collider.isTrigger && !hit2.collider.isTrigger)
+            {
+                Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
+                Debug.Log(averageNormal);
+                Vector3 averagePoint = (hit.point + hit2.point) / 2;
 
-            Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
-            Debug.Log(averageNormal);
-            Vector3 averagePoint = (hit.point + hit2.point) / 2;
-            
-            Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
-            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 4f);
-           if (iceWalk)
-           {
-               transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
-           }
-           else
-           {
-               transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
-           }
+                Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
+                Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
+                if (iceWalk)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
+                }
+            }
             
 
+        }
+        else if(hit && !hit2)
+        {
+            if (!hit.collider.isTrigger)
+            {
+                Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
+                Debug.Log(averageNormal);
+                Vector3 averagePoint = (hit.point + hit2.point) / 2;
+
+                Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
+                Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
+                if (iceWalk)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
+                }
+            }
+        }
+        else if (!hit && hit2)
+        {
+            if (!hit2.collider.isTrigger)
+            {
+                Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
+                Debug.Log(averageNormal);
+                Vector3 averagePoint = (hit.point + hit2.point) / 2;
+
+                Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
+                Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
+                if (iceWalk)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
+                }
+            }
         }
         else
         {
