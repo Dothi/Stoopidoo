@@ -18,6 +18,7 @@ public class Movement : MonoBehaviour
     RaycastHit2D hit;
     SpriteRenderer spriteRend;
     LayerMask layerMask;
+    LayerMask UIlayerMask;
     VictoryLose vl;
     BlockSpawner bs;
     public LayerMask DefaultTerrainLayerMask;
@@ -50,9 +51,10 @@ public class Movement : MonoBehaviour
         spriteRend = GetComponent<SpriteRenderer>();
         idleTimer = 0f;
         layerMask = 1 << LayerMask.NameToLayer("Player");
-
+        UIlayerMask = 1 << LayerMask.NameToLayer("UI");
 
         layerMask = ~layerMask;
+        UIlayerMask = ~UIlayerMask;
         vl = GetComponent<VictoryLose>();
     }
 
@@ -134,7 +136,14 @@ public class Movement : MonoBehaviour
         RaycastHit2D groundHit;
         hit = Physics2D.Raycast(transform.position, -transform.up + transform.right, hitLength, DefaultTerrainLayerMask);
         hit2 = Physics2D.Raycast(transform.position, -transform.up + -transform.right, hitLength, DefaultTerrainLayerMask);
-        groundHit = Physics2D.Raycast(transform.position, -transform.up, 1.2f, DefaultTerrainLayerMask);
+        if (movingRight)
+        {
+            groundHit = Physics2D.Raycast(transform.position + new Vector3(-.4f, 0), -transform.up, 1.2f, DefaultTerrainLayerMask);
+        }
+        else
+        {
+            groundHit = Physics2D.Raycast(transform.position + new Vector3(.4f, 0), -transform.up, 1.2f, DefaultTerrainLayerMask);
+        }
         /*if (movingRight)
         {
             
@@ -199,6 +208,7 @@ public class Movement : MonoBehaviour
 
         Debug.DrawRay(transform.position, -transform.up + -transform.right * hitLength, Color.green);
         Debug.DrawRay(transform.position, -transform.up + transform.right * hitLength, Color.green);
+        Debug.DrawRay(transform.position, -transform.up * hitLength, Color.green);
         
        
         //Debug.DrawRay(transform.position + -transform.right * 1f, -transform.up * 1f, Color.green);
@@ -242,7 +252,7 @@ public class Movement : MonoBehaviour
            }
            else
            {
-               transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
+               transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
            }
             
 
@@ -251,9 +261,9 @@ public class Movement : MonoBehaviour
         {
             
             Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 4f);
-            
-           
-                transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
+
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
             
         }
 
