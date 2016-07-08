@@ -346,7 +346,7 @@ public class Movement : MonoBehaviour
         {
             Debug.Log("trappe'd");
             Debug.Log("gaemover");
-            Destroy(collision.gameObject);
+           // Destroy(collision.gameObject);
             vl.lose = true;
         }
        /* if (collision.gameObject.layer == LayerMask.NameToLayer("Ice") && !iceWalk && !hit)

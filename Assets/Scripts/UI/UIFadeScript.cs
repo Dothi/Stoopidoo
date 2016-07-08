@@ -7,6 +7,7 @@ public class UIFadeScript : MonoBehaviour
 {
 
     public List<Image> uiImages = new List<Image>();
+    public GameObject blockButtons;
     BlockSpawner bs;
     MoveCameraMobileTest cameraScript;
     Movement playerMovement;
@@ -20,13 +21,27 @@ public class UIFadeScript : MonoBehaviour
         bs = GameObject.FindGameObjectWithTag("BlockSpawner").GetComponent<BlockSpawner>();
         cameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MoveCameraMobileTest>();
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
+        blockButtons = GameObject.FindGameObjectWithTag("BlockButtons");
         currentTime = 0f;
         alphaTime = 1f;
+
+        var buttons = blockButtons.GetComponentsInChildren<Image>();
+        foreach (var button in buttons)
+        {
+            if (!uiImages.Contains(button))
+            {
+                uiImages.Add(button);
+            }
+        }
+
         var gos = GameObject.FindGameObjectsWithTag("UI");
 
         foreach (var go in gos)
         {
-            uiImages.Add(go.GetComponent<Image>());
+            if (!uiImages.Contains(go.GetComponent<Image>()))
+            {
+                uiImages.Add(go.GetComponent<Image>());
+            }
         }
     }
 
