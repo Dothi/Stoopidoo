@@ -61,7 +61,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         vel = myRB.velocity;
         if (iceWalk)
         {
@@ -153,31 +153,31 @@ public class Movement : MonoBehaviour
         {
             hit = Physics2D.Raycast(transform.position + new Vector3(.4f, 0f), -transform.up, hitLength, DefaultTerrainLayerMask);
         }*/
-       // RaycastHit2D rightHit = Physics2D.Raycast(transform.position + transform.right * 1f, -transform.up, 1f, DefaultTerrainLayerMask);
+        // RaycastHit2D rightHit = Physics2D.Raycast(transform.position + transform.right * 1f, -transform.up, 1f, DefaultTerrainLayerMask);
         if (groundHit && !groundHit.collider.isTrigger && groundHit.transform.gameObject.layer == LayerMask.NameToLayer("Ice"))
         {
-            
-                iceWalk = true;
-                moving = false;
-                if (!isGrounded)
-                {
-                    isGrounded = true;
-                }
-                
-                
+
+            iceWalk = true;
+            moving = false;
+            if (!isGrounded)
+            {
+                isGrounded = true;
+            }
+
+
         }
         else if (groundHit && groundHit.collider.isTrigger && bs.spawn != null && groundHit.collider == bs.spawn.GetComponent<Collider2D>())
         {
             if (isGrounded)
             {
-                
+
                 isGrounded = true;
             }
         }
 
         else if (groundHit && groundHit.transform.gameObject.layer == LayerMask.NameToLayer("Ground") || groundHit && groundHit.transform.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
-            
+
             isGrounded = true;
             if (started)
             {
@@ -209,73 +209,87 @@ public class Movement : MonoBehaviour
         Debug.DrawRay(transform.position, -transform.up + -transform.right * hitLength, Color.green);
         Debug.DrawRay(transform.position, -transform.up + transform.right * hitLength, Color.green);
         Debug.DrawRay(transform.position, -transform.up * hitLength, Color.green);
-        
-       
+
+
         //Debug.DrawRay(transform.position + -transform.right * 1f, -transform.up * 1f, Color.green);
 
 
         //if moving left
-       /* if (!movingRight)
-        {
-            RaycastHit2D overrideLeftHitInfo = Physics2D.Raycast(transform.position, -transform.right, 1f, DefaultTerrainLayerMask);
+        /* if (!movingRight)
+         {
+             RaycastHit2D overrideLeftHitInfo = Physics2D.Raycast(transform.position, -transform.right, 1f, DefaultTerrainLayerMask);
             
-            if (overrideLeftHitInfo)
-            {
-                leftHit = overrideLeftHitInfo;
-            }
-        }
-        //if moving right
-        else
-        {
-            RaycastHit2D overrideRightHitInfo = Physics2D.Raycast(transform.position, transform.right, 1f, DefaultTerrainLayerMask);
+             if (overrideLeftHitInfo)
+             {
+                 leftHit = overrideLeftHitInfo;
+             }
+         }
+         //if moving right
+         else
+         {
+             RaycastHit2D overrideRightHitInfo = Physics2D.Raycast(transform.position, transform.right, 1f, DefaultTerrainLayerMask);
 
 
-            if (overrideRightHitInfo)
-            {
-                rightHit = overrideRightHitInfo;
-            }
+             if (overrideRightHitInfo)
+             {
+                 rightHit = overrideRightHitInfo;
+             }
 
-        }*/
+         }*/
 
         if (hit && hit2)
         {
             if (!hit.collider.isTrigger && !hit2.collider.isTrigger)
             {
-                Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
-                Debug.Log(averageNormal);
-                Vector3 averagePoint = (hit.point + hit2.point) / 2;
+                if (hit.collider.transform.rotation.z != transform.rotation.z && hit2.collider.transform.rotation.z != transform.rotation.z)
+                {
+                    Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
+                    Debug.Log(averageNormal);
+                    Vector3 averagePoint = (hit.point + hit2.point) / 2;
 
-                Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
-                Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
-                if (iceWalk)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
-                }
-                else
-                {
-                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
+                    Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
+                    Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
+                    if (iceWalk)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
+                    }
+                    else if (hit.collider.transform.gameObject.layer == LayerMask.NameToLayer("Ground") && hit2.collider.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                    {
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), 15f * Time.deltaTime);
+                    }
+                    else
+                    {
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
+                    }
                 }
             }
-            
+
 
         }
-        else if(hit && !hit2)
+        else if (hit && !hit2)
         {
             if (!hit.collider.isTrigger)
             {
-                Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
-                Debug.Log(averageNormal);
-                Vector3 averagePoint = (hit.point + hit2.point) / 2;
+                if (hit.collider.transform.rotation.z != transform.rotation.z)
+                {
+                    Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
+                    Debug.Log(averageNormal);
+                    Vector3 averagePoint = (hit.point + hit2.point) / 2;
 
-                Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
-                Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
-                if (iceWalk)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
-                }
-                else
-                {
-                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
+                    Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
+                    Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
+                    if (iceWalk)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
+                    }
+                    else if (hit.collider.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                    {
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), 15f * Time.deltaTime);
+                    }
+                    else
+                    {
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
+                    }
                 }
             }
         }
@@ -283,30 +297,37 @@ public class Movement : MonoBehaviour
         {
             if (!hit2.collider.isTrigger)
             {
-                Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
-                Debug.Log(averageNormal);
-                Vector3 averagePoint = (hit.point + hit2.point) / 2;
+                if (hit2.collider.transform.rotation.z != transform.rotation.z)
+                {
+                    Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
+                    Debug.Log(averageNormal);
+                    Vector3 averagePoint = (hit.point + hit2.point) / 2;
 
-                Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
-                Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
-                if (iceWalk)
-                {
-                    transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
-                }
-                else
-                {
-                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
+                    Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
+                    Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
+                    if (iceWalk)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
+                    }
+                    else if (hit2.collider.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                    {
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), 15f * Time.deltaTime);
+                    }
+                    else
+                    {
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
+                    }
                 }
             }
         }
         else
         {
-            
+
             Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 4f);
 
 
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
-            
+
         }
 
 
@@ -353,7 +374,7 @@ public class Movement : MonoBehaviour
                     Vector3 newVel = myRB.velocity;
                     myRB.velocity = newVel;
 
-                    
+
                 }
                 if (moving && movingRight)
                 {
@@ -386,7 +407,7 @@ public class Movement : MonoBehaviour
                     Vector3 newVel = myRB.velocity;
                     myRB.velocity = newVel;
                 }
-                
+
             }
         }
     }
@@ -398,29 +419,29 @@ public class Movement : MonoBehaviour
         {
             Debug.Log("trappe'd");
             Debug.Log("gaemover");
-           // Destroy(collision.gameObject);
+            // Destroy(collision.gameObject);
             vl.lose = true;
         }
-       /* if (collision.gameObject.layer == LayerMask.NameToLayer("Ice") && !iceWalk && !hit)
-        {
-            iceWalk = true;
-        }*/
-        
+        /* if (collision.gameObject.layer == LayerMask.NameToLayer("Ice") && !iceWalk && !hit)
+         {
+             iceWalk = true;
+         }*/
+
     }
-   /* void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ice") && !iceWalk)
-        {
-            iceWalk = true;
-        }
-    }
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ice") && iceWalk)
-        {
-            iceWalk = false;
-        }
-    }*/
+    /* void OnCollisionStay2D(Collision2D collision)
+     {
+         if (collision.gameObject.layer == LayerMask.NameToLayer("Ice") && !iceWalk)
+         {
+             iceWalk = true;
+         }
+     }
+     void OnCollisionExit2D(Collision2D collision)
+     {
+         if (collision.gameObject.layer == LayerMask.NameToLayer("Ice") && iceWalk)
+         {
+             iceWalk = false;
+         }
+     }*/
 
 
 
