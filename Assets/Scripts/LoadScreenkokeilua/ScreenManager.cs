@@ -59,7 +59,7 @@ public class ScreenManager : MonoBehaviour
 
             // !!! unload loading screen
             LoadingSceneManager.UnloadLoadingScene();
-
+        //Application.UnloadLevel("LoadingScreen");
             // Fade to new screen
             yield return StartCoroutine(m_blackScreenCover.FadeOut());
         

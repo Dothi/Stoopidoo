@@ -47,13 +47,14 @@ public class MapMenu : MonoBehaviour
             overAllStars += GameManager.instance.levelNumber[i];
         }
         levelPos = GameManager.instance.levelPos;
+        theme = GameManager.instance.theme;
         if (GameManager.instance.continued)
         {
             highlight.gameObject.SetActive(true);
             highlight.gameObject.transform.position = GameManager.instance.highlightPos;
             levelSelect = true;
             gameLevels.position = GameManager.instance.levelPos;
-            theme = GameManager.instance.theme;
+            
             playButton.gameObject.SetActive(false);
             mainMenuPic.gameObject.SetActive(false);
         }
@@ -85,7 +86,7 @@ public class MapMenu : MonoBehaviour
             GameManager.instance.secondUnlock = true;
             Unlock();
         }
-        levelSelection();
+        //levelSelection();
         showStars();
         if (Input.touchCount > 0)
         {
@@ -178,161 +179,161 @@ public class MapMenu : MonoBehaviour
             star03 = GameManager.instance.levelNumber[14];
         }
     }
-    void levelSelection()
-    {
-        RaycastHit2D ray = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (Input.GetMouseButtonDown(0))
-        {
-            hideStars();
-            if (ray)
-            {
-                Debug.Log("lol");
-                if (ray && ray.collider.GetComponent<CircleCollider2D>())
-                {
-                    Debug.Log(ray.collider.gameObject);
-                    highlight.transform.position = ray.collider.gameObject.transform.position;
-                    GameManager.instance.highlightPos = ray.collider.gameObject.transform.position;
-                }
-                levelPos = ray.collider.gameObject.transform.position;
-                levelPos.y += yPos;
-                levelPos.z = -10;
-                for (int i = 0; i < 5; i++)
-                {
-                    if (ray && ray.collider == levels[i].GetComponent<CircleCollider2D>())
-                    {
-                        AudioSource.PlayClipAtPoint(plob, transform.position);
-                        Highlighter();
-                        levelSelect = true;
-                        theme = i;
-                        GameManager.instance.theme = i;
-                        Debug.Log(theme + " theme");
-                    }
+    //void levelSelection()
+    //{
+    //    RaycastHit2D ray = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        hideStars();
+    //        if (ray)
+    //        {
+    //            Debug.Log("lol");
+    //            if (ray && ray.collider.GetComponent<CircleCollider2D>())
+    //            {
+    //                Debug.Log(ray.collider.gameObject);
+    //                highlight.transform.position = ray.collider.gameObject.transform.position;
+    //                GameManager.instance.highlightPos = ray.collider.gameObject.transform.position;
+    //            }
+    //            levelPos = ray.collider.gameObject.transform.position;
+    //            levelPos.y += yPos;
+    //            levelPos.z = -10;
+    //            for (int i = 0; i < 5; i++)
+    //            {
+    //                if (ray && ray.collider == levels[i].GetComponent<CircleCollider2D>())
+    //                {
+    //                    AudioSource.PlayClipAtPoint(plob, transform.position);
+    //                    Highlighter();
+    //                    levelSelect = true;
+    //                    theme = i;
+    //                    GameManager.instance.theme = i;
+    //                    Debug.Log(theme + " theme");
+    //                }
 
-                }
-                //showStars();
-                if (levelSelect)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (ray & ray.collider == gameLevel[j].GetComponent<BoxCollider2D>())
-                        {
-                            if (theme == 0)
-                            {
-                                if (j == 0)
-                                {
-                                    GameManager.instance.selectedNumber = 0;
-                                    //Application.LoadLevel("Jonna Forest 1");
-                                    ScreenManager.instance.StartCoroutine(ScreenManager.instance.LoadSceneAsync("Jonna Forest 1"));
-                                    Debug.Log("eka themen eka kenttä");
-                                }
-                                if (j == 1)
-                                {
-                                    GameManager.instance.selectedNumber = 1;
-                                    //Application.LoadLevel("JonnaTestMobile");
-                                    StartCoroutine(ScreenManager.instance.LoadSceneAsync("JonnaTestMobile"));
-                                    Debug.Log("eka themen toinen kenttä");
-                                }
-                                if (j == 2)
-                                {
-                                    GameManager.instance.selectedNumber = 2;
-                                    //Application.LoadLevel("jmlevelsuunnittelu");
-                                    StartCoroutine(ScreenManager.instance.LoadSceneAsync("jmlevelsuunnittelu"));
-                                    Debug.Log("eka themen viimeinen kenttä");
-                                }
-                            }
-                            if (theme == 1)
-                            {
-                                if (j == 0)
-                                {
-                                    GameManager.instance.selectedNumber = 3;
-                                    //Application.LoadLevel("Winter1 level");
-                                    StartCoroutine(ScreenManager.instance.LoadSceneAsync("Winter1 level"));
-                                    Debug.Log("toisen themen eka kenttä");
-                                }
-                                if (j == 1)
-                                {
-                                    GameManager.instance.selectedNumber = 4;
-                                    //Application.LoadLevel("Winter1 leve 2");
-                                    StartCoroutine(ScreenManager.instance.LoadSceneAsync("Winter1 leve 2"));
-                                    Debug.Log("toisen themen toinen kenttä");
-                                }
-                                if (j == 2)
-                                {
-                                    GameManager.instance.selectedNumber = 5;
-                                    //Application.LoadLevel("Winter level 3");
-                                    StartCoroutine(ScreenManager.instance.LoadSceneAsync("Winter level 3"));
-                                    Debug.Log("toisen themen viimeinen kenttä");
-                                }
-                            }
-                            if (theme == 2)
-                            {
-                                if (j == 0)
-                                {
-                                    GameManager.instance.selectedNumber = 6;
-                                    Debug.Log("kolmannen themen eka kenttä");
-                                }
-                                if (j == 1)
-                                {
-                                    GameManager.instance.selectedNumber = 7;
-                                    Debug.Log("kolmannen themen toinen kenttä");
-                                }
-                                if (j == 2)
-                                {
-                                    GameManager.instance.selectedNumber = 8;
-                                    Debug.Log("kolmannen themen viimeinen kenttä");
-                                }
-                            }
-                            if (theme == 3)
-                            {
-                                if (j == 0)
-                                {
-                                    GameManager.instance.selectedNumber = 9;
-                                    Debug.Log("neljännen themen eka kenttä");
-                                }
-                                if (j == 1)
-                                {
-                                    GameManager.instance.selectedNumber = 10;
-                                    Debug.Log("neljännen themen toinen kenttä");
-                                }
-                                if (j == 2)
-                                {
-                                    GameManager.instance.selectedNumber = 11;
-                                    Debug.Log("neljännen themen viimeinen kenttä");
-                                }
-                            }
-                            if (theme == 4)
-                            {
-                                if (j == 0)
-                                {
-                                    GameManager.instance.selectedNumber = 12;
-                                    Debug.Log("viidennen themen eka kenttä");
-                                }
-                                if (j == 1)
-                                {
-                                    GameManager.instance.selectedNumber = 13;
-                                    Debug.Log("viidennen themen toinen kenttä");
-                                }
-                                if (j == 2)
-                                {
-                                    GameManager.instance.selectedNumber = 14;
-                                    Debug.Log("viidennen themen viimeinen kenttä");
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+    //            }
+    //            //showStars();
+    //            if (levelSelect)
+    //            {
+    //                for (int j = 0; j < 3; j++)
+    //                {
+    //                    if (ray & ray.collider == gameLevel[j].GetComponent<BoxCollider2D>())
+    //                    {
+    //                        if (theme == 0)
+    //                        {
+    //                            if (j == 0)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 0;
+    //                                //Application.LoadLevel("Jonna Forest 1");
+    //                                ScreenManager.instance.StartCoroutine(ScreenManager.instance.LoadSceneAsync("Jonna Forest 1"));
+    //                                Debug.Log("eka themen eka kenttä");
+    //                            }
+    //                            if (j == 1)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 1;
+    //                                //Application.LoadLevel("JonnaTestMobile");
+    //                                StartCoroutine(ScreenManager.instance.LoadSceneAsync("JonnaTestMobile"));
+    //                                Debug.Log("eka themen toinen kenttä");
+    //                            }
+    //                            if (j == 2)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 2;
+    //                                //Application.LoadLevel("jmlevelsuunnittelu");
+    //                                StartCoroutine(ScreenManager.instance.LoadSceneAsync("jmlevelsuunnittelu"));
+    //                                Debug.Log("eka themen viimeinen kenttä");
+    //                            }
+    //                        }
+    //                        if (theme == 1)
+    //                        {
+    //                            if (j == 0)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 3;
+    //                                //Application.LoadLevel("Winter1 level");
+    //                                StartCoroutine(ScreenManager.instance.LoadSceneAsync("Winter1 level"));
+    //                                Debug.Log("toisen themen eka kenttä");
+    //                            }
+    //                            if (j == 1)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 4;
+    //                                //Application.LoadLevel("Winter1 leve 2");
+    //                                StartCoroutine(ScreenManager.instance.LoadSceneAsync("Winter1 leve 2"));
+    //                                Debug.Log("toisen themen toinen kenttä");
+    //                            }
+    //                            if (j == 2)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 5;
+    //                                //Application.LoadLevel("Winter level 3");
+    //                                StartCoroutine(ScreenManager.instance.LoadSceneAsync("Winter level 3"));
+    //                                Debug.Log("toisen themen viimeinen kenttä");
+    //                            }
+    //                        }
+    //                        if (theme == 2)
+    //                        {
+    //                            if (j == 0)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 6;
+    //                                Debug.Log("kolmannen themen eka kenttä");
+    //                            }
+    //                            if (j == 1)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 7;
+    //                                Debug.Log("kolmannen themen toinen kenttä");
+    //                            }
+    //                            if (j == 2)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 8;
+    //                                Debug.Log("kolmannen themen viimeinen kenttä");
+    //                            }
+    //                        }
+    //                        if (theme == 3)
+    //                        {
+    //                            if (j == 0)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 9;
+    //                                Debug.Log("neljännen themen eka kenttä");
+    //                            }
+    //                            if (j == 1)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 10;
+    //                                Debug.Log("neljännen themen toinen kenttä");
+    //                            }
+    //                            if (j == 2)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 11;
+    //                                Debug.Log("neljännen themen viimeinen kenttä");
+    //                            }
+    //                        }
+    //                        if (theme == 4)
+    //                        {
+    //                            if (j == 0)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 12;
+    //                                Debug.Log("viidennen themen eka kenttä");
+    //                            }
+    //                            if (j == 1)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 13;
+    //                                Debug.Log("viidennen themen toinen kenttä");
+    //                            }
+    //                            if (j == 2)
+    //                            {
+    //                                GameManager.instance.selectedNumber = 14;
+    //                                Debug.Log("viidennen themen viimeinen kenttä");
+    //                            }
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
 
-            else if (!ray)
-            {
-                Debug.Log("ei osu :l");
-                //levelSelect = false;
-                //highlight.gameObject.SetActive(false);
-                //gameLevels.gameObject.SetActive(false);
+    //        else if (!ray)
+    //        {
+    //            Debug.Log("ei osu :l");
+    //            //levelSelect = false;
+    //            //highlight.gameObject.SetActive(false);
+    //            //gameLevels.gameObject.SetActive(false);
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 
     void levelSelectionMobile()
     {
@@ -343,6 +344,7 @@ public class MapMenu : MonoBehaviour
             if (ray && ray.collider.GetComponent<CircleCollider2D>())
             {
                 highlight.transform.position = ray.collider.gameObject.transform.position;
+                GameManager.instance.highlightPos = ray.collider.gameObject.transform.position;
 
             }
             levelPos = ray.collider.gameObject.transform.position;
@@ -356,6 +358,7 @@ public class MapMenu : MonoBehaviour
                     Highlighter();
                     levelSelect = true;
                     theme = i;
+                    GameManager.instance.theme = i;
                 }
 
             }
@@ -366,24 +369,25 @@ public class MapMenu : MonoBehaviour
                 {
                     if (ray & ray.collider == gameLevel[j].GetComponent<BoxCollider2D>())
                     {
+                        GameManager.instance.camPos = Camera.main.transform.position;
                         if (theme == 0)
                         {
                             if (j == 0)
                             {
                                 GameManager.instance.selectedNumber = 0;
-                                Application.LoadLevel("jmlevelsuunnittelu");
+                                GameManager.instance.sceneLoader("Jonna Forest 1");
                                 Debug.Log("eka themen eka kenttä");
                             }
                             if (j == 1)
                             {
                                 GameManager.instance.selectedNumber = 1;
-                                Application.LoadLevel("jmlevelsuunnittelu1");
+                                GameManager.instance.sceneLoader("JonnaTestMobile");
                                 Debug.Log("eka themen toinen kenttä");
                             }
                             if (j == 2)
                             {
                                 GameManager.instance.selectedNumber = 2;
-                                Application.LoadLevel("jmlevelsuunnittelu2");
+                                GameManager.instance.sceneLoader("jmlevelsuunnittelu");
                                 Debug.Log("eka themen viimeinen kenttä");
                             }
                         }
@@ -392,19 +396,19 @@ public class MapMenu : MonoBehaviour
                             if (j == 0)
                             {
                                 GameManager.instance.selectedNumber = 3;
-                                Application.LoadLevel("Winter1 level");
+                                GameManager.instance.sceneLoader("Winter1 level");
                                 Debug.Log("toisen themen eka kenttä");
                             }
                             if (j == 1)
                             {
                                 GameManager.instance.selectedNumber = 4;
-                                Application.LoadLevel("Winter1 leve 2");
+                                GameManager.instance.sceneLoader("Winter1 leve 2");
                                 Debug.Log("toisen themen toinen kenttä");
                             }
                             if (j == 2)
                             {
                                 GameManager.instance.selectedNumber = 5;
-                                Application.LoadLevel("Winter level 3");
+                                GameManager.instance.sceneLoader("Winter level 3");
                                 Debug.Log("toisen themen viimeinen kenttä");
                             }
                         }
