@@ -123,7 +123,7 @@ public class Movement : MonoBehaviour
         }
         if (!iceWalk)
         {
-            hitLength = 1f;
+            hitLength = 1.5f;
         }
         else
         {
@@ -151,16 +151,18 @@ public class Movement : MonoBehaviour
                 
                 
         }
-        else if (hit && hit.collider.isTrigger && hit.collider == bs.spawn.GetComponent<Collider2D>())
+        else if (hit && hit.collider.isTrigger && bs.spawn != null && hit.collider == bs.spawn.GetComponent<Collider2D>())
         {
             if (isGrounded)
             {
+                
                 isGrounded = true;
             }
         }
 
         else if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            
             isGrounded = true;
             if (started)
             {
@@ -190,11 +192,11 @@ public class Movement : MonoBehaviour
 
         if (movingRight)
         {
-            Debug.DrawRay(transform.position + new Vector3(-.4f, 0f), -transform.up * hitLength, Color.green);
+            Debug.DrawRay(transform.position, -transform.up * hitLength, Color.green);
         }
         else
         {
-            Debug.DrawRay(transform.position + new Vector3(.4f, 0f), -transform.up * hitLength, Color.green);
+            Debug.DrawRay(transform.position, -transform.up * hitLength, Color.green);
         }
         //Debug.DrawRay(transform.position + -transform.right * 1f, -transform.up * 1f, Color.green);
 
@@ -228,15 +230,16 @@ public class Movement : MonoBehaviour
             Vector3 averageNormal = hit.normal;
             Debug.Log(averageNormal);
             Vector3 averagePoint = hit.point;
+            
             Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
-            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 8f);
+            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
            if (iceWalk)
            {
                transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
            }
            else
            {
-               transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 10f * Time.deltaTime);
+               transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
            }
             
 
@@ -244,10 +247,10 @@ public class Movement : MonoBehaviour
         else
         {
             
-            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 4f);
+            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 6f);
             
            
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 10f * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
             
         }
 
