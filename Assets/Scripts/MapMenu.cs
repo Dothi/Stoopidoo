@@ -8,8 +8,10 @@ public class MapMenu : MonoBehaviour
     public float yPos;
     public List<GameObject> levels;
     public List<GameObject> gameLevel;
+    public Sprite[] pointers;
     public Transform highlight;
     public Transform gameLevels;
+    public SpriteRenderer themePointer;
     public bool levelSelect;
     Vector3 levelPos;
     public int theme;
@@ -53,7 +55,7 @@ public class MapMenu : MonoBehaviour
             highlight.gameObject.SetActive(true);
             highlight.gameObject.transform.position = GameManager.instance.highlightPos;
             levelSelect = true;
-            gameLevels.position = GameManager.instance.levelPos;
+            //gameLevels.position = GameManager.instance.levelPos;
             
             playButton.gameObject.SetActive(false);
             mainMenuPic.gameObject.SetActive(false);
@@ -150,18 +152,21 @@ public class MapMenu : MonoBehaviour
     {
         if (theme == 0)
         {
+            themePointer.sprite = pointers[0];
             star01 = GameManager.instance.levelNumber[0];
             star02 = GameManager.instance.levelNumber[1];
             star03 = GameManager.instance.levelNumber[2];
         }
         if (theme == 1)
         {
+            themePointer.sprite = pointers[1];
             star01 = GameManager.instance.levelNumber[3];
             star02 = GameManager.instance.levelNumber[4];
             star03 = GameManager.instance.levelNumber[5];
         }
         if (theme == 2)
         {
+            themePointer.sprite = pointers[2];
             star01 = GameManager.instance.levelNumber[6];
             star02 = GameManager.instance.levelNumber[7];
             star03 = GameManager.instance.levelNumber[8];
@@ -343,8 +348,7 @@ public class MapMenu : MonoBehaviour
         {
             if (ray && ray.collider.GetComponent<CircleCollider2D>())
             {
-                highlight.transform.position = ray.collider.gameObject.transform.position;
-                GameManager.instance.highlightPos = ray.collider.gameObject.transform.position;
+                
 
             }
             levelPos = ray.collider.gameObject.transform.position;
@@ -354,6 +358,8 @@ public class MapMenu : MonoBehaviour
             {
                 if (ray && ray.collider == levels[i].GetComponent<CircleCollider2D>())
                 {
+                    highlight.transform.position = ray.collider.gameObject.transform.position;
+                    GameManager.instance.highlightPos = ray.collider.gameObject.transform.position;
                     AudioSource.PlayClipAtPoint(plob, transform.position);
                     Highlighter();
                     levelSelect = true;
@@ -367,7 +373,7 @@ public class MapMenu : MonoBehaviour
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (ray & ray.collider == gameLevel[j].GetComponent<BoxCollider2D>())
+                    if (ray & ray.collider == gameLevel[j].GetComponent<CircleCollider2D>())
                     {
                         GameManager.instance.camPos = Camera.main.transform.position;
                         if (theme == 0)
@@ -375,19 +381,19 @@ public class MapMenu : MonoBehaviour
                             if (j == 0)
                             {
                                 GameManager.instance.selectedNumber = 0;
-                                GameManager.instance.sceneLoader("Jonna Forest 1");
+                                //GameManager.instance.sceneLoader("Jonna Forest 1");
                                 Debug.Log("eka themen eka kenttä");
                             }
                             if (j == 1)
                             {
                                 GameManager.instance.selectedNumber = 1;
-                                GameManager.instance.sceneLoader("JonnaTestMobile");
+                                //GameManager.instance.sceneLoader("JonnaTestMobile");
                                 Debug.Log("eka themen toinen kenttä");
                             }
                             if (j == 2)
                             {
                                 GameManager.instance.selectedNumber = 2;
-                                GameManager.instance.sceneLoader("jmlevelsuunnittelu");
+                                //GameManager.instance.sceneLoader("jmlevelsuunnittelu");
                                 Debug.Log("eka themen viimeinen kenttä");
                             }
                         }
@@ -396,19 +402,19 @@ public class MapMenu : MonoBehaviour
                             if (j == 0)
                             {
                                 GameManager.instance.selectedNumber = 3;
-                                GameManager.instance.sceneLoader("Winter1 level");
+                                //GameManager.instance.sceneLoader("Winter1 level");
                                 Debug.Log("toisen themen eka kenttä");
                             }
                             if (j == 1)
                             {
                                 GameManager.instance.selectedNumber = 4;
-                                GameManager.instance.sceneLoader("Winter1 leve 2");
+                                //GameManager.instance.sceneLoader("Winter1 leve 2");
                                 Debug.Log("toisen themen toinen kenttä");
                             }
                             if (j == 2)
                             {
                                 GameManager.instance.selectedNumber = 5;
-                                GameManager.instance.sceneLoader("Winter level 3");
+                                //GameManager.instance.sceneLoader("Winter level 3");
                                 Debug.Log("toisen themen viimeinen kenttä");
                             }
                         }

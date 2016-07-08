@@ -1,0 +1,117 @@
+fileFormatVersion: 2
+guid: 6ab2900c5f781d34f9185576055a069e
+timeCreated: 1467966787
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: glow_star_0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: glow_star_0
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 60
+        width: 420
+        height: 388
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 29, y: -183}
+        - {x: 51, y: -188}
+        - {x: 80, y: -191}
+        - {x: 112, y: -191}
+        - {x: 138, y: -188}
+        - {x: 146, y: -186}
+        - {x: 157, y: -181}
+        - {x: 164, y: -173}
+        - {x: 171, y: -152}
+        - {x: 173, y: -133}
+        - {x: 172, y: -78}
+        - {x: 187, y: -60}
+        - {x: 204, y: -45}
+        - {x: 210, y: -32}
+        - {x: 210, y: 62}
+        - {x: 205, y: 72}
+        - {x: 187, y: 85}
+        - {x: 158, y: 92}
+        - {x: 122, y: 99}
+        - {x: 103, y: 127}
+        - {x: 88, y: 153}
+        - {x: 71, y: 176}
+        - {x: 58, y: 189}
+        - {x: 43, y: 194}
+        - {x: -41, y: 194}
+        - {x: -57, y: 188}
+        - {x: -72, y: 172}
+        - {x: -101, y: 127}
+        - {x: -114, y: 105}
+        - {x: -174, y: 94}
+        - {x: -196, y: 84}
+        - {x: -205, y: 71}
+        - {x: -207, y: 59}
+        - {x: -210, y: 43}
+        - {x: -210, y: -6}
+        - {x: -207, y: -18}
+        - {x: -204, y: -33}
+        - {x: -199, y: -40}
+        - {x: -179, y: -62}
+        - {x: -181, y: -104}
+        - {x: -181, y: -156}
+        - {x: -173, y: -180}
+        - {x: -158, y: -190}
+        - {x: -136, y: -194}
+        - {x: -81, y: -194}
+        - {x: -64, y: -192}
+        - {x: -50, y: -190}
+        - {x: 6, y: -174}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
