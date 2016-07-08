@@ -72,6 +72,7 @@ public class MapMenu : MonoBehaviour
         {
 
         }
+        hideStars();
         unlocking();
     }
 
@@ -343,12 +344,12 @@ public class MapMenu : MonoBehaviour
     void levelSelectionMobile()
     {
         RaycastHit2D ray = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector2.zero);
-        hideStars();
+        
         if (ray)
         {
             if (ray && ray.collider.GetComponent<CircleCollider2D>())
             {
-                
+                hideStars();
 
             }
             levelPos = ray.collider.gameObject.transform.position;

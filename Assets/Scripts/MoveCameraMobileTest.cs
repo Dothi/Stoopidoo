@@ -114,24 +114,26 @@ public class MoveCameraMobileTest : MonoBehaviour
             Vector3 wp = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
             Vector2 touchPos = new Vector2(wp.x, wp.y);
 
-            
-            if (Input.touches[0].phase == TouchPhase.Began && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+            if (FollowDogButton != null)
             {
-                currentLerpTime = 0f;
-                followDoge = true;
-            }
-            else if (Input.touches[0].phase == TouchPhase.Stationary && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
-            {
-                followDoge = true;
-            }
-            else if (Input.touches[0].phase == TouchPhase.Moved && !FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
-            {
-                followDoge = false;
-            }
+                if (Input.touches[0].phase == TouchPhase.Began && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                {
+                    currentLerpTime = 0f;
+                    followDoge = true;
+                }
+                else if (Input.touches[0].phase == TouchPhase.Stationary && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                {
+                    followDoge = true;
+                }
+                else if (Input.touches[0].phase == TouchPhase.Moved && !FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                {
+                    followDoge = false;
+                }
 
-            else if (Input.touches[0].phase == TouchPhase.Ended && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
-            {
-                followDoge = false;
+                else if (Input.touches[0].phase == TouchPhase.Ended && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                {
+                    followDoge = false;
+                }
             }
         }
         
