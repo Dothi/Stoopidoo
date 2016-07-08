@@ -123,23 +123,29 @@ public class Movement : MonoBehaviour
         }
         if (!iceWalk)
         {
-            hitLength = 1.5f;
+            hitLength = 1f;
         }
         else
         {
             hitLength = 1.5f;
         }
         RaycastHit2D hit;
-        if (movingRight)
+        RaycastHit2D hit2;
+        RaycastHit2D groundHit;
+        hit = Physics2D.Raycast(transform.position, -transform.up + transform.right, hitLength, DefaultTerrainLayerMask);
+        hit2 = Physics2D.Raycast(transform.position, -transform.up + -transform.right, hitLength, DefaultTerrainLayerMask);
+        groundHit = Physics2D.Raycast(transform.position, -transform.up, 1.2f, DefaultTerrainLayerMask);
+        /*if (movingRight)
         {
-            hit = Physics2D.Raycast(transform.position + new Vector3(-.4f, 0f), -transform.up, hitLength, DefaultTerrainLayerMask);
-        }
-        else
+            
+            
+        }*/
+        /*else
         {
             hit = Physics2D.Raycast(transform.position + new Vector3(.4f, 0f), -transform.up, hitLength, DefaultTerrainLayerMask);
-        }
+        }*/
        // RaycastHit2D rightHit = Physics2D.Raycast(transform.position + transform.right * 1f, -transform.up, 1f, DefaultTerrainLayerMask);
-        if (hit && !hit.collider.isTrigger && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ice"))
+        if (groundHit && !groundHit.collider.isTrigger && groundHit.transform.gameObject.layer == LayerMask.NameToLayer("Ice"))
         {
             
                 iceWalk = true;
@@ -151,7 +157,7 @@ public class Movement : MonoBehaviour
                 
                 
         }
-        else if (hit && hit.collider.isTrigger && bs.spawn != null && hit.collider == bs.spawn.GetComponent<Collider2D>())
+        else if (groundHit && groundHit.collider.isTrigger && bs.spawn != null && groundHit.collider == bs.spawn.GetComponent<Collider2D>())
         {
             if (isGrounded)
             {
@@ -160,7 +166,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        else if (hit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        else if (groundHit && groundHit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             
             isGrounded = true;
@@ -190,14 +196,11 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (movingRight)
-        {
-            Debug.DrawRay(transform.position, -transform.up * hitLength, Color.green);
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, -transform.up * hitLength, Color.green);
-        }
+
+        Debug.DrawRay(transform.position, -transform.up + -transform.right * hitLength, Color.green);
+        Debug.DrawRay(transform.position, -transform.up + transform.right * hitLength, Color.green);
+        
+       
         //Debug.DrawRay(transform.position + -transform.right * 1f, -transform.up * 1f, Color.green);
 
 
@@ -224,15 +227,15 @@ public class Movement : MonoBehaviour
 
         }*/
 
-        if (hit && !hit.collider.isTrigger)
+        if (hit && !hit.collider.isTrigger || hit2 && !hit2.collider.isTrigger || hit && hit2 && !hit.collider.isTrigger && !hit2.collider.isTrigger)
         {
 
-            Vector3 averageNormal = hit.normal;
+            Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
             Debug.Log(averageNormal);
-            Vector3 averagePoint = hit.point;
+            Vector3 averagePoint = (hit.point + hit2.point) / 2;
             
             Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
-            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
+            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 4f);
            if (iceWalk)
            {
                transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
@@ -247,7 +250,7 @@ public class Movement : MonoBehaviour
         else
         {
             
-            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 6f);
+            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 4f);
             
            
                 transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
