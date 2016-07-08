@@ -55,7 +55,7 @@ public class MapMenu : MonoBehaviour
             highlight.gameObject.SetActive(true);
             highlight.gameObject.transform.position = GameManager.instance.highlightPos;
             levelSelect = true;
-            //gameLevels.position = GameManager.instance.levelPos;
+            gameLevels.position = GameManager.instance.levelPos;
             
             playButton.gameObject.SetActive(false);
             mainMenuPic.gameObject.SetActive(false);
@@ -381,19 +381,19 @@ public class MapMenu : MonoBehaviour
                             if (j == 0)
                             {
                                 GameManager.instance.selectedNumber = 0;
-                                //GameManager.instance.sceneLoader("Jonna Forest 1");
+                                GameManager.instance.sceneLoader("Jonna Forest 1");
                                 Debug.Log("eka themen eka kenttä");
                             }
                             if (j == 1)
                             {
                                 GameManager.instance.selectedNumber = 1;
-                                //GameManager.instance.sceneLoader("JonnaTestMobile");
+                                GameManager.instance.sceneLoader("JonnaTestMobile");
                                 Debug.Log("eka themen toinen kenttä");
                             }
                             if (j == 2)
                             {
                                 GameManager.instance.selectedNumber = 2;
-                                //GameManager.instance.sceneLoader("jmlevelsuunnittelu");
+                                GameManager.instance.sceneLoader("jmlevelsuunnittelu");
                                 Debug.Log("eka themen viimeinen kenttä");
                             }
                         }
@@ -402,19 +402,19 @@ public class MapMenu : MonoBehaviour
                             if (j == 0)
                             {
                                 GameManager.instance.selectedNumber = 3;
-                                //GameManager.instance.sceneLoader("Winter1 level");
+                                GameManager.instance.sceneLoader("Winter1 level");
                                 Debug.Log("toisen themen eka kenttä");
                             }
                             if (j == 1)
                             {
                                 GameManager.instance.selectedNumber = 4;
-                                //GameManager.instance.sceneLoader("Winter1 leve 2");
+                                GameManager.instance.sceneLoader("Winter1 leve 2");
                                 Debug.Log("toisen themen toinen kenttä");
                             }
                             if (j == 2)
                             {
                                 GameManager.instance.selectedNumber = 5;
-                                //GameManager.instance.sceneLoader("Winter level 3");
+                                GameManager.instance.sceneLoader("Winter level 3");
                                 Debug.Log("toisen themen viimeinen kenttä");
                             }
                         }

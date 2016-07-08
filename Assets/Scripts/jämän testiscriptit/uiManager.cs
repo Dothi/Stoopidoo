@@ -110,4 +110,8 @@ public class uiManager : MonoBehaviour
         GameManager.instance.continued = true;
         GameManager.instance.sceneLoader("MenuMap");
     }
+    public void restart()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
 }
