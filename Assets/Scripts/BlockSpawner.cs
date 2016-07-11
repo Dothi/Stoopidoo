@@ -17,9 +17,13 @@ public class BlockSpawner : MonoBehaviour
     Quaternion fromRotation;
     Quaternion toRotation;
 
+    GameObject cam;
+    GameObject player;
+
     public bool isRotating = false;
     public bool isDragging = false;
     public bool isHit = false;
+    bool playerIsHit;
     public static BlockSpawner instance;
     public Transform[] prefabs;
 
@@ -29,7 +33,7 @@ public class BlockSpawner : MonoBehaviour
     Vector3 offset;
 
     LayerMask UIMask;
-    
+
     public GameObject confirmButton;
     public GameObject cancelButton;
     public GameObject restartButton;
@@ -51,6 +55,8 @@ public class BlockSpawner : MonoBehaviour
 
     void Start()
     {
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
+        player = GameObject.FindGameObjectWithTag("Player");
         UIMask = 1 << LayerMask.NameToLayer("UI") | 1 << LayerMask.NameToLayer("Ground");
         UIMask = ~UIMask;
     }
@@ -62,7 +68,7 @@ public class BlockSpawner : MonoBehaviour
             Vector3 wp = Camera.main.ScreenToWorldPoint(myTouches[0].position);
             Vector2 touchPos = new Vector2(wp.x, wp.y);
 
-            if (myTouches[0].phase == TouchPhase.Began && restartButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+            if (myTouches.Length == 1 && myTouches[0].phase == TouchPhase.Began && restartButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
             {
                 Restart();
             }
@@ -83,11 +89,11 @@ public class BlockSpawner : MonoBehaviour
                     offset = spawn.transform.position - Camera.main.ScreenToWorldPoint(pos);
 
                 }
-                if (myTouches[0].phase == TouchPhase.Began && cancelButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                if (myTouches.Length == 1 && myTouches[0].phase == TouchPhase.Began && cancelButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
                 {
                     Cancel();
                 }
-                if (myTouches[0].phase == TouchPhase.Began && confirmButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                if (myTouches.Length == 1 && myTouches[0].phase == TouchPhase.Began && confirmButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
                 {
                     Confirm();
                 }
@@ -115,57 +121,58 @@ public class BlockSpawner : MonoBehaviour
                 }
                 if (isRotating)
                 {
-                    
-                        /*newPos = spawn.transform.position;
-                        spawn.transform.position = newPos;*/
-                        if (myTouches.Length == 2)
-                        {
-                            /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
-                            
-                            var v2 = myTouches[0].position - myTouches[1].position;
-                            var newAngle = Mathf.Atan2(v2.y, v2.x);
-                           // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
-                            
-                           // oldAngle = newAngle;
-                            
-                            spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
-                            
-                        }
-                        else if (myTouches.Length == 2 && isHit)
-                        {
-                             
-                        
-                            /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
-                            
-                            var v2 = myTouches[0].position - myTouches[1].position;
-                            var newAngle = Mathf.Atan2(v2.y, v2.x);
-                           // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
-                            
-                           // oldAngle = newAngle;
-                            
-                            spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
-                        }
-                        else
-                        {
-                            /*mousePos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, 10);
-                            Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
-                            lookPos = lookPos - spawn.transform.position;
-                            float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
-                            spawn.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);*/
-                        }
-                      /*  Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+                    /*newPos = spawn.transform.position;
+                    spawn.transform.position = newPos;*/
+                    if (myTouches.Length == 2)
+                    {
+                        /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
+
+                        var v2 = myTouches[0].position - myTouches[1].position;
+                        var newAngle = Mathf.Atan2(v2.y, v2.x);
+                        // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
+
+                        // oldAngle = newAngle;
+
+                        spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+
+                    }
+                    else if (myTouches.Length == 2 && isHit)
+                    {
+
+
+                        /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
+
+                        var v2 = myTouches[0].position - myTouches[1].position;
+                        var newAngle = Mathf.Atan2(v2.y, v2.x);
+                        // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
+
+                        // oldAngle = newAngle;
+
+                        spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                    }
+                    else
+                    {
+                        /*mousePos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, 10);
+                        Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
                         lookPos = lookPos - spawn.transform.position;
                         float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
                         spawn.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);*/
+                    }
+                    /*  Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+                      lookPos = lookPos - spawn.transform.position;
+                      float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
+                      spawn.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);*/
 
-                    
-                    
+
+
                 }
+
             }
 
 
         }
-        
+
         /*else
         {
             isDragging = false;
@@ -184,7 +191,7 @@ public class BlockSpawner : MonoBehaviour
         {
             confirmButton.SetActive(true);
             cancelButton.SetActive(true);
-            spawn.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.4f);
+            //spawn.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.4f);
         }
         else
         {
@@ -192,11 +199,27 @@ public class BlockSpawner : MonoBehaviour
             cancelButton.SetActive(false);
         }
     }
+    /*void FixedUpdate()
+    {
+        if (spawn != null)
+        {
+            if (spawn.GetComponent<BoxCollider2D>().bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds))
+            {
+                spawn.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 0.4f);
+                playerIsHit = true;
+            }
+            else if (!spawn.GetComponent<BoxCollider2D>().bounds.Intersects(player.GetComponent<BoxCollider2D>().bounds))
+            {
+                spawn.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.4f);
+                playerIsHit = false;
+            }
+        }
+    }*/
     public void Rotate()
     {
-        
-            isRotating = true;
-        
+
+        isRotating = true;
+
     }
     public void StopRotate()
     {
@@ -208,7 +231,8 @@ public class BlockSpawner : MonoBehaviour
         {
             var pos = Input.touches[0].position;
             // pos.z = -Camera.main.transform.position.z;
-            pos = Camera.main.ScreenToWorldPoint(pos);
+            //pos = Camera.main.ScreenToWorldPoint(pos);
+            pos = Camera.main.transform.position;
             spawn = Instantiate(prefabs[0], pos, Quaternion.identity) as Transform;
             smallBlocks--;
             blocksUsed++;
@@ -220,7 +244,8 @@ public class BlockSpawner : MonoBehaviour
         {
             var pos = Input.touches[0].position;
             // pos.z = -Camera.main.transform.position.z;
-            pos = Camera.main.ScreenToWorldPoint(pos);
+            //pos = Camera.main.ScreenToWorldPoint(pos);
+            pos = Camera.main.transform.position;
             spawn = Instantiate(prefabs[1], pos, Quaternion.identity) as Transform;
             mediumBlocks--;
             blocksUsed++;
@@ -232,7 +257,8 @@ public class BlockSpawner : MonoBehaviour
         {
             var pos = Input.touches[0].position;
             // pos.z = -Camera.main.transform.position.z;
-            pos = Camera.main.ScreenToWorldPoint(pos);
+            //pos = Camera.main.ScreenToWorldPoint(pos);
+            pos = Camera.main.transform.position;
             spawn = Instantiate(prefabs[2], pos, Quaternion.identity) as Transform;
             longBlocks--;
             blocksUsed++;
@@ -241,9 +267,11 @@ public class BlockSpawner : MonoBehaviour
 
     public void Confirm()
     {
-        if (!isHit)
+        blockCollision bc = spawn.GetComponent<blockCollision>();
+        if (!isHit && !bc.hitPlayer)
         {
             isDragging = false;
+            bc.placed = true;
             spawn.GetComponent<Collider2D>().isTrigger = false;
             spawn.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f);
             spawn = null;
@@ -281,7 +309,7 @@ public class BlockSpawner : MonoBehaviour
             Application.LoadLevel(Application.loadedLevel);
         }
     }
-    
+
     void OnGUI()
     {
         /*Event e = Event.current;
