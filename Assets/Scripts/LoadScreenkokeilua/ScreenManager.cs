@@ -35,7 +35,7 @@ public class ScreenManager : MonoBehaviour
      
             // Fade to black
             yield return StartCoroutine(m_blackScreenCover.FadeIn());
-
+        GameManager.instance.loadingScreen = true;
             // Load loading screen
             yield return Application.LoadLevelAsync("LoadingScreen");
 
@@ -62,6 +62,7 @@ public class ScreenManager : MonoBehaviour
         //Application.UnloadLevel("LoadingScreen");
             // Fade to new screen
             yield return StartCoroutine(m_blackScreenCover.FadeOut());
+        GameManager.instance.loadingScreen = false;
         
     }
 

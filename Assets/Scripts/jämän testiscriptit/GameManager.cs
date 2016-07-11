@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
     public Vector3 camePos;
     public bool firstUnlock, secondUnlock;
     public bool gameStarted;
+    public bool loadingScreen;
     void Awake()
     {
         if(instance != null && instance != this)

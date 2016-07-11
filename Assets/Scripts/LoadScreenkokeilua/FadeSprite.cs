@@ -96,7 +96,6 @@ public class FadeSprite : MonoBehaviour
 
         spriteColor.a = m_maxAlpha;
         m_sprite.color = spriteColor;
-
         if (m_continuous)
             StartCoroutine(FadeOut());
     }
@@ -113,7 +112,6 @@ public class FadeSprite : MonoBehaviour
         }
         spriteColor.a = m_minAlpha;
         m_sprite.color = spriteColor;
-
         if (m_continuous)
             StartCoroutine(FadeIn());
     }

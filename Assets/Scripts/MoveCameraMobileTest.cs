@@ -107,57 +107,58 @@ public class MoveCameraMobileTest : MonoBehaviour
 
     public void Update()
     {
-        
-        
-        if (Input.touchCount > 0)
+        if (!GameManager.instance.loadingScreen)
         {
-            Vector3 wp = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
-            Vector2 touchPos = new Vector2(wp.x, wp.y);
-
-            if (FollowDogButton != null)
+            if (Input.touchCount > 0)
             {
-                if (Input.touches[0].phase == TouchPhase.Began && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
-                {
-                    currentLerpTime = 0f;
-                    followDoge = true;
-                }
-                else if (Input.touches[0].phase == TouchPhase.Stationary && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
-                {
-                    followDoge = true;
-                }
-                else if (Input.touches[0].phase == TouchPhase.Moved && !FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
-                {
-                    followDoge = false;
-                }
+                Vector3 wp = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
+                Vector2 touchPos = new Vector2(wp.x, wp.y);
 
-                else if (Input.touches[0].phase == TouchPhase.Ended && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                if (FollowDogButton != null)
                 {
-                    followDoge = false;
+                    if (Input.touches[0].phase == TouchPhase.Began && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                    {
+                        currentLerpTime = 0f;
+                        followDoge = true;
+                    }
+                    else if (Input.touches[0].phase == TouchPhase.Stationary && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                    {
+                        followDoge = true;
+                    }
+                    else if (Input.touches[0].phase == TouchPhase.Moved && !FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                    {
+                        followDoge = false;
+                    }
+
+                    else if (Input.touches[0].phase == TouchPhase.Ended && FollowDogButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                    {
+                        followDoge = false;
+                    }
                 }
             }
-        }
-        
 
-        //You would typically hook into Refresh on a screen rotation or aspect ratio change
-        //In demo, we call it non stop to demonstrate the camera system 
-        Refresh();
-        if (BlockSpawner.instance != null)
-        {
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && !BlockSpawner.instance.isDragging)
+
+            //You would typically hook into Refresh on a screen rotation or aspect ratio change
+            //In demo, we call it non stop to demonstrate the camera system 
+            Refresh();
+            if (BlockSpawner.instance != null)
             {
-                Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+                if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && !BlockSpawner.instance.isDragging)
+                {
+                    Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
 
-                transform.Translate(-touchDeltaPosition.x * Time.deltaTime * speed, 0, 0);
+                    transform.Translate(-touchDeltaPosition.x * Time.deltaTime * speed, 0, 0);
 
+                }
             }
-        }
-        else
-        {
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+            else
             {
-                Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+                if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
 
-                transform.Translate(-touchDeltaPosition.x * Time.deltaTime * speed, 0, 0);
+                    transform.Translate(-touchDeltaPosition.x * Time.deltaTime * speed, 0, 0);
+                }
             }
         }
     }
