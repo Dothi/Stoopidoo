@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
     public Rigidbody2D myRB;
     public float speed = 50f;
     public float fan = 1f;
+    float boostTimer = 0f;
     float hitLength;
     float timer;
     public float idleTimer;
@@ -14,6 +15,8 @@ public class Movement : MonoBehaviour
     public bool movingRight;
     public bool isTouchingWall;
     public bool iceWalk;
+    bool jumped;
+    bool hitForward;
     bool started;
     RaycastHit2D hit;
     SpriteRenderer spriteRend;
@@ -48,8 +51,9 @@ public class Movement : MonoBehaviour
         isTouchingWall = false;
         isGrounded = false;
         started = false;
+
         spriteRend = GetComponent<SpriteRenderer>();
-        idleTimer = 0f;
+        
         layerMask = 1 << LayerMask.NameToLayer("Player");
         UIlayerMask = 1 << LayerMask.NameToLayer("UI");
 
@@ -61,6 +65,27 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastHit2D hit;
+        RaycastHit2D hit2;
+        RaycastHit2D groundHit;
+        RaycastHit2D forwardHit;
+        hit = Physics2D.Raycast(transform.position, -transform.up + transform.right, hitLength, DefaultTerrainLayerMask);
+        hit2 = Physics2D.Raycast(transform.position, -transform.up + -transform.right, hitLength, DefaultTerrainLayerMask);
+
+        if (movingRight)
+        {
+            groundHit = Physics2D.Raycast(transform.position + new Vector3(-.4f, 0), -transform.up, 1.2f, DefaultTerrainLayerMask);
+            
+                forwardHit = Physics2D.Raycast(transform.position, transform.right, 1.2f, DefaultTerrainLayerMask);
+            
+        }
+        else
+        {
+            groundHit = Physics2D.Raycast(transform.position + new Vector3(.4f, 0), -transform.up, 1.2f, DefaultTerrainLayerMask);
+           
+                forwardHit = Physics2D.Raycast(transform.position, -transform.right, 1.2f, DefaultTerrainLayerMask);
+            
+        }
 
         vel = myRB.velocity;
         if (iceWalk)
@@ -78,15 +103,49 @@ public class Movement : MonoBehaviour
 
                 spriteRend.flipX = false;
 
-                if (moving && myRB.velocity.x == 0f)
+                if (moving && myRB.velocity.x == 0)
                 {
-                    idleTimer += 10 * Time.deltaTime;
-                    Debug.Log(idleTimer);
-                    if (idleTimer >= 1f)
-                    {
-                        movingRight = false;
-                        idleTimer = 0f;
-                    }
+                    
+                        if (!forwardHit)
+                        {
+                            
+                            Debug.Log("cyka");
+                            boostTimer += Time.deltaTime;
+                            if (boostTimer > .2f)
+                            {
+                                Debug.Log("Blyat");
+                                if (!jumped)
+                                {
+                                    myRB.AddForce(new Vector2(100, 100));
+                                }
+                                
+                                if (myRB.velocity.x == 0 && jumped)
+                                {
+                                    movingRight = false;
+                                    jumped = false;
+                                    boostTimer = 0f;
+                                    
+                                }
+                                jumped = true;
+                                boostTimer = 0f;
+                                
+                            }
+
+                        }
+                        else
+                        {
+                            idleTimer += 10 * Time.deltaTime;
+                            Debug.Log(idleTimer);
+                            if (idleTimer >= 1f)
+                            {
+                                idleTimer = 0f;
+                                movingRight = false;
+                                jumped = false;
+                                
+                            }
+                        }
+                    
+                    
                 }
             }
             else
@@ -94,13 +153,43 @@ public class Movement : MonoBehaviour
 
                 spriteRend.flipX = true;
 
-                if (moving && myRB.velocity.x == 0f)
+                if (moving && myRB.velocity.x == 0)
                 {
-                    idleTimer += 10 * Time.deltaTime;
-                    if (idleTimer >= 1f)
+                    if (!forwardHit)
                     {
-                        movingRight = true;
-                        idleTimer = 0f;
+
+                        Debug.Log("cyka");
+                        boostTimer += Time.deltaTime;
+                        if (boostTimer > .2f)
+                        {
+                            Debug.Log("Blyat");
+                            if (!jumped)
+                            {
+                                myRB.AddForce(new Vector2(-100, 100));
+                            }
+                            
+                            if (myRB.velocity.x == 0 && jumped)
+                            {
+                                movingRight = true;
+                                boostTimer = 0f;
+                                
+                            }
+                            jumped = true;
+                            boostTimer = 0f;
+                            
+                        }
+
+                    }
+                    else
+                    {
+                        idleTimer += 10 * Time.deltaTime;
+                        if (idleTimer >= 1f)
+                        {
+                            idleTimer = 0f;
+                            movingRight = true;
+                            jumped = false;
+                            
+                        }
                     }
 
                 }
@@ -131,19 +220,8 @@ public class Movement : MonoBehaviour
         {
             hitLength = 1.5f;
         }
-        RaycastHit2D hit;
-        RaycastHit2D hit2;
-        RaycastHit2D groundHit;
-        hit = Physics2D.Raycast(transform.position, -transform.up + transform.right, hitLength, DefaultTerrainLayerMask);
-        hit2 = Physics2D.Raycast(transform.position, -transform.up + -transform.right, hitLength, DefaultTerrainLayerMask);
-        if (movingRight)
-        {
-            groundHit = Physics2D.Raycast(transform.position + new Vector3(-.4f, 0), -transform.up, 1.2f, DefaultTerrainLayerMask);
-        }
-        else
-        {
-            groundHit = Physics2D.Raycast(transform.position + new Vector3(.4f, 0), -transform.up, 1.2f, DefaultTerrainLayerMask);
-        }
+
+
         /*if (movingRight)
         {
             
@@ -156,15 +234,12 @@ public class Movement : MonoBehaviour
         // RaycastHit2D rightHit = Physics2D.Raycast(transform.position + transform.right * 1f, -transform.up, 1f, DefaultTerrainLayerMask);
         if (groundHit && !groundHit.collider.isTrigger && groundHit.transform.gameObject.layer == LayerMask.NameToLayer("Ice"))
         {
-
             iceWalk = true;
             moving = false;
             if (!isGrounded)
             {
                 isGrounded = true;
             }
-
-
         }
         else if (groundHit && groundHit.collider.isTrigger && bs.spawn != null && groundHit.collider == bs.spawn.GetComponent<Collider2D>())
         {
@@ -185,12 +260,11 @@ public class Movement : MonoBehaviour
                 Debug.Log("Hit ground");
             }
         }
-        else
+        else if (!groundHit)
         {
-            if (isGrounded)
-            {
+            
                 isGrounded = false;
-            }
+            
             iceWalk = false;
         }
         if (isGrounded)
@@ -199,9 +273,11 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            if (myRB.velocity.y > 1f || myRB.velocity.y < -1f)
+            if (myRB.velocity.y > 2f || myRB.velocity.y < -2f)
             {
-                anim.SetBool("falling", true);
+                
+                    anim.SetBool("falling", true);
+                
             }
         }
 
@@ -209,6 +285,14 @@ public class Movement : MonoBehaviour
         Debug.DrawRay(transform.position, -transform.up + -transform.right * hitLength, Color.green);
         Debug.DrawRay(transform.position, -transform.up + transform.right * hitLength, Color.green);
         Debug.DrawRay(transform.position, -transform.up * hitLength, Color.green);
+        if (movingRight)
+        {
+            Debug.DrawRay(transform.position, transform.right * 1.2f, Color.green);
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, -transform.right * 1.2f, Color.green);
+        }
 
 
         //Debug.DrawRay(transform.position + -transform.right * 1f, -transform.up * 1f, Color.green);
@@ -356,6 +440,9 @@ public class Movement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        
+        
+        
         if (myRB.velocity.x > 0)
         {
             anim.SetFloat("speed", myRB.velocity.x);
