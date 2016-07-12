@@ -430,8 +430,8 @@ public class MapMenu : MonoBehaviour
                             if (j == 2)
                             {
                                 GameManager.instance.selectedNumber = 2;
-                                GameManager.instance.sceneLoader("Winter1 leve 2");
-                                //GameManager.instance.sceneLoader("jmlevelsuunnittelu");
+                                //GameManager.instance.sceneLoader("Winter1 leve 2");
+                                GameManager.instance.sceneLoader("jmlevelsuunnittelu");
                                 Debug.Log("eka themen viimeinen kenttä");
                             }
                         }
