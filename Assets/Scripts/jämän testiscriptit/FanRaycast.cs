@@ -39,6 +39,9 @@ public class FanRaycast : MonoBehaviour
     void Update()
     {
         raycast();
+        asdRaycastOrigins();
+        CalculateRaySpacing();
+        Debug.Log(verticalRayCount);
     }
 
     void raycast()
@@ -59,6 +62,7 @@ public class FanRaycast : MonoBehaviour
                 velocity.x = player.GetComponent<Rigidbody2D>().velocity.x;
                 player.GetComponent<Rigidbody2D>().velocity = velocity;
             }
+            
             rayLength += percent;
         }
     }

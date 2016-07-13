@@ -128,13 +128,43 @@ public class BlockSpawner : MonoBehaviour
                     {
                         /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
 
+
                         var v2 = myTouches[0].position - myTouches[1].position;
-                        var newAngle = Mathf.Atan2(v2.y, v2.x);
+                       
+
+                        
+                        
+                        
+                        
+                           
+                            var newAngle = Mathf.Atan2(v2.y, v2.x);
+                            
+
+                            
+                            spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                         
+                        
+                            
+                           
+
+
                         // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
+
+
+
+
+
+
+
+
+
+
 
                         // oldAngle = newAngle;
 
-                        spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+
+
+
 
                     }
                     else if (myTouches.Length == 2 && isHit)
@@ -144,12 +174,20 @@ public class BlockSpawner : MonoBehaviour
                         /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
 
                         var v2 = myTouches[0].position - myTouches[1].position;
-                        var newAngle = Mathf.Atan2(v2.y, v2.x);
-                        // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
+                        if (v2.x < 0)
+                        {
+                            var newAngle = Mathf.Atan2(-v2.y, -v2.x);
+                            spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                        }
+                        else
+                        {
+                            var newAngle = Mathf.Atan2(v2.y, v2.x);
+                            spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                        }
 
                         // oldAngle = newAngle;
 
-                        spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                        
                     }
                     else
                     {
@@ -180,7 +218,7 @@ public class BlockSpawner : MonoBehaviour
         if (!isDragging)
         {
 
-            Debug.Log("sad");
+
             if (spawn != null)
             {
                 offset = Vector3.zero;
@@ -272,7 +310,11 @@ public class BlockSpawner : MonoBehaviour
         {
             isDragging = false;
             bc.placed = true;
-            spawn.GetComponent<Collider2D>().isTrigger = false;
+            if (spawn.gameObject.layer != LayerMask.NameToLayer("Hurricane"))
+            {
+                spawn.GetComponent<Collider2D>().isTrigger = false;
+            }
+
             spawn.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f);
             spawn = null;
         }
