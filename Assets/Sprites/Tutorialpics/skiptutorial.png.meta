@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5102b7808710336429583b3248ce83c8
-timeCreated: 1468401225
+guid: 2007a3a83a30a8c49bdd1490942f20a3
+timeCreated: 1468394175
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: rotate_placeholder_0
+    21300000: skiptutorial_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -27,7 +27,7 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 8192
   textureSettings:
     filterMode: -1
@@ -39,7 +39,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -51,31 +51,30 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: rotate_placeholder_0
+    - name: skiptutorial_0
       rect:
         serializedVersion: 2
-        x: 147
-        y: 147
-        width: 218
-        height: 218
+        x: 79
+        y: 191
+        width: 353
+        height: 125
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 109, y: 44}
-        - {x: 95, y: 75}
-        - {x: 42, y: 109}
-        - {x: -30, y: 109}
-        - {x: -58, y: 99}
-        - {x: -81, y: 84}
-        - {x: -109, y: 40}
-        - {x: -109, y: -42}
-        - {x: -75, y: -95}
-        - {x: -39, y: -109}
-        - {x: 34, y: -109}
-        - {x: 62, y: -99}
-        - {x: 104, y: -61}
-        - {x: 109, y: -35}
+      - - {x: 176.5, y: -27.5}
+        - {x: 176.5, y: 34.5}
+        - {x: 152.5, y: 62.5}
+        - {x: -145.5, y: 62.5}
+        - {x: -170.5, y: 40.5}
+        - {x: -176.5, y: 25.5}
+        - {x: -176.5, y: -34.5}
+        - {x: -174.5, y: -39.5}
+        - {x: -153.5, y: -60.5}
+        - {x: -145.5, y: -62.5}
+        - {x: 141.5, y: -62.5}
+        - {x: 153.5, y: -54.5}
+        - {x: 163.5, y: -45.5}
     outline: []
   spritePackingTag: 
   userData: 
