@@ -1,0 +1,139 @@
+fileFormatVersion: 2
+guid: 9ab19247a91fb364bbec1e4c14efb64b
+timeCreated: 1468492696
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: japan_short_boxbutton_0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: japan_short_boxbutton_0
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 95
+        width: 674
+        height: 328
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 237, y: -157}
+        - {x: 242, y: -155}
+        - {x: 261, y: -146}
+        - {x: 273, y: -138}
+        - {x: 281, y: -131}
+        - {x: 301, y: -111}
+        - {x: 305, y: -106}
+        - {x: 310, y: -99}
+        - {x: 316, y: -91}
+        - {x: 325, y: -72}
+        - {x: 327, y: -67}
+        - {x: 331, y: -55}
+        - {x: 337, y: -31}
+        - {x: 337, y: 43}
+        - {x: 336, y: 47}
+        - {x: 333, y: 58}
+        - {x: 330, y: 67}
+        - {x: 328, y: 72}
+        - {x: 323, y: 84}
+        - {x: 316, y: 96}
+        - {x: 309, y: 106}
+        - {x: 305, y: 110}
+        - {x: 297, y: 119}
+        - {x: 291, y: 125}
+        - {x: 283, y: 132}
+        - {x: 274, y: 139}
+        - {x: 264, y: 146}
+        - {x: 252, y: 152}
+        - {x: 241, y: 157}
+        - {x: 234, y: 159}
+        - {x: 224, y: 162}
+        - {x: 216, y: 164}
+        - {x: -211, y: 164}
+        - {x: -224, y: 161}
+        - {x: -230, y: 159}
+        - {x: -238, y: 156}
+        - {x: -249, y: 151}
+        - {x: -259, y: 146}
+        - {x: -264, y: 143}
+        - {x: -270, y: 139}
+        - {x: -286, y: 125}
+        - {x: -292, y: 119}
+        - {x: -300, y: 110}
+        - {x: -307, y: 101}
+        - {x: -311, y: 95}
+        - {x: -314, y: 91}
+        - {x: -320, y: 79}
+        - {x: -320, y: 77}
+        - {x: -330, y: 57}
+        - {x: -332, y: 51}
+        - {x: -336, y: 37}
+        - {x: -337, y: 32}
+        - {x: -337, y: -42}
+        - {x: -336, y: -47}
+        - {x: -333, y: -58}
+        - {x: -330, y: -67}
+        - {x: -328, y: -72}
+        - {x: -317, y: -94}
+        - {x: -311, y: -103}
+        - {x: -304, y: -111}
+        - {x: -284, y: -131}
+        - {x: -279, y: -135}
+        - {x: -272, y: -140}
+        - {x: -264, y: -146}
+        - {x: -245, y: -155}
+        - {x: -240, y: -157}
+        - {x: -228, y: -161}
+        - {x: -216, y: -164}
+        - {x: 213, y: -164}
+        - {x: 225, y: -161}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     public bool firstUnlock, secondUnlock;
     public bool gameStarted;
     public bool loadingScreen;
+    public bool pauseState;
     void Awake()
     {
         if(instance != null && instance != this)

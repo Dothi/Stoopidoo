@@ -26,7 +26,7 @@ public class Tutorial : MonoBehaviour {
         spriteColor.a = 1f;
         darken.color = spriteColor;
         player = GameObject.Find("Player").GetComponent<SpriteRenderer>();
-
+        GameManager.instance.pauseState = true;
 	}
 	
 	// Update is called once per frame
@@ -87,6 +87,7 @@ public class Tutorial : MonoBehaviour {
         Debug.Log(tutorial.Length);
         if(tutorialNumber >= 9)
         {
+            GameManager.instance.pauseState = false;
             tutorialDone = true;
             tuto.enabled = false;
             _tutor.gameObject.SetActive(false);

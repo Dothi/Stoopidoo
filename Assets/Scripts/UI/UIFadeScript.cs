@@ -47,49 +47,52 @@ public class UIFadeScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount == 0 && !bs.isDragging)
+        if (!GameManager.instance.pauseState)
         {
-            currentTime += Time.deltaTime;
-            if (currentTime >= fadeTime)
+            if (Input.touchCount == 0 && !bs.isDragging)
             {
-                
+                currentTime += Time.deltaTime;
+                if (currentTime >= fadeTime)
+                {
 
-                if (alphaTime <= .4f)
-                {
-                    alphaTime = .4f;
+
+                    if (alphaTime <= .4f)
+                    {
+                        alphaTime = .4f;
+                    }
+                    else
+                    {
+                        alphaTime -= Time.deltaTime * .75f;
+                    }
+                    for (int i = 0; i < uiImages.Count; i++)
+                    {
+                        uiImages[i].color = new Color(1f, 1f, 1f, alphaTime);
+                    }
+
                 }
-                else
+
+            }
+            else if (bs.isDragging)
+            {
+                currentTime = 0f;
+                alphaTime = 1f;
+                for (int i = 0; i < 6; i++)
                 {
-                    alphaTime -= Time.deltaTime * .75f;
+                    uiImages[i].color = new Color(1f, 1f, 1f, 0f);
                 }
-                for (int i = 0; i < uiImages.Count; i++)
+                for (int i = 6; i < uiImages.Count; i++)
                 {
                     uiImages[i].color = new Color(1f, 1f, 1f, alphaTime);
                 }
+            }
+            else
+            {
 
-            }
-            
-        }
-        else if (bs.isDragging)
-        {
-            currentTime = 0f;
-            alphaTime = 1f;
-            for (int i = 0; i < 6; i++)
-            {
-                uiImages[i].color = new Color(1f, 1f, 1f, 0f);
-            }
-            for (int i = 6; i < uiImages.Count; i++)
-            {
-                uiImages[i].color = new Color(1f, 1f, 1f, alphaTime);
-            }
-        }
-        else 
-        {
-            
-            
-            for (int i = 0; i < 6; i++)
-            {
-                uiImages[i].color = new Color(1f, 1f, 1f, alphaTime);
+
+                for (int i = 0; i < 6; i++)
+                {
+                    uiImages[i].color = new Color(1f, 1f, 1f, alphaTime);
+                }
             }
         }
     }

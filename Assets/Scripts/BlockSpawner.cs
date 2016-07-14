@@ -63,7 +63,7 @@ public class BlockSpawner : MonoBehaviour
     void Update()
     {
         myTouches = Input.touches;
-        if (myTouches.Length > 0)
+        if (myTouches.Length > 0 && !GameManager.instance.pauseState)
         {
             Vector3 wp = Camera.main.ScreenToWorldPoint(myTouches[0].position);
             Vector2 touchPos = new Vector2(wp.x, wp.y);
@@ -265,7 +265,7 @@ public class BlockSpawner : MonoBehaviour
     }
     public void SmallBlock()
     {
-        if (smallBlocks > 0 && spawn == null)
+        if (smallBlocks > 0 && spawn == null && !GameManager.instance.pauseState)
         {
             var pos = Input.touches[0].position;
             // pos.z = -Camera.main.transform.position.z;
@@ -278,7 +278,7 @@ public class BlockSpawner : MonoBehaviour
     }
     public void MediumBlock()
     {
-        if (mediumBlocks > 0 && spawn == null)
+        if (mediumBlocks > 0 && spawn == null && !GameManager.instance.pauseState)
         {
             var pos = Input.touches[0].position;
             // pos.z = -Camera.main.transform.position.z;
@@ -291,7 +291,7 @@ public class BlockSpawner : MonoBehaviour
     }
     public void LongBlock()
     {
-        if (longBlocks > 0 && spawn == null)
+        if (longBlocks > 0 && spawn == null && !GameManager.instance.pauseState)
         {
             var pos = Input.touches[0].position;
             // pos.z = -Camera.main.transform.position.z;

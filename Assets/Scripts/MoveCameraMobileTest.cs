@@ -107,7 +107,7 @@ public class MoveCameraMobileTest : MonoBehaviour
 
     public void Update()
     {
-        if (!GameManager.instance.loadingScreen)
+        if (!GameManager.instance.loadingScreen && !GameManager.instance.pauseState)
         {
             if (Input.touchCount > 0)
             {

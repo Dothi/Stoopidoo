@@ -17,4 +17,11 @@ public class ButtonBoxCollision : MonoBehaviour
             bb.Rotating = true;
         }
     }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "ButtonBox")
+        {
+            bb.Rotating = true;
+        }
+    }
 }

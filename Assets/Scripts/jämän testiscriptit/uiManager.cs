@@ -35,7 +35,7 @@ public class uiManager : MonoBehaviour
         WinLose.gameObject.SetActive(false);
         Victory.gameObject.SetActive(false);
         startTime = GameObject.Find("StartTime").GetComponent<Text>();
-        startTime.enabled = true;
+
 
     }
 
