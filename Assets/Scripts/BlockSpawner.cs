@@ -41,6 +41,8 @@ public class BlockSpawner : MonoBehaviour
     public Transform spawn;
     public Rect[] rect;
     public float oldAngle;
+    bool leftFirst;
+    Vector2 v2 = new Vector2();
     void Awake()
     {
         if (instance != null && instance != this)
@@ -126,10 +128,24 @@ public class BlockSpawner : MonoBehaviour
                     spawn.transform.position = newPos;*/
                     if (myTouches.Length == 2)
                     {
+                        
+                        if (myTouches[1].phase == TouchPhase.Began)
+                        {
+                            if(myTouches[0].position.x < myTouches[1].position.x) { leftFirst = true; }
+                            if(myTouches[0].position.x > myTouches[1].position.x) { leftFirst = false; }
+                        }
                         /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
 
+                        if (leftFirst)
+                        {
+                            v2 = myTouches[1].position - myTouches[0].position;
+                        }
+                        if(!leftFirst)
+                        {
+                            v2 = myTouches[0].position - myTouches[1].position;
+                        }
 
-                        var v2 = myTouches[0].position - myTouches[1].position;
+                        
                        
 
                         
@@ -173,7 +189,7 @@ public class BlockSpawner : MonoBehaviour
 
                         /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
 
-                        var v2 = myTouches[0].position - myTouches[1].position;
+                        v2 = myTouches[0].position - myTouches[1].position;
                         if (v2.x < 0)
                         {
                             var newAngle = Mathf.Atan2(-v2.y, -v2.x);

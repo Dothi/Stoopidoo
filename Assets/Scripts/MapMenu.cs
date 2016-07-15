@@ -447,7 +447,7 @@ public class MapMenu : MonoBehaviour
                             if (j == 1)
                             {
                                 GameManager.instance.selectedNumber = 4;
-                                GameManager.instance.sceneLoader("Winter leve 2");
+                                GameManager.instance.sceneLoader("Winter level 2");
                                 Debug.Log("toisen themen toinen kenttä");
                             }
                             if (j == 2)
