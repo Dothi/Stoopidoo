@@ -169,7 +169,7 @@ public class MoveCameraMobileTest : MonoBehaviour
         Vector3 v3 = transform.position;
         
         v3.y = Mathf.Clamp(v3.y, Bottom, Top);
-        if (followDoge)
+        if (followDoge || uiManager.instance.doubleSpeed)
         {
             v3.x = Mathf.Clamp(player.transform.position.x, Left, Right);
             

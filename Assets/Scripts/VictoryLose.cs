@@ -34,8 +34,8 @@ public class VictoryLose : MonoBehaviour {
     if(lose)
         {
             //WinLose.gameObject.SetActive(true);
-            uiManager.instance.WinLose.gameObject.SetActive(true);
-            uiManager.instance.WinLose.text = "You Lose";
+            uiManager.instance.Lose.gameObject.SetActive(true);
+
             //WinLose.text = "You Lose";
             timer += Time.deltaTime;
             if(timer >= 3)
@@ -51,9 +51,6 @@ public class VictoryLose : MonoBehaviour {
             
             Debug.Log("Victoryyyy!");
             //WinLose.gameObject.SetActive(true);
-            uiManager.instance.WinLose.gameObject.SetActive(true);
-            uiManager.instance.WinLose.text = "Victory";
-            uiManager.instance.WinLose.color = Color.green;
             uiManager.instance.Victory.gameObject.SetActive(true);
             uiManager.instance.ScoreStars();
             win = true;

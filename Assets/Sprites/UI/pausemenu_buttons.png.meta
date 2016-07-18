@@ -1,0 +1,291 @@
+fileFormatVersion: 2
+guid: 6149d11b95a65ba42b40f2bf39ea30d6
+timeCreated: 1468833527
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: pausemenu_buttons_0
+    21300002: pausemenu_buttons_1
+    21300004: pausemenu_buttons_2
+    21300006: pausemenu_buttons_3
+    21300008: pausemenu_buttons_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: pausemenu_buttons_0
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 137
+        width: 664
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -190, y: -75}
+        - {x: 193, y: -75}
+        - {x: 195, y: -79}
+        - {x: 211, y: -102}
+        - {x: 243, y: -119}
+        - {x: 289, y: -119}
+        - {x: 306, y: -109}
+        - {x: 322, y: -90}
+        - {x: 327, y: -59}
+        - {x: 319, y: -38}
+        - {x: 293, y: -9}
+        - {x: 314, y: 9}
+        - {x: 332, y: 33}
+        - {x: 332, y: 74}
+        - {x: 319, y: 103}
+        - {x: 308, y: 114}
+        - {x: 296, y: 119}
+        - {x: 259, y: 119}
+        - {x: 248, y: 116}
+        - {x: 224, y: 98}
+        - {x: 211, y: 81}
+        - {x: 206, y: 71}
+        - {x: -210, y: 71}
+        - {x: -210, y: 74}
+        - {x: -230, y: 99}
+        - {x: -256, y: 116}
+        - {x: -270, y: 119}
+        - {x: -278, y: 119}
+        - {x: -308, y: 110}
+        - {x: -323, y: 95}
+        - {x: -332, y: 70}
+        - {x: -332, y: 46}
+        - {x: -325, y: 24}
+        - {x: -300, y: -4}
+        - {x: -292, y: -10}
+        - {x: -310, y: -20}
+        - {x: -324, y: -48}
+        - {x: -322, y: -70}
+        - {x: -308, y: -102}
+        - {x: -279, y: -119}
+        - {x: -231, y: -119}
+        - {x: -218, y: -113}
+        - {x: -202, y: -98}
+    - name: pausemenu_buttons_1
+      rect:
+        serializedVersion: 2
+        x: 1315
+        y: 139
+        width: 440
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 128, y: -89}
+        - {x: 151, y: -115}
+        - {x: 187, y: -115}
+        - {x: 197, y: -116}
+        - {x: 207, y: -116}
+        - {x: 220, y: -76}
+        - {x: 220, y: -36}
+        - {x: 201, y: -9}
+        - {x: 220, y: 34}
+        - {x: 220, y: 81}
+        - {x: 208, y: 116}
+        - {x: 160, y: 116}
+        - {x: 138, y: 93}
+        - {x: 130, y: 71}
+        - {x: -133, y: 71}
+        - {x: -129, y: 82}
+        - {x: -163, y: 116}
+        - {x: -191, y: 116}
+        - {x: -200, y: 112}
+        - {x: -219, y: 95}
+        - {x: -220, y: 83}
+        - {x: -220, y: 33}
+        - {x: -216, y: 25}
+        - {x: -198, y: -5}
+        - {x: -215, y: -39}
+        - {x: -212, y: -90}
+        - {x: -184, y: -116}
+        - {x: -150, y: -116}
+        - {x: -131, y: -104}
+        - {x: -119, y: -71}
+        - {x: 122, y: -71}
+    - name: pausemenu_buttons_2
+      rect:
+        serializedVersion: 2
+        x: 2267
+        y: 147
+        width: 586
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 184, y: -91}
+        - {x: 206, y: -106}
+        - {x: 218, y: -109}
+        - {x: 245, y: -109}
+        - {x: 260, y: -107}
+        - {x: 276, y: -92}
+        - {x: 290, y: -67}
+        - {x: 283, y: -33}
+        - {x: 265, y: -13}
+        - {x: 285, y: 18}
+        - {x: 293, y: 36}
+        - {x: 293, y: 75}
+        - {x: 274, y: 109}
+        - {x: 221, y: 109}
+        - {x: 192, y: 91}
+        - {x: 180, y: 65}
+        - {x: -184, y: 65}
+        - {x: -183, y: 67}
+        - {x: -205, y: 94}
+        - {x: -231, y: 108}
+        - {x: -261, y: 106}
+        - {x: -278, y: 95}
+        - {x: -288, y: 88}
+        - {x: -293, y: 67}
+        - {x: -293, y: 41}
+        - {x: -288, y: 29}
+        - {x: -278, y: 9}
+        - {x: -262, y: -7}
+        - {x: -289, y: -32}
+        - {x: -284, y: -72}
+        - {x: -273, y: -89}
+        - {x: -252, y: -109}
+        - {x: -199, y: -109}
+        - {x: -179, y: -94}
+        - {x: -166, y: -69}
+        - {x: 168, y: -69}
+    - name: pausemenu_buttons_3
+      rect:
+        serializedVersion: 2
+        x: 3369
+        y: 147
+        width: 430
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 124, y: -83}
+        - {x: 140, y: -100}
+        - {x: 156, y: -108}
+        - {x: 177, y: -108}
+        - {x: 202, y: -99}
+        - {x: 213, y: -71}
+        - {x: 208, y: -30}
+        - {x: 191, y: -9}
+        - {x: 215, y: 27}
+        - {x: 215, y: 75}
+        - {x: 202, y: 106}
+        - {x: 196, y: 108}
+        - {x: 153, y: 108}
+        - {x: 122, y: 76}
+        - {x: 127, y: 65}
+        - {x: -141, y: 93}
+        - {x: -165, y: 108}
+        - {x: -190, y: 108}
+        - {x: -215, y: 99}
+        - {x: -215, y: 23}
+        - {x: -198, y: 3}
+        - {x: -214, y: -30}
+        - {x: -207, y: -88}
+        - {x: -180, y: -108}
+        - {x: -139, y: -108}
+        - {x: -108, y: -74}
+        - {x: -117, y: -67}
+        - {x: 118, y: -67}
+    - name: pausemenu_buttons_4
+      rect:
+        serializedVersion: 2
+        x: 4375
+        y: 133
+        width: 468
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 128, y: -76}
+        - {x: 135, y: -102}
+        - {x: 167, y: -122}
+        - {x: 199, y: -122}
+        - {x: 210, y: -117}
+        - {x: 222, y: -113}
+        - {x: 234, y: -62}
+        - {x: 234, y: -49}
+        - {x: 205, y: -8}
+        - {x: 225, y: 18}
+        - {x: 234, y: 43}
+        - {x: 234, y: 74}
+        - {x: 225, y: 104}
+        - {x: 214, y: 120}
+        - {x: 207, y: 122}
+        - {x: 172, y: 122}
+        - {x: 163, y: 118}
+        - {x: 143, y: 89}
+        - {x: 138, y: 72}
+        - {x: -142, y: 72}
+        - {x: -156, y: 100}
+        - {x: -178, y: 121}
+        - {x: -207, y: 122}
+        - {x: -234, y: 93}
+        - {x: -234, y: 44}
+        - {x: -229, y: 24}
+        - {x: -209, y: -7}
+        - {x: -234, y: -33}
+        - {x: -234, y: -37}
+        - {x: -223, y: -101}
+        - {x: -204, y: -119}
+        - {x: -190, y: -122}
+        - {x: -156, y: -122}
+        - {x: -150, y: -119}
+        - {x: -131, y: -88}
+        - {x: -129, y: -76}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

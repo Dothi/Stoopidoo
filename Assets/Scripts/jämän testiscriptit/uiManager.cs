@@ -5,9 +5,13 @@ using UnityEngine.UI;
 public class uiManager : MonoBehaviour
 {
 
-    public Text WinLose;
+    public Image Lose;
+    public Sprite[] timerSprites;
+    public Image CountDown;
     public Transform Victory;
-    public Text startTime;
+    public Transform menu;
+    public Button fastForward;
+    public Button pauseMenu;
     //public Transform star1;
     //public Transform star2;
     //public Transform star3;
@@ -16,6 +20,7 @@ public class uiManager : MonoBehaviour
     public Image star03;
     int starAmount;
     int threeStar, twoStar, oneStar;
+    public bool doubleSpeed;
 
     public static uiManager instance;
     // Use this for initialization
@@ -32,9 +37,7 @@ public class uiManager : MonoBehaviour
     }
     void Start()
     {
-        WinLose.gameObject.SetActive(false);
         Victory.gameObject.SetActive(false);
-        startTime = GameObject.Find("StartTime").GetComponent<Text>();
 
 
     }
@@ -42,7 +45,16 @@ public class uiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(doubleSpeed)
+        {
+            Time.timeScale = 2;
+            Debug.Log("Double pseed!");
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Debug.Log("going Normal");
+        }
     }
 
     public void ScoreStars()
@@ -112,6 +124,39 @@ public class uiManager : MonoBehaviour
     }
     public void restart()
     {
+        GameManager.instance.pauseState = false;
         Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void fastSpeed()
+    {
+        if(!GameManager.instance.pauseState)
+        doubleSpeed = true;
+    }
+    public void normalSpeed()
+    {
+        if (!GameManager.instance.pauseState)
+            doubleSpeed = false;
+    }
+    public void gamePause()
+    {
+        if (!GameManager.instance.pauseState)
+        {
+            GameManager.instance.pauseState = true;
+            menu.gameObject.SetActive(true);
+        }
+    }
+    public void gameContinue()
+    {
+        GameManager.instance.pauseState = false;
+        menu.gameObject.SetActive(false);
+    }
+    public void quitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
+
     }
 }

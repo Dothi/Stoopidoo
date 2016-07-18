@@ -49,7 +49,7 @@ public class tutorialDrag : MonoBehaviour {
             {
                 if(Input.touches.Length == 2)
                 {
-                    isHit = false;
+                    
                     if(Input.touches[1].phase == TouchPhase.Began)
                     {
                         if (Input.touches[0].position.x < Input.touches[1].position.x) { leftFirst = true; }
@@ -66,6 +66,20 @@ public class tutorialDrag : MonoBehaviour {
 
                     newAngle = Mathf.Atan2(v2.y, v2.x);
                     transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                }
+                else if (Input.touches.Length == 2 && isHit)
+                {
+                    v2 = Input.touches[0].position - Input.touches[1].position;
+                    if(v2.x < 0)
+                    {
+                        newAngle = Mathf.Atan2(-v2.y, -v2.x);
+                        transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                    }
+                    else
+                    {
+                        newAngle = Mathf.Atan2(v2.y, v2.x);
+                        transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                    }
                 }
 
                     

@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: 56d012aab5d373745bf566bd067747fc
+timeCreated: 1468824804
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: lahtolaskenta_numerot_0
+    21300002: lahtolaskenta_numerot_1
+    21300004: lahtolaskenta_numerot_2
+    21300006: lahtolaskenta_numerot_3
+    21300008: lahtolaskenta_numerot_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: lahtolaskenta_numerot_0
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 92
+        width: 497
+        height: 920
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40.17592, y: 99.09259}
+        - {x: -53.17592, y: 92.09259}
+        - {x: -53.17592, y: -97.90741}
+        - {x: 53.82408, y: -97.90741}
+        - {x: 53.82408, y: 90.09259}
+        - {x: 47.82408, y: 99.09259}
+    - name: lahtolaskenta_numerot_1
+      rect:
+        serializedVersion: 2
+        x: 2543
+        y: 101
+        width: 675
+        height: 920
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -46.93518, y: 99.00926}
+        - {x: -53.93518, y: 98.00926}
+        - {x: -70.93518, y: 67.00926}
+        - {x: -60.93518, y: 30.009262}
+        - {x: -71.93518, y: -8.990738}
+        - {x: -71.93518, y: -80.99074}
+        - {x: -68.93518, y: -97.99074}
+        - {x: 73.06482, y: -97.99074}
+        - {x: 73.06482, y: 94.00926}
+        - {x: 55.06482, y: 99.00926}
+    - name: lahtolaskenta_numerot_2
+      rect:
+        serializedVersion: 2
+        x: 4455
+        y: 82
+        width: 680
+        height: 939
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -52.24994, y: 100.96297}
+        - {x: -71.24994, y: 87.96297}
+        - {x: -71.24994, y: -100.03703}
+        - {x: 39.75006, y: -100.03703}
+        - {x: 73.75006, y: -89.03703}
+        - {x: 73.75006, y: 71.96297}
+        - {x: 42.75006, y: 100.96297}
+    - name: lahtolaskenta_numerot_3
+      rect:
+        serializedVersion: 2
+        x: 6312
+        y: 92
+        width: 839
+        height: 920
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9.27771, y: 99.09259}
+        - {x: -88.27771, y: 23.09259}
+        - {x: -88.27771, y: -68.90741}
+        - {x: -70.27771, y: -74.90741}
+        - {x: 4.72229, y: -97.90741}
+        - {x: 64.72229, y: -97.90741}
+        - {x: 89.72229, y: -60.90741}
+        - {x: 89.72229, y: 1.0925903}
+        - {x: 59.72229, y: 99.09259}
+    - name: lahtolaskenta_numerot_4
+      rect:
+        serializedVersion: 2
+        x: 8318
+        y: 82
+        width: 670
+        height: 921
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -58.573975, y: 98.96297}
+        - {x: -69.573975, y: 50.962967}
+        - {x: -69.573975, y: -94.03703}
+        - {x: -52.573975, y: -98.03703}
+        - {x: 49.426025, y: -98.03703}
+        - {x: 72.426025, y: -69.03703}
+        - {x: 72.426025, y: 79.96297}
+        - {x: 64.426025, y: 98.96297}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

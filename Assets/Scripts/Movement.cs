@@ -200,14 +200,15 @@ public class Movement : MonoBehaviour
             }
             if (!moving && !started)
             {
-                uiManager.instance.startTime.enabled = true;
+                uiManager.instance.CountDown.enabled = true;
                 timer -= Time.deltaTime;
-                uiManager.instance.startTime.text = "" + (int)(timer + 1);
+                Debug.Log(uiManager.instance.timerSprites.Length);
+                uiManager.instance.CountDown.sprite = uiManager.instance.timerSprites[(int)timer];
             }
             if (timer <= 0 && !moving && !started)
             {
                 Debug.Log(timer);
-                uiManager.instance.startTime.enabled = false;
+                uiManager.instance.CountDown.enabled = false;
                 moving = true;
                 started = true;
             }
