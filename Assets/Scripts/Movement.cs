@@ -54,7 +54,7 @@ public class Movement : MonoBehaviour
         started = false;
 
         spriteRend = GetComponent<SpriteRenderer>();
-        
+
         layerMask = 1 << LayerMask.NameToLayer("Player");
         UIlayerMask = 1 << LayerMask.NameToLayer("UI");
 
@@ -74,6 +74,7 @@ public class Movement : MonoBehaviour
             RaycastHit2D forwardHit;
             hit = Physics2D.Raycast(transform.position, -transform.up + transform.right, hitLength, DefaultTerrainLayerMask);
             hit2 = Physics2D.Raycast(transform.position, -transform.up + -transform.right, hitLength, DefaultTerrainLayerMask);
+
 
             if (movingRight)
             {
@@ -219,7 +220,7 @@ public class Movement : MonoBehaviour
             }
             if (!iceWalk)
             {
-                hitLength = 1f;
+                hitLength = 1.5f;
             }
             else
             {
@@ -340,7 +341,7 @@ public class Movement : MonoBehaviour
                 {
                     if (!iceWalk)
                     {
-                        if (hit.collider.transform.rotation.z != transform.rotation.z && hit2.collider.transform.rotation.z != transform.rotation.z)
+                        if (hit.transform.rotation.z != transform.rotation.z && hit2.transform.rotation.z != transform.rotation.z)
                         {
                             Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
                             Debug.Log(averageNormal);
@@ -353,6 +354,7 @@ public class Movement : MonoBehaviour
                             {
                                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), 15f * Time.deltaTime);
                             }
+
                             else
                             {
                                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
@@ -377,56 +379,58 @@ public class Movement : MonoBehaviour
 
 
                 }
-                else if (hit && !hit2)
+            }
+            else if (hit && !hit2)
+            {
+                if (!hit.collider.isTrigger)
                 {
-                    if (!hit.collider.isTrigger)
+                    if (!iceWalk)
                     {
-                        if (!iceWalk)
+                        if (hit.transform.rotation.z != transform.rotation.z)
                         {
-                            if (hit.collider.transform.rotation.z != transform.rotation.z)
+
+                            Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
+                            Debug.Log(averageNormal);
+                            Vector3 averagePoint = (hit.point + hit2.point) / 2;
+
+                            Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
+                            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
+
+                            if (hit.collider.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                             {
-                                Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
-                                Debug.Log(averageNormal);
-                                Vector3 averagePoint = (hit.point + hit2.point) / 2;
-
-                                Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
-                                Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
-
-                                if (hit.collider.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                                {
-                                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), 15f * Time.deltaTime);
-                                }
-                                else
-                                {
-                                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
-                                }
+                                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), 15f * Time.deltaTime);
+                            }
+                            else
+                            {
+                                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, finalRotation.eulerAngles.z), 15f * Time.deltaTime);
                             }
                         }
-                        else
+                    }
+                    else
+                    {
+
                         {
+                            Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
+                            Debug.Log(averageNormal);
+                            Vector3 averagePoint = (hit.point + hit2.point) / 2;
 
-                            {
-                                Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
-                                Debug.Log(averageNormal);
-                                Vector3 averagePoint = (hit.point + hit2.point) / 2;
+                            Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
+                            Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
 
-                                Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, averageNormal);
-                                Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 6f);
+                            transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
 
-                                transform.rotation = Quaternion.Euler(0, 0, finalRotation.eulerAngles.z);
-
-                            }
                         }
                     }
                 }
             }
-            else if (!hit && hit2)
+
+            else if (hit2 && !hit)
             {
                 if (!hit2.collider.isTrigger)
                 {
                     if (!iceWalk)
                     {
-                        if (hit2.collider.transform.rotation.z != transform.rotation.z)
+                        if (hit2.transform.rotation.z != transform.rotation.z)
                         {
                             Vector3 averageNormal = (hit.normal + hit2.normal) / 2;
                             Debug.Log(averageNormal);
@@ -465,7 +469,7 @@ public class Movement : MonoBehaviour
             }
             else
             {
-
+                
                 Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 4f);
 
 
