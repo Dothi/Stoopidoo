@@ -119,7 +119,8 @@ public class uiManager : MonoBehaviour
     }
     public void returnMapMenu()
     {
-        GameManager.instance.continued = true;
+        //GameManager.instance.continued = true;
+        GameManager.instance.pauseState = false;
         GameManager.instance.sceneLoader("MenuMap");
     }
     public void restart()
