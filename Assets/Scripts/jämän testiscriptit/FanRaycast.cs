@@ -58,7 +58,7 @@ public class FanRaycast : MonoBehaviour
             if (hit && hit.transform.tag == "Player")
             {
                 Debug.Log(hit.collider.name);
-                velocity.y = 50 * Time.deltaTime;
+                velocity.y = 100 * Time.deltaTime;
                 velocity.x = player.GetComponent<Rigidbody2D>().velocity.x;
                 player.GetComponent<Rigidbody2D>().velocity = velocity;
             }
