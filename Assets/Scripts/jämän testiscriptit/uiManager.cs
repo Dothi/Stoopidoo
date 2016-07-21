@@ -20,7 +20,7 @@ public class uiManager : MonoBehaviour
     public Image star03;
     int starAmount;
     int threeStar, twoStar, oneStar;
-    public bool doubleSpeed;
+    //public bool doubleSpeed;
 
     public static uiManager instance;
     // Use this for initialization
@@ -45,7 +45,7 @@ public class uiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(doubleSpeed)
+        if(GameManager.instance.doubleSpeed)
         {
             Time.timeScale = 2;
             Debug.Log("Double pseed!");
@@ -131,12 +131,12 @@ public class uiManager : MonoBehaviour
     public void fastSpeed()
     {
         if(!GameManager.instance.pauseState)
-        doubleSpeed = true;
+        GameManager.instance.doubleSpeed = true;
     }
     public void normalSpeed()
     {
         if (!GameManager.instance.pauseState)
-            doubleSpeed = false;
+            GameManager.instance.doubleSpeed = false;
     }
     public void gamePause()
     {
