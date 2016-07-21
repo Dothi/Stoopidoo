@@ -1,0 +1,246 @@
+fileFormatVersion: 2
+guid: b0d0a4a23f604aa4d946ef8decaa91de
+timeCreated: 1469108721
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Medium_FlyingCarpet_SpriteSheet_0
+    21300002: Medium_FlyingCarpet_SpriteSheet_1
+    21300004: Medium_FlyingCarpet_SpriteSheet_2
+    21300006: Medium_FlyingCarpet_SpriteSheet_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Medium_FlyingCarpet_SpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1104
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 25, y: -24.5}
+        - {x: 102, y: -32.5}
+        - {x: 163, y: -38.5}
+        - {x: 280, y: -35.5}
+        - {x: 347, y: -25.5}
+        - {x: 437, y: -0.5}
+        - {x: 463, y: -14.5}
+        - {x: 485, y: -12.5}
+        - {x: 486, y: -7.5}
+        - {x: 486, y: 31.5}
+        - {x: 463, y: 34.5}
+        - {x: 442, y: 48.5}
+        - {x: 434, y: 78.5}
+        - {x: 416, y: 78.5}
+        - {x: 206, y: 50.5}
+        - {x: 40, y: 56.5}
+        - {x: -82, y: 73.5}
+        - {x: -145, y: 78.5}
+        - {x: -259, y: 78.5}
+        - {x: -293, y: 75.5}
+        - {x: -324, y: 71.5}
+        - {x: -379, y: 62.5}
+        - {x: -443, y: 32.5}
+        - {x: -509, y: -33.5}
+        - {x: -509, y: -46.5}
+        - {x: -486, y: -66.5}
+        - {x: -468, y: -66.5}
+        - {x: -452, y: -26.5}
+        - {x: -398, y: -10.5}
+        - {x: -238, y: -0.5}
+    - name: Medium_FlyingCarpet_SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 0
+        width: 1104
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 518, y: -30.5}
+        - {x: 525, y: -16.5}
+        - {x: 525, y: 11.5}
+        - {x: 519, y: 24.5}
+        - {x: 398, y: 61.5}
+        - {x: 325, y: 77.5}
+        - {x: 287, y: 78.5}
+        - {x: 171, y: 78.5}
+        - {x: 56, y: 58.5}
+        - {x: -154, y: 15.5}
+        - {x: -289, y: 29.5}
+        - {x: -370, y: 69.5}
+        - {x: -397, y: 75.5}
+        - {x: -424, y: 62.5}
+        - {x: -446, y: 20.5}
+        - {x: -481, y: 24.5}
+        - {x: -506, y: 21.5}
+        - {x: -509, y: 13.5}
+        - {x: -509, y: -1.5}
+        - {x: -501, y: -25.5}
+        - {x: -468, y: -24.5}
+        - {x: -350, y: -42.5}
+        - {x: -292, y: -51.5}
+        - {x: -185, y: -56.5}
+        - {x: 10, y: -36.5}
+        - {x: 147, y: -14.5}
+        - {x: 295, y: -17.5}
+        - {x: 401, y: -74.5}
+        - {x: 446, y: -74.5}
+        - {x: 456, y: -51.5}
+        - {x: 445, y: -38.5}
+        - {x: 485, y: -13.5}
+      - - {x: 529, y: -55.5}
+        - {x: 528, y: -57.5}
+        - {x: 528, y: -59.5}
+        - {x: 532, y: -63.5}
+        - {x: 536, y: -63.5}
+        - {x: 537, y: -62.5}
+        - {x: 537, y: -57.5}
+        - {x: 532, y: -55.5}
+      - - {x: -420, y: 65.5}
+        - {x: -417, y: 66.5}
+        - {x: -417, y: 69.5}
+        - {x: -420, y: 70.5}
+        - {x: -422, y: 68.5}
+    - name: Medium_FlyingCarpet_SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 0
+        width: 1104
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -22, y: -28.5}
+        - {x: 137, y: 5.5}
+        - {x: 363, y: 13.5}
+        - {x: 380, y: -15.5}
+        - {x: 470, y: -5.5}
+        - {x: 490, y: -31.5}
+        - {x: 513, y: -39.5}
+        - {x: 531, y: -27.5}
+        - {x: 532, y: -20.5}
+        - {x: 532, y: 5.5}
+        - {x: 503, y: 23.5}
+        - {x: 382, y: 66.5}
+        - {x: 270, y: 83.5}
+        - {x: 174, y: 83.5}
+        - {x: 93, y: 75.5}
+        - {x: -103, y: 39.5}
+        - {x: -259, y: 37.5}
+        - {x: -392, y: 69.5}
+        - {x: -438, y: 71.5}
+        - {x: -478, y: 11.5}
+        - {x: -514, y: -3.5}
+        - {x: -533, y: -15.5}
+        - {x: -533, y: -34.5}
+        - {x: -524, y: -52.5}
+        - {x: -485, y: -52.5}
+        - {x: -439, y: -33.5}
+        - {x: -300, y: -44.5}
+        - {x: -142, y: -44.5}
+    - name: Medium_FlyingCarpet_SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 0
+        width: 1104
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -144, y: -85.5}
+        - {x: -142, y: -87.5}
+        - {x: -139, y: -86.5}
+        - {x: -139, y: -83.5}
+        - {x: -141, y: -81.5}
+        - {x: -144, y: -82.5}
+      - - {x: 14, y: -25.5}
+        - {x: 240, y: -22.5}
+        - {x: 350, y: -5.5}
+        - {x: 422, y: 18.5}
+        - {x: 474, y: 2.5}
+        - {x: 484, y: 15.5}
+        - {x: 484, y: 46.5}
+        - {x: 376, y: 81.5}
+        - {x: 369, y: 85.5}
+        - {x: 303, y: 85.5}
+        - {x: 202, y: 55.5}
+        - {x: 43, y: 36.5}
+        - {x: -59, y: 43.5}
+        - {x: -343, y: 71.5}
+        - {x: -427, y: 44.5}
+        - {x: -505, y: -10.5}
+        - {x: -523, y: -33.5}
+        - {x: -523, y: -62.5}
+        - {x: -513, y: -71.5}
+        - {x: -478, y: -71.5}
+        - {x: -435, y: -30.5}
+        - {x: -395, y: -32.5}
+        - {x: -224, y: -2.5}
+        - {x: -63, y: -21.5}
+      - - {x: -374, y: 72.5}
+        - {x: -387, y: 68.5}
+        - {x: -388, y: 63.5}
+        - {x: -387, y: 60.5}
+        - {x: -383, y: 60.5}
+        - {x: -368, y: 64.5}
+        - {x: -363, y: 69.5}
+        - {x: -363, y: 72.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
