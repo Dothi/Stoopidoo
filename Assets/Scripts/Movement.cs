@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour
     public LayerMask DefaultTerrainLayerMask;
     public Vector3 vel;
     public static Movement instance;
-    Animator anim;
+    internal Animator anim;
     // Use this for initialization
     void Awake()
     {
