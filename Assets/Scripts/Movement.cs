@@ -107,7 +107,7 @@ public class Movement : MonoBehaviour
 
                     spriteRend.flipX = false;
 
-                    if (moving && myRB.velocity.x == 0)
+                    if (moving && myRB.velocity.x < 0.05f)
                     {
 
                         if (!forwardHit)
@@ -123,7 +123,7 @@ public class Movement : MonoBehaviour
                                     myRB.AddForce(new Vector2(100, 100));
                                 }
 
-                                if (myRB.velocity.x == 0 && jumped)
+                                if (myRB.velocity.x < 0.05f && jumped)
                                 {
                                     movingRight = false;
                                     jumped = false;
@@ -157,7 +157,7 @@ public class Movement : MonoBehaviour
 
                     spriteRend.flipX = true;
 
-                    if (moving && myRB.velocity.x == 0)
+                    if (moving && myRB.velocity.x > -0.05f)
                     {
                         if (!forwardHit)
                         {
@@ -172,7 +172,7 @@ public class Movement : MonoBehaviour
                                     myRB.AddForce(new Vector2(-100, 100));
                                 }
 
-                                if (myRB.velocity.x == 0 && jumped)
+                                if (myRB.velocity.x > -0.05f && jumped)
                                 {
                                     movingRight = true;
                                     boostTimer = 0f;
