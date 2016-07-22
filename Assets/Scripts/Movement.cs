@@ -547,17 +547,17 @@ public class Movement : MonoBehaviour
                     if (iceWalk && myRB.velocity.x > 0 && myRB.velocity.y < 0)
                     {
                         moving = false;
-                        myRB.AddForce(new Vector2(speed * 2 * Time.deltaTime, myRB.velocity.y));
+                        myRB.AddForce(new Vector2(speed * 2 * Time.deltaTime, 0f));
                     }
                     else if (iceWalk && myRB.velocity.x > 0 && myRB.velocity.y > 0)
                     {
-                        Vector3 newVel = myRB.velocity;
-                        myRB.velocity = newVel;
+                     /*   Vector3 newVel = myRB.velocity;
+                        myRB.velocity = newVel;*/
                     }
-                    else if (iceWalk && myRB.velocity.x < 0 && movingRight && myRB.velocity.y < 0)
+                    else if (iceWalk && myRB.velocity.x < 0 && myRB.velocity.y < 0)
                     {
                         moving = false;
-                        myRB.AddForce(new Vector2(-speed * Time.deltaTime, myRB.velocity.y));
+                        myRB.AddForce(new Vector2(-speed * 2 * Time.deltaTime, 0f));
                     }
                     else if (iceWalk && myRB.velocity.x < 0 && myRB.velocity.y > 0)
                     {
@@ -566,11 +566,11 @@ public class Movement : MonoBehaviour
                     }
                     else if (iceWalk && movingRight && myRB.velocity == Vector2.zero)
                     {
-                        myRB.AddForce(new Vector2(100, myRB.velocity.y));
+                        myRB.AddForce(new Vector2(100, 0));
                     }
                     else if (iceWalk && !movingRight && myRB.velocity == Vector2.zero)
                     {
-                        myRB.AddForce(new Vector2(-100, myRB.velocity.y));
+                        myRB.AddForce(new Vector2(-100, 0));
                     }
 
 
