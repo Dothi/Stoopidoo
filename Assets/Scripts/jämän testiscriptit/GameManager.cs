@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public static GameManager instance;
     public bool destroyed;
@@ -17,11 +18,12 @@ public class GameManager : MonoBehaviour {
     public bool firstUnlock, secondUnlock;
     public bool gameStarted;
     public bool loadingScreen;
+    public bool saved;
     public bool pauseState;
     public bool doubleSpeed;
     void Awake()
     {
-        if(instance != null && instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
         }
@@ -32,18 +34,31 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         destroyed = false;
     }
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
+        for (int i = 0; i < levelNumber.Length; i++)
+        {
+            
+            levelNumber[i] = PlayerPrefs.GetInt("Level " + i + "Stars", levelNumber[i]);
+        }
         continued = false;
         gameStarted = false;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        
+
+    // Update is called once per frame
+    void Update() {
+        if (loadingScreen)
+        {
+            for (int i = 0; i < levelNumber.Length; i++)
+            {
+                PlayerPrefs.SetInt("Level " + i + "Stars", levelNumber[i]);
+            }
+            
+        }
 	}
 
-   public void sceneLoader(string sceneName)
+    public void sceneLoader(string sceneName)
     {
         camePos = Camera.main.transform.position;
         ScreenManager.instance.StartCoroutine(ScreenManager.instance.LoadSceneAsync(sceneName));
