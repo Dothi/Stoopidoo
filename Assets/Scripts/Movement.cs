@@ -107,7 +107,7 @@ public class Movement : MonoBehaviour
 
                     spriteRend.flipX = false;
 
-                    if (moving && myRB.velocity.x < 0.05f)
+                    if (moving && myRB.velocity.x < 0.02f)
                     {
 
                         if (!forwardHit)
@@ -121,13 +121,15 @@ public class Movement : MonoBehaviour
                                 if (!jumped)
                                 {
                                     myRB.AddForce(new Vector2(100, 100));
+                                    idleTimer = 0f;
                                 }
 
-                                if (myRB.velocity.x < 0.05f && jumped)
+                                if (myRB.velocity.x < 0.02f && jumped)
                                 {
                                     movingRight = false;
                                     jumped = false;
                                     boostTimer = 0f;
+                                    
 
                                 }
                                 jumped = true;
@@ -138,18 +140,17 @@ public class Movement : MonoBehaviour
                         }
                         else
                         {
-                            idleTimer += 10 * Time.deltaTime;
+                            idleTimer += Time.deltaTime;
                             Debug.Log(idleTimer);
-                            if (idleTimer >= 1f)
+                            if (idleTimer >= 2f)
                             {
-                                idleTimer = 0f;
+                                
                                 movingRight = false;
                                 jumped = false;
+                                idleTimer = 0f;
 
                             }
                         }
-
-
                     }
                 }
                 else
@@ -157,7 +158,7 @@ public class Movement : MonoBehaviour
 
                     spriteRend.flipX = true;
 
-                    if (moving && myRB.velocity.x > -0.05f)
+                    if (moving && myRB.velocity.x > -0.02f)
                     {
                         if (!forwardHit)
                         {
@@ -170,12 +171,14 @@ public class Movement : MonoBehaviour
                                 if (!jumped)
                                 {
                                     myRB.AddForce(new Vector2(-100, 100));
+                                    idleTimer = 0f;
                                 }
 
-                                if (myRB.velocity.x > -0.05f && jumped)
+                                if (myRB.velocity.x > -0.01f && jumped)
                                 {
                                     movingRight = true;
                                     boostTimer = 0f;
+                                    idleTimer = 0f;
 
                                 }
                                 jumped = true;
@@ -186,8 +189,8 @@ public class Movement : MonoBehaviour
                         }
                         else
                         {
-                            idleTimer += 10 * Time.deltaTime;
-                            if (idleTimer >= 1f)
+                            idleTimer += Time.deltaTime;
+                            if (idleTimer >= 2f)
                             {
                                 idleTimer = 0f;
                                 movingRight = true;
