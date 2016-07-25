@@ -7,12 +7,12 @@ public class ButtonBox : MonoBehaviour
 
     public GameObject player;
     public List<GameObject> rotatingBlocks = new List<GameObject>();
-    
+
 
     public bool Rotating;
 
     //TODO: Make block rotate also clockwise
-   // public bool clockWise;
+    // public bool clockWise;
 
     float temp = 0f;
 
@@ -25,81 +25,96 @@ public class ButtonBox : MonoBehaviour
         {
             rotatingBlocks.Add(block);
         }
-        
 
-        
+
+
 
     }
     void Update()
     {
-        
-            if (Rotating)
+
+        if (Rotating)
+        {
+            for (int i = 0; i < rotatingBlocks.Count; i++)
             {
-                if (temp > 90)
+                //disable colliders
+                Collider2D[] colliders = rotatingBlocks[i].GetComponentsInChildren<BoxCollider2D>();
+                foreach (var collider in colliders)
                 {
-                    Rotating = false;
-                    temp = 0f;
-                    Debug.Log(rotatingBlocks[0].transform.eulerAngles.z);
+                    collider.isTrigger = true;
                 }
-                else
-                {
-
-
-                    RotateBlocks();
-                    float rotationVal = Mathf.Lerp(0, 90f, Time.deltaTime);
-                    temp += rotationVal;
-                }
+                
+            }
+            if (temp > 90)
+            {
+                Rotating = false;
+                temp = 0f;
+                Debug.Log(rotatingBlocks[0].transform.eulerAngles.z);
             }
             else
             {
-                
-                
-                    for (int i = 0; i < rotatingBlocks.Count; i++)
-                    {
-                        if (rotatingBlocks[i].GetComponent<RotatingBoxRotation>().clockWise)
+
+
+                RotateBlocks();
+                float rotationVal = Mathf.Lerp(0, 90f, Time.deltaTime);
+                temp += rotationVal;
+            }
+        }
+        else
+        {
+
+
+            for (int i = 0; i < rotatingBlocks.Count; i++)
+            {
+                if (rotatingBlocks[i].GetComponent<RotatingBoxRotation>().clockWise)
                 {
-                        if (rotatingBlocks[i].transform.eulerAngles.z > 271)
-                        {
-                            rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 0);
-                        }
-                        else if (rotatingBlocks[i].transform.eulerAngles.z < 90 && rotatingBlocks[i].transform.eulerAngles.z > 0)
-                        {
-                            rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 90);
-                        }
-                        else if (rotatingBlocks[i].transform.eulerAngles.z < 180 && rotatingBlocks[i].transform.eulerAngles.z > 91)
-                        {
-                            rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 180);
-                        }
-                        else if (rotatingBlocks[i].transform.eulerAngles.z < 270 && rotatingBlocks[i].transform.eulerAngles.z > 181)
-                        {
-                            rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 270);
-                        }
-                        
+                    if (rotatingBlocks[i].transform.eulerAngles.z > 271)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 0);
                     }
-                  
-                
+                    else if (rotatingBlocks[i].transform.eulerAngles.z < 90 && rotatingBlocks[i].transform.eulerAngles.z > 0)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 90);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z < 180 && rotatingBlocks[i].transform.eulerAngles.z > 91)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 180);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z < 270 && rotatingBlocks[i].transform.eulerAngles.z > 181)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 270);
+                    }
+                    //enable colliders
+                    Collider2D[] colliders = rotatingBlocks[i].GetComponentsInChildren<BoxCollider2D>();
+                    foreach (var collider in colliders)
+                    {
+                        collider.isTrigger = false;
+                    }
+                }
+
+
                 else
                 {
-                    
-                        if (rotatingBlocks[i].transform.eulerAngles.z < 90)
-                        {
-                            rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 0);
-                        }
-                        else if (rotatingBlocks[i].transform.eulerAngles.z > 90 && rotatingBlocks[i].transform.eulerAngles.z < 180)
-                        {
-                            rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 90);
-                        }
-                        else if (rotatingBlocks[i].transform.eulerAngles.z > 180 && rotatingBlocks[i].transform.eulerAngles.z < 270)
-                        {
-                            rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 180);
-                        }
-                        else if (rotatingBlocks[i].transform.eulerAngles.z > 270)
-                        {
-                            rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 270);
-                        }
+
+                    if (rotatingBlocks[i].transform.eulerAngles.z < 90)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 0);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z > 90 && rotatingBlocks[i].transform.eulerAngles.z < 180)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 90);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z > 180 && rotatingBlocks[i].transform.eulerAngles.z < 270)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 180);
+                    }
+                    else if (rotatingBlocks[i].transform.eulerAngles.z > 270)
+                    {
+                        rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 270);
                     }
                 }
             }
+        }
     }
     void RotateBlocks()
     {

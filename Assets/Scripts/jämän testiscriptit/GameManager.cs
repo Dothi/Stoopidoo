@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("Level " + i + "Stars", levelNumber[i]);
             }
-            
         }
 	}
 
