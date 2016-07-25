@@ -107,7 +107,7 @@ public class Movement : MonoBehaviour
 
                     spriteRend.flipX = false;
 
-                    if (moving && myRB.velocity.x < 0.02f)
+                    if (moving && myRB.velocity.x < 0.02f && myRB.velocity.y < 0.02f)
                     {
 
                         if (!forwardHit)
@@ -115,7 +115,7 @@ public class Movement : MonoBehaviour
 
                             Debug.Log("cyka");
                             boostTimer += Time.deltaTime;
-                            if (boostTimer > .2f)
+                            if (boostTimer >= 1f)
                             {
                                 Debug.Log("Blyat");
                                 if (!jumped)
@@ -124,16 +124,17 @@ public class Movement : MonoBehaviour
                                     idleTimer = 0f;
                                 }
 
-                                if (myRB.velocity.x < 0.02f && jumped)
-                                {
-                                    movingRight = false;
-                                    jumped = false;
-                                    boostTimer = 0f;
-                                    
-
-                                }
+                                
                                 jumped = true;
                                 boostTimer = 0f;
+
+                            }
+                            else if (myRB.velocity.x < 0.02f && jumped && boostTimer >= 2f)
+                            {
+                                movingRight = false;
+                                jumped = false;
+                                boostTimer = 0f;
+
 
                             }
 
@@ -158,14 +159,14 @@ public class Movement : MonoBehaviour
 
                     spriteRend.flipX = true;
 
-                    if (moving && myRB.velocity.x > -0.02f)
+                    if (moving && myRB.velocity.x > -0.02f && myRB.velocity.y < 0.02f)
                     {
                         if (!forwardHit)
                         {
 
                             Debug.Log("cyka");
                             boostTimer += Time.deltaTime;
-                            if (boostTimer > .2f)
+                            if (boostTimer >= 1f)
                             {
                                 Debug.Log("Blyat");
                                 if (!jumped)
@@ -174,15 +175,16 @@ public class Movement : MonoBehaviour
                                     idleTimer = 0f;
                                 }
 
-                                if (myRB.velocity.x > -0.01f && jumped)
-                                {
-                                    movingRight = true;
-                                    boostTimer = 0f;
-                                    idleTimer = 0f;
-
-                                }
+                                
                                 jumped = true;
                                 boostTimer = 0f;
+
+                            }
+                            if (myRB.velocity.x > -0.02f && jumped)
+                            {
+                                movingRight = true;
+                                boostTimer = 0f;
+                                idleTimer = 0f;
 
                             }
 
