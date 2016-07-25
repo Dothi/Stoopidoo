@@ -330,6 +330,10 @@ public class BlockSpawner : MonoBehaviour
             {
                 spawn.GetComponent<Collider2D>().isTrigger = false;
             }
+            else
+            {
+                spawn.GetComponentInChildren<FanRaycast>().enabled = true;
+            }
 
             spawn.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f);
             spawn = null;
