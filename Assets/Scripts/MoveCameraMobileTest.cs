@@ -33,6 +33,7 @@ public class MoveCameraMobileTest : MonoBehaviour
 
     public void Start()
     {
+        GameManager.instance.pauseState = false;
         GameManager.instance.camePos = transform.position;
         FollowDogButton = GameObject.Find("FollowDoge");
         Sprite = Area.transform.GetComponent<SpriteRenderer>().sprite;
