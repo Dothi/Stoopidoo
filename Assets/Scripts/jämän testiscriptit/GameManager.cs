@@ -42,6 +42,16 @@ public class GameManager : MonoBehaviour
             
             levelNumber[i] = PlayerPrefs.GetInt("Level " + i + "Stars", levelNumber[i]);
         }
+
+        if (PlayerPrefs.GetInt("FirstUnlock") == 1)
+        {
+            firstUnlock = true;
+            if (PlayerPrefs.GetInt("SecondUnlock") == 1)
+            {
+                secondUnlock = true;
+            }
+        }
+
         continued = false;
         gameStarted = false;
     }
@@ -55,6 +65,15 @@ public class GameManager : MonoBehaviour
                 PlayerPrefs.SetInt("Level " + i + "Stars", levelNumber[i]);
             }
         }
+        if (firstUnlock)
+        {
+            PlayerPrefs.SetInt("FirstUnlock", 1);
+            if (secondUnlock)
+            {
+                PlayerPrefs.SetInt("SecondUnlock", 1);
+            }
+        }
+        
 	}
 
     public void sceneLoader(string sceneName)
