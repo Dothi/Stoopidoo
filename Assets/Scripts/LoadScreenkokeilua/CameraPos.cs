@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraPos : MonoBehaviour {
 
-    Vector3 jee;
+    public Vector3 jee;
 	// Use this for initialization
 	void Start () {
         jee.z = 0;
@@ -14,5 +14,7 @@ public class CameraPos : MonoBehaviour {
         jee.x = GameManager.instance.camePos.x;
         jee.y = GameManager.instance.camePos.y;
         transform.position = jee;
-	}
+
+        //transform.position = Camera.main.transform.position;
+    }
 }
