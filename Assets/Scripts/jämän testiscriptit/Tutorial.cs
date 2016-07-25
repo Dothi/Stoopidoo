@@ -13,6 +13,7 @@ public class Tutorial : MonoBehaviour {
     public GameObject cancel;
     public GameObject restart;
     public GameObject fastForward;
+    public GameObject goal;
     public int tutorialNumber;
     public bool tutorialDone;
     public Button buttonNext;
@@ -46,38 +47,43 @@ public class Tutorial : MonoBehaviour {
                 break;
             case 1:
                 player.sortingLayerName = "Tutorial";
+                
                 break;
             case 2:
+                goal.gameObject.SetActive(true);
                 player.sortingLayerName = "Default";
+                break;
+            case 3:
+                goal.gameObject.SetActive(false);
                 buttons.gameObject.SetActive(true);
                 Debug.Log("Kolmesti painettu");
                 break;
-            case 3:
+            case 4:
                 buttons.gameObject.SetActive(false);
                 rotatingBlock.gameObject.SetActive(true);
                 Debug.Log("neljästi painettu");
                 break;
-            case 4:
+            case 5:
                 Debug.Log("viidesti painettu");
                 rotatingBlock.gameObject.SetActive(false);
                 accept.gameObject.SetActive(true);
                 break;
-            case 5:
+            case 6:
                 Debug.Log("kuudesti painettu");
                 accept.gameObject.SetActive(false);
                 cancel.gameObject.SetActive(true);
                 break;
-            case 6:
+            case 7:
                 Debug.Log("seittämästi painettu");
                 cancel.gameObject.SetActive(false);
                 buttons.gameObject.SetActive(true);
                 break;
-            case 7:
+            case 8:
                 Debug.Log("kaheksa painettu");
                 buttons.gameObject.SetActive(false);
                 fastForward.gameObject.SetActive(true);
                 break;
-            case 8:
+            case 9:
                 Debug.Log("kököö");
                 fastForward.gameObject.SetActive(false);
                 restart.gameObject.SetActive(true);

@@ -462,16 +462,19 @@ public class MapMenu : MonoBehaviour
                         {
                             if (j == 0)
                             {
+                                GameManager.instance.selectedNumber = 6;
                                 Debug.Log("kolmannen themen eka kenttä");
                                 GameManager.instance.sceneLoader("Japan level 1");
                             }
                             if (j == 1)
                             {
+                                GameManager.instance.selectedNumber = 7;
                                 Debug.Log("kolmannen themen toinen kenttä");
                                 GameManager.instance.sceneLoader("Japan level 4");
                             }
                             if (j == 2)
                             {
+                                GameManager.instance.selectedNumber = 8;
                                 Debug.Log("kolmannen themen viimeinen kenttä");
                                 GameManager.instance.sceneLoader("Japan level 5");
                             }

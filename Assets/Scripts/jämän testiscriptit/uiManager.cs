@@ -112,14 +112,14 @@ public class uiManager : MonoBehaviour
     public void ContinueGame()
     {
         GameManager.instance.levelNumber[GameManager.instance.selectedNumber] = starAmount;
-       // GameManager.instance.continued = true;
+        GameManager.instance.continued = true;
         Time.timeScale = 1;
         GameManager.instance.sceneLoader("MenuMap");
 
     }
     public void returnMapMenu()
     {
-        //GameManager.instance.continued = true;
+        GameManager.instance.continued = true;
        // GameManager.instance.pauseState = false;
         GameManager.instance.sceneLoader("MenuMap");
     }

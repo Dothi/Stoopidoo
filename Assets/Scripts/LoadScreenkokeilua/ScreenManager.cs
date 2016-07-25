@@ -23,6 +23,7 @@ public class ScreenManager : MonoBehaviour
     }
     void Update()
     {
+        transform.position = Camera.main.transform.position;
         //if (Input.GetMouseButtonDown(0))
         //{
         //    StartCoroutine(LoadSceneAsync("GameScreen"));
