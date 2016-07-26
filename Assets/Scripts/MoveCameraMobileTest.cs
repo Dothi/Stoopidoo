@@ -23,7 +23,7 @@ public class MoveCameraMobileTest : MonoBehaviour
     public float speed;
     float lerpTime = 1f;
     float currentLerpTime;
-
+    public Camera mainCamera;
 
 
     public GameObject FollowDogButton;
@@ -34,19 +34,20 @@ public class MoveCameraMobileTest : MonoBehaviour
     public void Start()
     {
         GameManager.instance.pauseState = false;
-        GameManager.instance.camePos = transform.position;
         FollowDogButton = GameObject.Find("FollowDoge");
         Sprite = Area.transform.GetComponent<SpriteRenderer>().sprite;
         player = GameObject.FindGameObjectWithTag("Player");
         CalculatePixelUnits();
         CalculateSize();
         Refresh();
-       // Center();
+        GameManager.instance.camePos = transform.position;
+        // Center();
     }
 
     //Calculate the pixel per unit value is for this sprite
     private void CalculatePixelUnits()
     {
+        
         PixelUnits = Sprite.rect.width / Sprite.bounds.size.x;
     }
 
@@ -93,6 +94,7 @@ public class MoveCameraMobileTest : MonoBehaviour
         Vector3 delta = camPosition - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
         Vector3 destination = transform.position + delta;
         transform.position = destination;
+        
     }
 
     //Calculate the max distance the camera can travel

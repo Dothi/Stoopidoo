@@ -63,6 +63,10 @@ public class Movement : MonoBehaviour
         vl = GetComponent<VictoryLose>();
     }
 
+    public void startWalking()
+    {
+        started = true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -204,20 +208,20 @@ public class Movement : MonoBehaviour
                     }
                 }
             }
-            if (!moving && !started)
-            {
-                uiManager.instance.CountDown.enabled = true;
-                timer -= Time.deltaTime;
-                Debug.Log(uiManager.instance.timerSprites.Length);
-                uiManager.instance.CountDown.sprite = uiManager.instance.timerSprites[(int)timer];
-            }
-            if (timer <= 0 && !moving && !started)
-            {
-                Debug.Log(timer);
-                uiManager.instance.CountDown.enabled = false;
-                moving = true;
-                started = true;
-            }
+            //if (!moving && !started)
+            //{
+            //    uiManager.instance.CountDown.enabled = true;
+            //    timer -= Time.deltaTime;
+            //    Debug.Log(uiManager.instance.timerSprites.Length);
+            //    uiManager.instance.CountDown.sprite = uiManager.instance.timerSprites[(int)timer];
+            //}
+            //if (timer <= 0 && !moving && !started)
+            //{
+            //    Debug.Log(timer);
+            //    uiManager.instance.CountDown.enabled = false;
+            //    moving = true;
+            //    started = true;
+            //}
             if (Input.GetKeyDown(KeyCode.Space) && !moving && !started)
             {
                 Debug.Log("jloj");
