@@ -72,19 +72,20 @@ public class GameManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("Level " + i + "Stars", levelNumber[i]);
             }
-            if (firstUnlock)
+            
+        }
+        if (firstUnlock)
+        {
+            PlayerPrefs.SetInt("FirstUnlock", 1);
+            if (secondUnlock)
             {
-                PlayerPrefs.SetInt("FirstUnlock", 1);
-                if (secondUnlock)
+                PlayerPrefs.SetInt("SecondUnlock", 1);
+                if (thirdUnlock)
                 {
-                    PlayerPrefs.SetInt("SecondUnlock", 1);
-                    if (thirdUnlock)
+                    PlayerPrefs.SetInt("ThirdUnlock", 1);
+                    if (fourthUnlock)
                     {
-                        PlayerPrefs.SetInt("ThirdUnlock", 1);
-                        if (fourthUnlock)
-                        {
-                            PlayerPrefs.SetInt("FourthUnlock", 1);
-                        }
+                        PlayerPrefs.SetInt("FourthUnlock", 1);
                     }
                 }
             }
