@@ -77,6 +77,7 @@ public class BlockSpawner : MonoBehaviour
             if (spawn != null)
             {
                 isDragging = true;
+                
 
                 var pos = new Vector3(myTouches[0].position.x, myTouches[0].position.y, -Camera.main.transform.position.z);
                 // pos.z = -Camera.main.transform.position.z;
@@ -84,12 +85,11 @@ public class BlockSpawner : MonoBehaviour
 
 
 
-                if (myTouches[0].phase == TouchPhase.Began && spawn.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask))
+                if (myTouches[0].phase == TouchPhase.Began && spawn.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask, -5f, -5f))
                 {
                     Debug.Log("hit");
                     isHit = true;
                     offset = spawn.transform.position - Camera.main.ScreenToWorldPoint(pos);
-
                 }
                 if (myTouches.Length == 1 && myTouches[0].phase == TouchPhase.Began && cancelButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
                 {
@@ -113,10 +113,10 @@ public class BlockSpawner : MonoBehaviour
                 {
                     Rotate();
                 }
-                else if (myTouches.Length == 1 && !isHit && isDragging && myTouches[0].phase == TouchPhase.Moved)
+               /* else if (myTouches.Length == 1 && !isHit && isDragging && myTouches[0].phase == TouchPhase.Moved)
                 {
                     Rotate();
-                }
+                }*/
                 else
                 {
                     StopRotate();
@@ -128,11 +128,11 @@ public class BlockSpawner : MonoBehaviour
                     spawn.transform.position = newPos;*/
                     if (myTouches.Length == 2)
                     {
-                        
+
                         if (myTouches[1].phase == TouchPhase.Began)
                         {
-                            if(myTouches[0].position.x < myTouches[1].position.x) { leftFirst = true; }
-                            if(myTouches[0].position.x > myTouches[1].position.x) { leftFirst = false; }
+                            if (myTouches[0].position.x < myTouches[1].position.x) { leftFirst = true; }
+                            if (myTouches[0].position.x > myTouches[1].position.x) { leftFirst = false; }
                         }
                         /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
 
@@ -140,48 +140,14 @@ public class BlockSpawner : MonoBehaviour
                         {
                             v2 = myTouches[1].position - myTouches[0].position;
                         }
-                        if(!leftFirst)
+                        if (!leftFirst)
                         {
                             v2 = myTouches[0].position - myTouches[1].position;
                         }
-
-                        
-                       
-
-                        
-                        
-                        
-                        
-                           
-                            var newAngle = Mathf.Atan2(v2.y, v2.x);
-                            
-
-                            
-                            spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
-                         
-                        
-                            
-                           
-
-
+                        var newAngle = Mathf.Atan2(v2.y, v2.x);
+                        spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
                         // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
-
-
-
-
-
-
-
-
-
-
-
                         // oldAngle = newAngle;
-
-
-
-
-
                     }
                     else if (myTouches.Length == 2 && isHit)
                     {
@@ -203,7 +169,7 @@ public class BlockSpawner : MonoBehaviour
 
                         // oldAngle = newAngle;
 
-                        
+
                     }
                     else
                     {
@@ -288,6 +254,7 @@ public class BlockSpawner : MonoBehaviour
             //pos = Camera.main.ScreenToWorldPoint(pos);
             pos = Camera.main.transform.position;
             spawn = Instantiate(prefabs[0], pos, Quaternion.identity) as Transform;
+            spawn.transform.position = new Vector3(spawn.transform.position.x, spawn.transform.position.y, -5f);
             smallBlocks--;
             blocksUsed++;
         }
@@ -301,6 +268,7 @@ public class BlockSpawner : MonoBehaviour
             //pos = Camera.main.ScreenToWorldPoint(pos);
             pos = Camera.main.transform.position;
             spawn = Instantiate(prefabs[1], pos, Quaternion.identity) as Transform;
+            spawn.transform.position = new Vector3(spawn.transform.position.x, spawn.transform.position.y, -5f);
             mediumBlocks--;
             blocksUsed++;
         }
@@ -314,6 +282,7 @@ public class BlockSpawner : MonoBehaviour
             //pos = Camera.main.ScreenToWorldPoint(pos);
             pos = Camera.main.transform.position;
             spawn = Instantiate(prefabs[2], pos, Quaternion.identity) as Transform;
+            spawn.transform.position = new Vector3(spawn.transform.position.x, spawn.transform.position.y, -5f);
             longBlocks--;
             blocksUsed++;
         }
@@ -341,6 +310,7 @@ public class BlockSpawner : MonoBehaviour
             }
 
             spawn.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f);
+            spawn.transform.position = new Vector3(spawn.transform.position.x, spawn.transform.position.y, 0);
             spawn = null;
         }
 
