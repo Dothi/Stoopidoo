@@ -77,8 +77,8 @@ public class flyingCarpet : MonoBehaviour {
                
                 endpos = transform.position;
                 endpos.y += -distance;
-                playerpos = Player.transform.position;
-                playerpos.y += -distance;
+                //playerpos = Player.transform.position;
+                //playerpos.y += -distance;
                 Debug.Log("Ylhäältä osu");
                 moving = true;
             }
@@ -94,8 +94,8 @@ public class flyingCarpet : MonoBehaviour {
                 
                 endpos = transform.position;
                 endpos.y += distance;
-                playerpos = Player.transform.position;
-                playerpos.y += distance;
+                //playerpos = Player.transform.position;
+                //playerpos.y += distance;
                 Debug.Log("alhaalta osu");
                 moving = true;
             }
@@ -111,8 +111,8 @@ public class flyingCarpet : MonoBehaviour {
                 
                 endpos = transform.position;
                 endpos.x += distance;
-                playerpos = Player.transform.position;
-                playerpos.x += distance;
+                //playerpos = Player.transform.position;
+                //playerpos.x += distance;
                 Debug.Log("vasemmalta osu");
                 moving = true;
             }
@@ -129,8 +129,8 @@ public class flyingCarpet : MonoBehaviour {
                 
                 endpos = transform.position;
                 endpos.x += -distance;
-                playerpos = Player.transform.position;
-                playerpos.x += -distance;
+                //playerpos = Player.transform.position;
+                //playerpos.x += -distance;
                 Debug.Log("oikeelta osu");
                 moving = true;
             }
@@ -145,7 +145,7 @@ public class flyingCarpet : MonoBehaviour {
     }
     void movingUp()
     {
-        Player.transform.position = Vector3.MoveTowards(Player.transform.position, playerpos, speed * Time.deltaTime);
+        //Player.transform.position = Vector3.MoveTowards(Player.transform.position, playerpos, speed * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, endpos, speed * Time.deltaTime);
         if(transform.position == endpos)
         {
@@ -159,7 +159,7 @@ public class flyingCarpet : MonoBehaviour {
     }
     void movingDown()
     {
-        Player.transform.position = Vector3.MoveTowards(Player.transform.position, playerpos, speed * Time.deltaTime);
+        //Player.transform.position = Vector3.MoveTowards(Player.transform.position, playerpos, speed * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, endpos, speed * Time.deltaTime);
         if(transform.position == endpos)
         {
@@ -172,7 +172,7 @@ public class flyingCarpet : MonoBehaviour {
     }
     void movingRight()
     {
-        Player.transform.position = Vector3.MoveTowards(Player.transform.position, playerpos, speed * Time.deltaTime);
+        //Player.transform.position = Vector3.MoveTowards(Player.transform.position, playerpos, speed * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, endpos, speed * Time.deltaTime);
         if (transform.position == endpos)
         {
@@ -185,7 +185,7 @@ public class flyingCarpet : MonoBehaviour {
     }
     void movingLeft()
     {
-        Player.transform.position = Vector3.MoveTowards(Player.transform.position, playerpos, speed * Time.deltaTime);
+        //Player.transform.position = Vector3.MoveTowards(Player.transform.position, playerpos, speed * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, endpos, speed * Time.deltaTime);
         if(transform.position == endpos)
         {
