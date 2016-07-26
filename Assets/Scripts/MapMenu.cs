@@ -495,30 +495,42 @@ public class MapMenu : MonoBehaviour
                         {
                             if (j == 0)
                             {
+                                GameManager.instance.selectedNumber = 9;
                                 Debug.Log("neljännen themen eka kenttä");
+                                GameManager.instance.sceneLoader("Desert level 1");
                             }
                             if (j == 1)
                             {
+                                GameManager.instance.selectedNumber = 10;
                                 Debug.Log("neljännen themen toinen kenttä");
+                                GameManager.instance.sceneLoader("Desert level 2");
                             }
                             if (j == 2)
                             {
+                                GameManager.instance.selectedNumber = 11;
                                 Debug.Log("neljännen themen viimeinen kenttä");
+                                GameManager.instance.sceneLoader("Desert level 3");
                             }
                         }
                         if (theme == 4)
                         {
                             if (j == 0)
                             {
+                                GameManager.instance.selectedNumber = 12;
                                 Debug.Log("viidennen themen eka kenttä");
+                                GameManager.instance.sceneLoader("Lava level 1");
                             }
                             if (j == 1)
                             {
+                                GameManager.instance.selectedNumber = 13;
                                 Debug.Log("viidennen themen toinen kenttä");
+                                GameManager.instance.sceneLoader("Lava level 3");
                             }
                             if (j == 2)
                             {
+                                GameManager.instance.selectedNumber = 14;
                                 Debug.Log("viidennen themen viimeinen kenttä");
+                                GameManager.instance.sceneLoader("Lava level 4");
                             }
                         }
                     }
