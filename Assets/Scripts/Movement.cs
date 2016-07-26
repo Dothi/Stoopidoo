@@ -121,27 +121,23 @@ public class Movement : MonoBehaviour
                             boostTimer += Time.deltaTime;
                             if (boostTimer >= 1f)
                             {
+
                                 Debug.Log("Blyat");
-                                if (!jumped)
+                                if (myRB.velocity.x < 0.02f && jumped && boostTimer >= 2f)
+                                {
+                                    movingRight = false;
+                                    jumped = false;
+                                    boostTimer = 0f;
+                                }
+                                else if (!jumped)
                                 {
                                     myRB.AddForce(new Vector2(100, 100));
                                     idleTimer = 0f;
                                 }
 
-                                
                                 jumped = true;
                                 boostTimer = 0f;
-
                             }
-                            else if (myRB.velocity.x < 0.02f && jumped && boostTimer >= 2f)
-                            {
-                                movingRight = false;
-                                jumped = false;
-                                boostTimer = 0f;
-
-
-                            }
-
                         }
                         else
                         {
@@ -173,7 +169,14 @@ public class Movement : MonoBehaviour
                             if (boostTimer >= 1f)
                             {
                                 Debug.Log("Blyat");
-                                if (!jumped)
+                                if (myRB.velocity.x > -0.02f && jumped)
+                                {
+                                    movingRight = true;
+                                    boostTimer = 0f;
+                                    idleTimer = 0f;
+
+                                }
+                                else if (!jumped)
                                 {
                                     myRB.AddForce(new Vector2(-100, 100));
                                     idleTimer = 0f;
@@ -184,13 +187,7 @@ public class Movement : MonoBehaviour
                                 boostTimer = 0f;
 
                             }
-                            if (myRB.velocity.x > -0.02f && jumped)
-                            {
-                                movingRight = true;
-                                boostTimer = 0f;
-                                idleTimer = 0f;
-
-                            }
+                            
 
                         }
                         else
