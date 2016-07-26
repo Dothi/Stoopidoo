@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 61ee4ddea36e9d64dba38e9f06498e76
-timeCreated: 1467965671
+guid: 46ea0da963ba88f4aa73842956ed5720
+timeCreated: 1469517843
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: 3stage_navigator_0
+    21300000: 4stage_navigator_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -51,7 +51,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: 3stage_navigator_0
+    - name: 4stage_navigator_0
       rect:
         serializedVersion: 2
         x: 479

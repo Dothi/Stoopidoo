@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Vector3 highlightPos;
     public Vector3 camPos = new Vector3(0, 0, -10);
     public Vector3 camePos;
-    public bool firstUnlock, secondUnlock;
+    public bool firstUnlock, secondUnlock, thirdUnlock, fourthUnlock;
     public bool gameStarted;
     public bool loadingScreen;
     public bool saved;

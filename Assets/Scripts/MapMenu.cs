@@ -86,9 +86,19 @@ public class MapMenu : MonoBehaviour
             GameManager.instance.firstUnlock = true;
             Unlock();
         }
-        if(overAllStars >= 6)
+        if(overAllStars >= 6 && overAllStars <=8)
         {
             GameManager.instance.secondUnlock = true;
+            Unlock();
+        }
+        if (overAllStars >= 9 && overAllStars <= 11)
+        {
+            GameManager.instance.thirdUnlock = true;
+            Unlock();
+        }
+        if (overAllStars >= 12)
+        {
+            GameManager.instance.fourthUnlock = true;
             Unlock();
         }
         //levelSelection();
@@ -186,33 +196,35 @@ public class MapMenu : MonoBehaviour
     {
         if (theme == 0)
         {
-            themePointer.sprite = pointers[0];
+            themePointer.sprite = pointers[theme];
             star01 = GameManager.instance.levelNumber[0];
             star02 = GameManager.instance.levelNumber[1];
             star03 = GameManager.instance.levelNumber[2];
         }
         if (theme == 1)
         {
-            themePointer.sprite = pointers[1];
+            themePointer.sprite = pointers[theme];
             star01 = GameManager.instance.levelNumber[3];
             star02 = GameManager.instance.levelNumber[4];
             star03 = GameManager.instance.levelNumber[5];
         }
         if (theme == 2)
         {
-            themePointer.sprite = pointers[2];
+            themePointer.sprite = pointers[theme];
             star01 = GameManager.instance.levelNumber[6];
             star02 = GameManager.instance.levelNumber[7];
             star03 = GameManager.instance.levelNumber[8];
         }
         if (theme == 3)
         {
+            themePointer.sprite = pointers[theme];
             star01 = GameManager.instance.levelNumber[9];
             star02 = GameManager.instance.levelNumber[10];
             star03 = GameManager.instance.levelNumber[11];
         }
         if (theme == 4)
         {
+            themePointer.sprite = pointers[theme];
             star01 = GameManager.instance.levelNumber[12];
             star02 = GameManager.instance.levelNumber[13];
             star03 = GameManager.instance.levelNumber[14];
@@ -554,7 +566,7 @@ public class MapMenu : MonoBehaviour
                 }
 
             }
-            if (GameManager.instance.secondUnlock)
+            if (GameManager.instance.secondUnlock && !GameManager.instance.thirdUnlock)
             {
                 if (currentTime <= TimeitTakesToFade)
                 {
@@ -569,13 +581,39 @@ public class MapMenu : MonoBehaviour
                     levels[2].GetComponent<SpriteRenderer>().enabled = true;
                 }
             }
+            if (GameManager.instance.thirdUnlock && !GameManager.instance.fourthUnlock)
+            {
+                if (currentTime <= TimeitTakesToFade)
+                {
+                    Debug.Log("third unlock");
+                    fadeValue = 1 - (currentTime / TimeitTakesToFade);
+                    mappi[2].color = new Color(1, 1, 1, fadeValue);
+
+                }
+                if (fadeValue <= 0.01f)
+                {
+                    levels[3].GetComponent<CircleCollider2D>().enabled = true;
+                    levels[3].GetComponent<SpriteRenderer>().enabled = true;
+                }
+            }
+            if (GameManager.instance.fourthUnlock)
+            {
+                if (currentTime <= TimeitTakesToFade)
+                {
+                    Debug.Log("fourth unlock");
+                    fadeValue = 1 - (currentTime / TimeitTakesToFade);
+                    mappi[3].color = new Color(1, 1, 1, fadeValue);
+
+                }
+                if (fadeValue <= 0.01f)
+                {
+                    levels[4].GetComponent<CircleCollider2D>().enabled = true;
+                    levels[4].GetComponent<SpriteRenderer>().enabled = true;
+                }
+            }
         }
     }
-    void secondUnlock()
-    {
-        currentTime += Time.deltaTime;
 
-    }
     void unlocking()
     {
         if (GameManager.instance.firstUnlock)
@@ -592,5 +630,20 @@ public class MapMenu : MonoBehaviour
             levels[2].GetComponent<CircleCollider2D>().enabled = true;
             levels[2].GetComponent<SpriteRenderer>().enabled = true;
         }
+        if (GameManager.instance.thirdUnlock)
+        {
+            Debug.Log("Third unlock");
+            mappi[2].GetComponent<SpriteRenderer>().enabled = false;
+            levels[3].GetComponent<CircleCollider2D>().enabled = true;
+            levels[3].GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if (GameManager.instance.fourthUnlock)
+        {
+            Debug.Log("Fourth unlock");
+            mappi[3].GetComponent<SpriteRenderer>().enabled = false;
+            levels[4].GetComponent<CircleCollider2D>().enabled = true;
+            levels[4].GetComponent<SpriteRenderer>().enabled = true;
+        }
+
     }
 }
