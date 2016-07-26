@@ -49,6 +49,14 @@ public class GameManager : MonoBehaviour
             if (PlayerPrefs.GetInt("SecondUnlock") == 1)
             {
                 secondUnlock = true;
+                if(PlayerPrefs.GetInt("ThirdUnlock") == 1)
+                {
+                    thirdUnlock = true;
+                    if(PlayerPrefs.GetInt("FourthUnlock") == 1)
+                    {
+                        fourthUnlock = true;
+                    }
+                }
             }
         }
 
@@ -71,6 +79,14 @@ public class GameManager : MonoBehaviour
             if (secondUnlock)
             {
                 PlayerPrefs.SetInt("SecondUnlock", 1);
+                if(thirdUnlock)
+                {
+                    PlayerPrefs.SetInt("ThirdUnlock", 1);
+                    if(fourthUnlock)
+                    {
+                        PlayerPrefs.SetInt("FourthUnlock", 1);
+                    }
+                }
             }
         }
         
