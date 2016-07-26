@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: b9eec86d17a1f7949b094bf9491600cf
 timeCreated: 1469516103
+=======
+guid: 28ecb83c0e5d07747b252e76a55ad555
+timeCreated: 1469515842
+>>>>>>> origin/master
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -26,11 +31,19 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
+<<<<<<< HEAD
   textureFormat: -3
   maxTextureSize: 8192
   textureSettings:
     filterMode: -1
     aniso: 16
+=======
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+>>>>>>> origin/master
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
