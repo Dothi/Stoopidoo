@@ -34,7 +34,7 @@ public class MapMenu : MonoBehaviour
     bool faded;
     //public bool themeClicked;
     //public int clickCounter = 0;
-    void Start()
+    void Awake()
     {
         pressNumber = 0;
         //themeClicked = false;
@@ -54,16 +54,16 @@ public class MapMenu : MonoBehaviour
         }
         levelPos = GameManager.instance.levelPos;
         theme = GameManager.instance.theme;
-        if (GameManager.instance.continued)
-        {
-            highlight.gameObject.SetActive(true);
-            highlight.gameObject.transform.position = GameManager.instance.highlightPos;
-            levelSelect = true;
-            gameLevels.position = GameManager.instance.levelPos;
+        //if (GameManager.instance.continued)
+        //{
+        //    highlight.gameObject.SetActive(true);
+        //    highlight.gameObject.transform.position = GameManager.instance.highlightPos;
+        //    levelSelect = true;
+        //    gameLevels.position = GameManager.instance.levelPos;
             
-            playButton.gameObject.SetActive(false);
-            mainMenuPic.gameObject.SetActive(false);
-        }
+        //    playButton.gameObject.SetActive(false);
+        //    mainMenuPic.gameObject.SetActive(false);
+        //}
         for (int i = 1; i <= 5; i++)
         {
             levels.Add(GameObject.Find("Level_" + i));

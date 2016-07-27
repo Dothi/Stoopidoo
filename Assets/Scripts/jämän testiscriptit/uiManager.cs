@@ -133,8 +133,11 @@ public class uiManager : MonoBehaviour
     }
     public void restart()
     {
-        GameManager.instance.pauseState = false;
-        Application.LoadLevel(Application.loadedLevel);
+        if (pressNumber == 0)
+        {
+            GameManager.instance.pauseState = false;
+            Application.LoadLevel(Application.loadedLevel);
+        }
     }
 
     public void fastSpeed()
