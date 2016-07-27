@@ -27,7 +27,7 @@ public class MapMenu : MonoBehaviour
     public Image mainMenuPic;
     public SpriteRenderer[] mappi;
     public int overAllStars;
-
+    public int forestStars, iceStars, japanStars, desertStars;
     float currentTime = 0;
     float TimeitTakesToFade = 2;
     float fadeValue = 1;
@@ -47,23 +47,36 @@ public class MapMenu : MonoBehaviour
         for (int i = 1; i <= 3; i++) { star3.Add(GameObject.Find("star30" + i)); }
         levels = new List<GameObject>();
         gameLevel = new List<GameObject>();
-        //highlight.gameObject.SetActive(false);
-        for (int i = 0; i < GameManager.instance.levelNumber.Length; i++)
+        ////highlight.gameObject.SetActive(false);
+        //for (int i = 0; i < GameManager.instance.levelNumber.Length; i++)
+        //{
+        //    overAllStars += GameManager.instance.levelNumber[i];
+        //}
+        for(int i = 0; i < 3; i++)
         {
-            overAllStars += GameManager.instance.levelNumber[i];
+            forestStars += GameManager.instance.levelNumber[i];
+        }
+        for(int i = 3; i < 6; i++)
+        {
+            iceStars += GameManager.instance.levelNumber[i];
+        }
+        for(int i = 6; i < 9; i++)
+        {
+            japanStars += GameManager.instance.levelNumber[i];
+        }
+        for(int i = 9; i < 12; i++)
+        {
+            desertStars += GameManager.instance.levelNumber[i];
         }
         levelPos = GameManager.instance.levelPos;
         theme = GameManager.instance.theme;
-        //if (GameManager.instance.continued)
-        //{
-        //    highlight.gameObject.SetActive(true);
-        //    highlight.gameObject.transform.position = GameManager.instance.highlightPos;
-        //    levelSelect = true;
-        //    gameLevels.position = GameManager.instance.levelPos;
-            
-        //    playButton.gameObject.SetActive(false);
-        //    mainMenuPic.gameObject.SetActive(false);
-        //}
+        if (GameManager.instance.continued)
+        {
+            highlight.gameObject.SetActive(true);
+            highlight.gameObject.transform.position = GameManager.instance.highlightPos;
+            levelSelect = true;
+            gameLevels.position = GameManager.instance.levelPos;
+        }
         for (int i = 1; i <= 5; i++)
         {
             levels.Add(GameObject.Find("Level_" + i));
@@ -83,22 +96,22 @@ public class MapMenu : MonoBehaviour
     void Update()
     {
 
-        if (overAllStars >= 3 && overAllStars <=5)
+        if (forestStars >= 3)
         {
             GameManager.instance.firstUnlock = true;
             Unlock();
         }
-        if(overAllStars >= 6 && overAllStars <=8)
+        if(iceStars >= 4)
         {
             GameManager.instance.secondUnlock = true;
             Unlock();
         }
-        if (overAllStars >= 9 && overAllStars <= 11)
+        if (japanStars >= 6)
         {
             GameManager.instance.thirdUnlock = true;
             Unlock();
         }
-        if (overAllStars >= 12)
+        if (desertStars >= 8)
         {
             GameManager.instance.fourthUnlock = true;
             Unlock();
