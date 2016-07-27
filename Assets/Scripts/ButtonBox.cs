@@ -43,7 +43,7 @@ public class ButtonBox : MonoBehaviour
                 {
                     collider.isTrigger = true;
                 }
-                
+
             }
             if (temp > 90)
             {
@@ -66,6 +66,7 @@ public class ButtonBox : MonoBehaviour
 
             for (int i = 0; i < rotatingBlocks.Count; i++)
             {
+
                 if (rotatingBlocks[i].GetComponent<RotatingBoxRotation>().clockWise)
                 {
                     if (rotatingBlocks[i].transform.eulerAngles.z > 271)
@@ -84,12 +85,9 @@ public class ButtonBox : MonoBehaviour
                     {
                         rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 270);
                     }
-                    //enable colliders
-                    Collider2D[] colliders = rotatingBlocks[i].GetComponentsInChildren<BoxCollider2D>();
-                    foreach (var collider in colliders)
-                    {
-                        collider.isTrigger = false;
-                    }
+
+                    
+                   
                 }
 
 
@@ -113,13 +111,18 @@ public class ButtonBox : MonoBehaviour
                         rotatingBlocks[i].transform.eulerAngles = new Vector3(0, 0, 270);
                     }
                 }
+
+                //enable colliders
+                Collider2D[] colliders = rotatingBlocks[i].GetComponentsInChildren<BoxCollider2D>();
+                foreach (var collider in colliders)
+                {
+                    collider.isTrigger = false;
+                }
             }
         }
     }
     void RotateBlocks()
     {
-
-
         for (int i = 0; i < rotatingBlocks.Count; i++)
         {
             if (rotatingBlocks[i].GetComponent<RotatingBoxRotation>().clockWise)
@@ -136,8 +139,6 @@ public class ButtonBox : MonoBehaviour
 
                 rotatingBlocks[i].transform.eulerAngles += Vector3.Lerp(transform.rotation.eulerAngles, destination, Time.deltaTime);
             }
-
-
         }
     }
     //void OnTriggerEnter2D(Collider2D collision)
