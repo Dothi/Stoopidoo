@@ -298,12 +298,15 @@ public class BlockSpawner : MonoBehaviour
             if (spawn.gameObject.layer != LayerMask.NameToLayer("Hurricane"))
             {
                 spawn.GetComponent<Collider2D>().isTrigger = false;
+                Debug.Log("HURRICEIIIN#");
+                if(spawn.gameObject.layer == LayerMask.NameToLayer("Darude"))
+                {
+                    spawn.gameObject.layer = LayerMask.NameToLayer("Hurricane");
+                    spawn.GetComponent<Collider2D>().isTrigger = true;
+                    Debug.Log("ASDFADSFDDSAFASF");
+                }
             }
-            else if (spawn.gameObject.layer == LayerMask.NameToLayer("Darude"))
-            {
-                spawn.gameObject.layer = LayerMask.NameToLayer("Hurricane");
-                spawn.GetComponent<Collider2D>().isTrigger = true;
-            }
+
             else
             {
                 spawn.GetComponentInChildren<FanRaycast>().enabled = true;
