@@ -14,6 +14,8 @@ public class Tutorial : MonoBehaviour {
     public GameObject restart;
     public GameObject fastForward;
     public GameObject goal;
+    public GameObject WholeScreen;
+    public GameObject SkipTutorial;
     public int tutorialNumber;
     public bool tutorialDone;
     public Button buttonNext;
@@ -60,11 +62,13 @@ public class Tutorial : MonoBehaviour {
                 break;
             case 4:
                 buttons.gameObject.SetActive(false);
+                WholeScreen.gameObject.SetActive(false);
                 rotatingBlock.gameObject.SetActive(true);
                 Debug.Log("neljästi painettu");
                 break;
             case 5:
                 Debug.Log("viidesti painettu");
+                WholeScreen.gameObject.SetActive(true);
                 rotatingBlock.gameObject.SetActive(false);
                 accept.gameObject.SetActive(true);
                 break;
@@ -86,6 +90,7 @@ public class Tutorial : MonoBehaviour {
             case 9:
                 Debug.Log("kököö");
                 fastForward.gameObject.SetActive(false);
+                WholeScreen.gameObject.SetActive(false);
                 restart.gameObject.SetActive(true);
                 break;
   
@@ -111,5 +116,14 @@ public class Tutorial : MonoBehaviour {
                 tutorialNumber++;
             }
         //}
+    }
+    public void skipButton()
+    {
+        GameManager.instance.pauseState = false;
+        tutorialDone = true;
+        tuto.enabled = false;
+        _tutor.gameObject.SetActive(false);
+        buttonNext.gameObject.SetActive(false);
+
     }
 }
