@@ -19,7 +19,7 @@ public class uiManager : MonoBehaviour
     public Image star02;
     public Image star03;
     int starAmount;
-    int threeStar, twoStar, oneStar;
+    int threeStar, twoStar, oneStar, pressNumber;
     //public bool doubleSpeed;
 
     public static uiManager instance;
@@ -38,7 +38,7 @@ public class uiManager : MonoBehaviour
     void Start()
     {
         Victory.gameObject.SetActive(false);
-
+        pressNumber = 0;
 
     }
 
@@ -111,17 +111,25 @@ public class uiManager : MonoBehaviour
     }
     public void ContinueGame()
     {
-        GameManager.instance.levelNumber[GameManager.instance.selectedNumber] = starAmount;
-        GameManager.instance.continued = true;
-        Time.timeScale = 1;
-        GameManager.instance.sceneLoader("MenuMap");
+        if (pressNumber == 0)
+        {
+            GameManager.instance.levelNumber[GameManager.instance.selectedNumber] = starAmount;
+            GameManager.instance.continued = true;
+            Time.timeScale = 1;
+            GameManager.instance.sceneLoader("MenuMap");
+            pressNumber++;
+        }
 
     }
     public void returnMapMenu()
     {
-        GameManager.instance.continued = true;
-       // GameManager.instance.pauseState = false;
-        GameManager.instance.sceneLoader("MenuMap");
+        if (pressNumber == 0)
+        {
+            GameManager.instance.continued = true;
+            // GameManager.instance.pauseState = false;
+            GameManager.instance.sceneLoader("MenuMap");
+            pressNumber++;
+        }
     }
     public void restart()
     {

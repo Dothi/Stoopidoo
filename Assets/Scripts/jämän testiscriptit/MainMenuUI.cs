@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class MainMenuUI : MonoBehaviour {
 
     public Image credits, settings;
-    public Button backbutton, closeSettings;
+    public Button backbutton, closeSettings, quit, play, info, setting;
+    public GameObject wantToQuit;
     //public Button closeSettings;
     public Toggle music, sound;
 	// Use this for initialization
@@ -33,5 +34,25 @@ public class MainMenuUI : MonoBehaviour {
     public void CloseSettings()
     {
         settings.gameObject.SetActive(false);
+    }
+    public void QuitGame()
+    {
+        wantToQuit.gameObject.SetActive(true);
+        quit.gameObject.SetActive(false);
+        play.gameObject.SetActive(false);
+        info.gameObject.SetActive(false);
+        setting.gameObject.SetActive(false);
+    }
+    public void yes()
+    {
+        Application.Quit();
+    }
+    public void no()
+    {
+        wantToQuit.gameObject.SetActive(false);
+        quit.gameObject.SetActive(true);
+        play.gameObject.SetActive(true);
+        info.gameObject.SetActive(true);
+        setting.gameObject.SetActive(true);
     }
 }

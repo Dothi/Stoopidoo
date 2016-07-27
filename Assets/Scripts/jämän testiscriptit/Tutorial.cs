@@ -29,11 +29,19 @@ public class Tutorial : MonoBehaviour {
         spriteColor.a = 1f;
         darken.color = spriteColor;
         player = GameObject.Find("Player").GetComponent<SpriteRenderer>();
-        GameManager.instance.pauseState = true;
+        tutorialDone = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if(!tutorialDone)
+        {
+            GameManager.instance.pauseState = true;
+        }
+        else if (tutorialDone)
+        {
+            GameManager.instance.pauseState = false;
+        }
         Color spriteColor = darken.color;
         spriteColor.a = 0.7f;
         darken.color = spriteColor;
@@ -103,6 +111,7 @@ public class Tutorial : MonoBehaviour {
             tuto.enabled = false;
             _tutor.gameObject.SetActive(false);
             buttonNext.gameObject.SetActive(false);
+            
             Debug.Log("button should be enabled");
         }
 	}
@@ -124,6 +133,6 @@ public class Tutorial : MonoBehaviour {
         tuto.enabled = false;
         _tutor.gameObject.SetActive(false);
         buttonNext.gameObject.SetActive(false);
-
+        WholeScreen.gameObject.SetActive(false);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MapMenu : MonoBehaviour
 {
+    int pressNumber;
     public int sormi = 0;
     public float yPos;
     public List<GameObject> levels;
@@ -35,6 +36,7 @@ public class MapMenu : MonoBehaviour
     //public int clickCounter = 0;
     void Start()
     {
+        pressNumber = 0;
         //themeClicked = false;
         //levelPos.z = -10;
         star1 = new List<GameObject>();
@@ -657,5 +659,14 @@ public class MapMenu : MonoBehaviour
             levels[4].GetComponent<SpriteRenderer>().enabled = true;
         }
 
+    }
+
+    public void MainMenu()
+    {
+        if (pressNumber == 0)
+        {
+            GameManager.instance.sceneLoader("MainMenu");
+            pressNumber++;
+        }
     }
 }
