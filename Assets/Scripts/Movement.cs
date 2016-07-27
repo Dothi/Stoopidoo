@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     public bool isTouchingWall;
     public bool iceWalk;
     bool jumped;
-    bool hitForward;
+    public bool hitForward;
     bool started;
     RaycastHit2D hit;
     SpriteRenderer spriteRend;
@@ -26,6 +26,7 @@ public class Movement : MonoBehaviour
     BlockSpawner bs;
     public LayerMask DefaultTerrainLayerMask;
     public Vector3 vel;
+    Vector3 oldPos;
     public static Movement instance;
     internal Animator anim;
     // Use this for initialization
@@ -70,6 +71,9 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        vel = (transform.position - oldPos) / Time.deltaTime;
+        oldPos = transform.position;
         if (!GameManager.instance.pauseState)
         {
             RaycastHit2D hit;
@@ -84,18 +88,26 @@ public class Movement : MonoBehaviour
             {
                 groundHit = Physics2D.Raycast(transform.position + new Vector3(-.2f, 0), -transform.up, 1.2f, DefaultTerrainLayerMask);
 
-                forwardHit = Physics2D.Raycast(transform.position, transform.right, 1.2f, DefaultTerrainLayerMask);
+                forwardHit = Physics2D.Raycast(transform.position, transform.right, 1f, DefaultTerrainLayerMask);
 
             }
             else
             {
                 groundHit = Physics2D.Raycast(transform.position + new Vector3(.2f, 0), -transform.up, 1.2f, DefaultTerrainLayerMask);
 
-                forwardHit = Physics2D.Raycast(transform.position, -transform.right, 1.2f, DefaultTerrainLayerMask);
+                forwardHit = Physics2D.Raycast(transform.position, -transform.right, 1f, DefaultTerrainLayerMask);
 
             }
+            if (forwardHit && forwardHit != bs.spawn)
+            {
+                hitForward = true;
+            }
+            else if (!forwardHit)
+            {
+                hitForward = false;
+            }
 
-            vel = myRB.velocity;
+
             if (iceWalk)
             {
                 moving = false;
@@ -111,10 +123,10 @@ public class Movement : MonoBehaviour
 
                     spriteRend.flipX = false;
 
-                    if (moving && myRB.velocity.x < 0.02f && myRB.velocity.y < 0.02f)
+                    if (moving && vel.x <= 0f)
                     {
 
-                        if (!forwardHit)
+                        if (!forwardHit && !jumped)
                         {
 
                             Debug.Log("cyka");
@@ -125,31 +137,22 @@ public class Movement : MonoBehaviour
                                 if (!jumped)
                                 {
                                     myRB.AddForce(new Vector2(100, 100));
-                                    idleTimer = 0f;
+                                    jumped = true;
+                                    
                                 }
-
                                 
-                                jumped = true;
                                 boostTimer = 0f;
-
                             }
-                            else if (myRB.velocity.x < 0.02f && jumped && boostTimer >= 2f)
-                            {
-                                movingRight = false;
-                                jumped = false;
-                                boostTimer = 0f;
-
-
-                            }
-
+                            
                         }
                         else
                         {
+                           
                             idleTimer += Time.deltaTime;
                             Debug.Log(idleTimer);
-                            if (idleTimer >= 2f)
+                            if (idleTimer >= 1f)
                             {
-                                
+
                                 movingRight = false;
                                 jumped = false;
                                 idleTimer = 0f;
@@ -157,15 +160,20 @@ public class Movement : MonoBehaviour
                             }
                         }
                     }
+                    else if (!forwardHit)
+                    {
+                        idleTimer = 0f;
+                        boostTimer = 0f;
+                    }
                 }
                 else
                 {
 
                     spriteRend.flipX = true;
 
-                    if (moving && myRB.velocity.x > -0.02f && myRB.velocity.y < 0.02f)
+                    if (moving && vel.x >= 0f)
                     {
-                        if (!forwardHit)
+                        if (!forwardHit && !jumped)
                         {
 
                             Debug.Log("cyka");
@@ -176,35 +184,34 @@ public class Movement : MonoBehaviour
                                 if (!jumped)
                                 {
                                     myRB.AddForce(new Vector2(-100, 100));
-                                    idleTimer = 0f;
+                                    jumped = true;
+                                    
                                 }
-
-                                
-                                jumped = true;
                                 boostTimer = 0f;
 
                             }
-                            if (myRB.velocity.x > -0.02f && jumped)
-                            {
-                                movingRight = true;
-                                boostTimer = 0f;
-                                idleTimer = 0f;
-
-                            }
+                            
 
                         }
                         else
                         {
+
                             idleTimer += Time.deltaTime;
-                            if (idleTimer >= 2f)
+                            if (idleTimer >= 1f)
                             {
-                                idleTimer = 0f;
+
                                 movingRight = true;
                                 jumped = false;
+                                idleTimer = 0f;
 
                             }
                         }
 
+                    }
+                    else if (!forwardHit)
+                    {
+                        idleTimer = 0f;
+                        boostTimer = 0f;
                     }
                 }
             }
@@ -478,7 +485,7 @@ public class Movement : MonoBehaviour
             }
             else
             {
-                
+
                 Quaternion finalRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 4f);
 
 
@@ -518,7 +525,18 @@ public class Movement : MonoBehaviour
 
         if (!GameManager.instance.pauseState)
         {
-            if (myRB.velocity.x > 0)
+            
+            if (hitForward)
+            {
+                speed = 0f;
+                anim.SetFloat("speed", 0f);
+            }
+            else
+            {
+                speed = 50f;
+            }
+
+           if (myRB.velocity.x > 0)
             {
                 anim.SetFloat("speed", myRB.velocity.x);
             }
@@ -538,13 +556,16 @@ public class Movement : MonoBehaviour
 
 
                     }
-                    if (moving && movingRight)
+                    if (!hitForward)
                     {
-                        myRB.velocity = new Vector2(speed * Time.deltaTime, myRB.velocity.y);
-                    }
-                    else if (moving && !movingRight)
-                    {
-                        myRB.velocity = new Vector2(-speed * Time.deltaTime, myRB.velocity.y);
+                        if (moving && movingRight)
+                        {
+                            myRB.velocity = new Vector2(speed * Time.deltaTime, myRB.velocity.y);
+                        }
+                        else if (moving && !movingRight)
+                        {
+                            myRB.velocity = new Vector2(-speed * Time.deltaTime, myRB.velocity.y);
+                        }
                     }
                 }
                 else
@@ -557,8 +578,8 @@ public class Movement : MonoBehaviour
                     }
                     else if (iceWalk && myRB.velocity.x > 0 && myRB.velocity.y > 0)
                     {
-                     /*   Vector3 newVel = myRB.velocity;
-                        myRB.velocity = newVel;*/
+                        /*   Vector3 newVel = myRB.velocity;
+                           myRB.velocity = newVel;*/
                     }
                     else if (iceWalk && myRB.velocity.x < 0 && myRB.velocity.y < 0)
                     {

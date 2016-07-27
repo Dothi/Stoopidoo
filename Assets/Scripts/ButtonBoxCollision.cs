@@ -9,7 +9,10 @@ public class ButtonBoxCollision : MonoBehaviour
 
     void Start()
     {
-        bb = GameObject.FindGameObjectWithTag("ButtonBoxController").GetComponent<ButtonBox>();
+        if (GameObject.FindGameObjectWithTag("ButtonBoxController").GetComponent<ButtonBox>() != null)
+        {
+            bb = GameObject.FindGameObjectWithTag("ButtonBoxController").GetComponent<ButtonBox>();
+        }
         rotated = false;
     }
     
