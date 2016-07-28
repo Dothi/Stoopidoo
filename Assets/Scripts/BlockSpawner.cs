@@ -85,31 +85,32 @@ public class BlockSpawner : MonoBehaviour
 
 
 
-                if (myTouches[0].phase == TouchPhase.Began && spawn.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask, -5f, -5f))
+                if (myTouches[0].phase == TouchPhase.Began && spawn.GetChild(0).GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask, -5f, -5f) || myTouches[0].phase == TouchPhase.Began && spawn.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask, -5f, -5f))
                 {
                     Debug.Log("hit");
                     isHit = true;
                     offset = spawn.transform.position - Camera.main.ScreenToWorldPoint(pos);
                 }
-                if (myTouches.Length == 1 && myTouches[0].phase == TouchPhase.Began && cancelButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                
+                else if (myTouches.Length == 1 && myTouches[0].phase == TouchPhase.Began && cancelButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
                 {
                     Cancel();
                 }
-                if (myTouches.Length == 1 && myTouches[0].phase == TouchPhase.Began && confirmButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                else if (myTouches.Length == 1 && myTouches[0].phase == TouchPhase.Began && confirmButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
                 {
                     Confirm();
                 }
 
-                if (myTouches[0].phase == TouchPhase.Ended)
+                else if (myTouches[0].phase == TouchPhase.Ended)
                 {
                     isHit = false;
                 }
-                if (isHit)
+                else if (isHit)
                 {
                     spawn.transform.position = Camera.main.ScreenToWorldPoint(pos) + offset;
                 }
 
-                if (myTouches.Length == 2)
+                else if (myTouches.Length == 2)
                 {
                     Rotate();
                 }
@@ -298,6 +299,7 @@ public class BlockSpawner : MonoBehaviour
             if (spawn.gameObject.layer != LayerMask.NameToLayer("Hurricane"))
             {
                 spawn.GetComponent<Collider2D>().isTrigger = false;
+                spawn.GetChild(0).gameObject.SetActive(false);
                 Debug.Log("HURRICEIIIN#");
                 if(spawn.gameObject.layer == LayerMask.NameToLayer("Darude"))
                 {
