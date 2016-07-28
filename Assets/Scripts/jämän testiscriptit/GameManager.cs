@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public bool saved;
     public bool pauseState;
     public bool doubleSpeed;
+    public bool logo = true;
     void Awake()
     {
         if (instance != null && instance != this)

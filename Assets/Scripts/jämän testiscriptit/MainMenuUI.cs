@@ -7,6 +7,7 @@ public class MainMenuUI : MonoBehaviour {
     public Image credits, settings;
     public Button backbutton, closeSettings, quit, play, info, setting;
     public GameObject wantToQuit;
+    public GameObject kajaklogo;
     //public Button closeSettings;
     public Toggle music, sound;
 	// Use this for initialization
@@ -15,7 +16,10 @@ public class MainMenuUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	if(!GameManager.instance.logo)
+        {
+            kajaklogo.gameObject.SetActive(false);
+        }
 	}
     public void Credits()
     {

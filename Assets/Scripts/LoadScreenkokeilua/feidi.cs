@@ -12,12 +12,15 @@ public class feidi : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        timer += Time.deltaTime;
-        if(timer >= 2)
-        {
-            Debug.Log("TADAA");
-            StartCoroutine(blackScreenCover.FadeOut());
-            StartCoroutine(kajakLogo.FadeOut());
-        }
+
+            timer += Time.deltaTime;
+            if (timer >= 2)
+            {
+                Debug.Log("TADAA");
+                StartCoroutine(blackScreenCover.FadeOut());
+                StartCoroutine(kajakLogo.FadeOut());
+                GameManager.instance.logo = false;
+            }
+        
 	}
 }
