@@ -23,8 +23,7 @@ public class MapMenu : MonoBehaviour
     public int star01, star02, star03;
     public List<GameObject> star1, star2, star3;
     public AudioClip plob;
-    public Button playButton;
-    public Image mainMenuPic;
+    public Button mainMenu;
     public SpriteRenderer[] mappi;
     public int overAllStars;
     public int forestStars, iceStars, japanStars, desertStars;
@@ -567,8 +566,6 @@ public class MapMenu : MonoBehaviour
     public void playGame()
     {
         AudioSource.PlayClipAtPoint(plob, transform.position);
-        playButton.gameObject.SetActive(false);
-        mainMenuPic.gameObject.SetActive(false);
         levels[0].GetComponent<CircleCollider2D>().enabled = true;
 
     }
@@ -676,10 +673,7 @@ public class MapMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        if (pressNumber == 0)
-        {
-            GameManager.instance.sceneLoader("MainMenu");
-            pressNumber++;
-        }
+        Application.LoadLevel("MainMenu");
+        mainMenu.interactable = false;
     }
 }

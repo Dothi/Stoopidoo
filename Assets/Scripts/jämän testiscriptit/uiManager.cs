@@ -20,6 +20,8 @@ public class uiManager : MonoBehaviour
     public Image star03;
     int starAmount;
     int threeStar, twoStar, oneStar, pressNumber;
+    public Button map;
+    public GameObject wantToQuit;
     //public bool doubleSpeed;
 
     public static uiManager instance;
@@ -123,13 +125,16 @@ public class uiManager : MonoBehaviour
     }
     public void returnMapMenu()
     {
-        if (pressNumber == 0)
-        {
-            GameManager.instance.continued = true;
-            // GameManager.instance.pauseState = false;
-            GameManager.instance.sceneLoader("MenuMap");
-            pressNumber++;
-        }
+        map.interactable = false;
+        GameManager.instance.sceneLoader("MenuMap");
+        GameManager.instance.continued = true;
+        //if (pressNumber == 0)
+        //{
+        //    GameManager.instance.continued = true;
+        //    // GameManager.instance.pauseState = false;
+        //    GameManager.instance.sceneLoader("MenuMap");
+        //    pressNumber++;
+        //}
     }
     public void restart()
     {
@@ -165,10 +170,22 @@ public class uiManager : MonoBehaviour
     }
     public void quitGame()
     {
+        wantToQuit.gameObject.SetActive(true);
+//#if UNITY_EDITOR
+//        UnityEditor.EditorApplication.isPlaying = false;
+//#endif
+//        Application.Quit();
+
+    }
+    public void yes()
+    {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
-
+    }
+    public void no()
+    {
+        wantToQuit.gameObject.SetActive(false);
     }
 }
