@@ -83,16 +83,7 @@ public class BlockSpawner : MonoBehaviour
                 // pos.z = -Camera.main.transform.position.z;
 
 
-
-
-                if (myTouches[0].phase == TouchPhase.Began && spawn.GetChild(0).GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask, -5f, -5f) || myTouches[0].phase == TouchPhase.Began && spawn.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask, -5f, -5f))
-                {
-                    Debug.Log("hit");
-                    isHit = true;
-                    offset = spawn.transform.position - Camera.main.ScreenToWorldPoint(pos);
-                }
-                
-                else if (myTouches.Length == 1 && myTouches[0].phase == TouchPhase.Began && cancelButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+                if (myTouches.Length == 1 && myTouches[0].phase == TouchPhase.Began && cancelButton.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
                 {
                     Cancel();
                 }
@@ -100,7 +91,19 @@ public class BlockSpawner : MonoBehaviour
                 {
                     Confirm();
                 }
-
+                else if (myTouches[0].phase == TouchPhase.Began && spawn.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask, -5f, -5f) && spawn.childCount == 0)
+                {
+                    Debug.Log("hit");
+                    isHit = true;
+                    offset = spawn.transform.position - Camera.main.ScreenToWorldPoint(pos);
+                }
+                else if (myTouches[0].phase == TouchPhase.Began && spawn.GetChild(0).GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask, -5f, -5f) || myTouches[0].phase == TouchPhase.Began && spawn.GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos, UIMask, -5f, -5f))
+                {
+                    Debug.Log("hit");
+                    isHit = true;
+                    offset = spawn.transform.position - Camera.main.ScreenToWorldPoint(pos);
+                }
+                
                 else if (myTouches[0].phase == TouchPhase.Ended)
                 {
                     isHit = false;
@@ -147,14 +150,20 @@ public class BlockSpawner : MonoBehaviour
                         }
                         var newAngle = Mathf.Atan2(v2.y, v2.x);
                         spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+
+                        //testishaiba
+
+                        Vector3 newPos = new Vector3((myTouches[1].position.x + myTouches[0].position.x) / 2, (myTouches[1].position.y + myTouches[0].position.y) / 2, -Camera.main.transform.position.z - 5f);
+                        spawn.transform.position = Camera.main.ScreenToWorldPoint(newPos);
+
                         // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
                         // oldAngle = newAngle;
                     }
-                    else if (myTouches.Length == 2 && isHit)
+                   /* else if (myTouches.Length == 2 && isHit)
                     {
 
 
-                        /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);*/
+                        /*mousePos = new Vector3(myTouches[1].position.x, myTouches[1].position.y, 10);
 
                         v2 = myTouches[0].position - myTouches[1].position;
                         if (v2.x < 0)
@@ -178,7 +187,7 @@ public class BlockSpawner : MonoBehaviour
                         Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
                         lookPos = lookPos - spawn.transform.position;
                         float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
-                        spawn.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);*/
+                        spawn.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                     }
                     /*  Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
                       lookPos = lookPos - spawn.transform.position;
