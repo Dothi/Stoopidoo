@@ -24,6 +24,7 @@ public class MapMenu : MonoBehaviour
     public List<GameObject> star1, star2, star3;
     public AudioClip plob;
     public Button mainMenu;
+    public GameObject soundEffects;
     public SpriteRenderer[] mappi;
     public int overAllStars;
     public int forestStars, iceStars, japanStars, desertStars;
@@ -94,7 +95,10 @@ public class MapMenu : MonoBehaviour
 
     void Update()
     {
-
+        
+            
+            
+        
         if (forestStars >= 3)
         {
             GameManager.instance.firstUnlock = true;
@@ -420,7 +424,7 @@ public class MapMenu : MonoBehaviour
                 {
                     highlight.transform.position = ray.collider.gameObject.transform.position;
                     GameManager.instance.highlightPos = ray.collider.gameObject.transform.position;
-                    AudioSource.PlayClipAtPoint(plob, transform.position);
+                    soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
                     Highlighter();
                     levelSelect = true;
                     sormi = 0;
@@ -436,6 +440,7 @@ public class MapMenu : MonoBehaviour
                 {
                     if (ray & ray.collider == gameLevel[j].GetComponent<CircleCollider2D>())
                     {
+                        soundEffects.GetComponent<SoundEffects>().PlayWoof();
                         GameManager.instance.camPos = Camera.main.transform.position;
                         if (theme == 0)
                         {

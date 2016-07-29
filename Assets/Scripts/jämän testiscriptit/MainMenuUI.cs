@@ -8,10 +8,13 @@ public class MainMenuUI : MonoBehaviour {
     public Button backbutton, closeSettings, quit, play, info, setting;
     public GameObject wantToQuit;
     public GameObject kajaklogo;
+    public GameObject soundEffects;
     //public Button closeSettings;
     public Toggle music, sound;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
+        soundEffects = GameObject.FindGameObjectWithTag("SoundEffects");
 	}
 	
 	// Update is called once per frame
@@ -20,23 +23,44 @@ public class MainMenuUI : MonoBehaviour {
         {
             kajaklogo.gameObject.SetActive(false);
         }
+
+        if (sound.isOn)
+        {
+            soundEffects.GetComponent<SoundEffects>().soundEffects = true;
+        }
+        else
+        {
+            soundEffects.GetComponent<SoundEffects>().soundEffects = false;
+        }
+        if (music.isOn)
+        {
+            soundEffects.GetComponent<SoundEffects>().music = true;
+        }
+        else
+        {
+            soundEffects.GetComponent<SoundEffects>().music = false;
+        }
 	}
     public void Credits()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         credits.gameObject.SetActive(true);
         backbutton.gameObject.SetActive(true);
     }
     public void BackButton()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         credits.gameObject.SetActive(false);
         backbutton.gameObject.SetActive(false);
     }
     public void Settings()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         settings.gameObject.SetActive(true);
     }
     public void CloseSettings()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         settings.gameObject.SetActive(false);
     }
     public void QuitGame()

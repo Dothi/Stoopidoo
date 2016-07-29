@@ -24,11 +24,15 @@ public class CloudScroller : MonoBehaviour {
     public void PlayGame()
     {
         play.interactable = false;
-        GameManager.instance.sceneLoader("MenuMap");
+        Invoke("MenuMap", .5f);
         //if (pressNumber == 0)
         //{
         //    GameManager.instance.sceneLoader("MenuMap");
         //    pressNumber++;
         //}
+    }
+    void MenuMap()
+    {
+        GameManager.instance.sceneLoader("MenuMap");
     }
 }
