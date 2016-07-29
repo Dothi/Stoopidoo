@@ -32,8 +32,7 @@ public class VictoryLose : MonoBehaviour {
     {
 	if(win)
         {
-            mov.myRB.velocity = new Vector2(0f, mov.myRB.velocity.y);
-            mov.anim.SetFloat("speed", 0f);
+            
             if (!goalSoundPlayed)
             {
                 soundEffects.transform.GetChild(0).GetComponent<AudioSource>().clip = null;
