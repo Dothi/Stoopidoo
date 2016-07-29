@@ -24,6 +24,8 @@ public class uiManager : MonoBehaviour
     public GameObject wantToQuit;
     public Image mapButton;
     public GameObject soundEffects;
+    public Image Settingsimage;
+    public Toggle music, sound;
     //public bool doubleSpeed;
 
     public static uiManager instance;
@@ -62,6 +64,22 @@ public class uiManager : MonoBehaviour
         {
             Time.timeScale = 1;
             Debug.Log("going Normal");
+        }
+        if (sound.isOn)
+        {
+            soundEffects.GetComponent<SoundEffects>().soundEffects = true;
+        }
+        else
+        {
+            soundEffects.GetComponent<SoundEffects>().soundEffects = false;
+        }
+        if (music.isOn)
+        {
+            soundEffects.GetComponent<SoundEffects>().music = true;
+        }
+        else
+        {
+            soundEffects.GetComponent<SoundEffects>().music = false;
         }
     }
 
@@ -160,7 +178,16 @@ public class uiManager : MonoBehaviour
             OneStar();
         }
     }
-
+    public void Settings()
+    {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
+        Settingsimage.gameObject.SetActive(true);
+    }
+    public void CloseSettings()
+    {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
+        Settingsimage.gameObject.SetActive(false);
+    }
     public void ThreeStars()
     {
         starAmount = 3;
