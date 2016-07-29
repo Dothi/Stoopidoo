@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class MainMenuUI : MonoBehaviour {
+public class MainMenuUI : MonoBehaviour
+{
 
     public Image credits, settings;
     public Button backbutton, closeSettings, quit, play, info, setting;
@@ -11,15 +12,18 @@ public class MainMenuUI : MonoBehaviour {
     public GameObject soundEffects;
     //public Button closeSettings;
     public Toggle music, sound;
-	// Use this for initialization
-	void Start () 
+    float timer;
+    // Use this for initialization
+    void Start()
     {
         soundEffects = GameObject.FindGameObjectWithTag("SoundEffects");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	if(!GameManager.instance.logo)
+        timer = 0f;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!GameManager.instance.logo)
         {
             kajaklogo.gameObject.SetActive(false);
         }
@@ -40,7 +44,7 @@ public class MainMenuUI : MonoBehaviour {
         {
             soundEffects.GetComponent<SoundEffects>().music = false;
         }
-	}
+    }
     public void Credits()
     {
         soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
@@ -73,10 +77,17 @@ public class MainMenuUI : MonoBehaviour {
     }
     public void yes()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayLoseSound();
+
+        Invoke("QuitYes", 3f);
+    }
+    public void QuitYes()
+    {
         Application.Quit();
     }
     public void no()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         wantToQuit.gameObject.SetActive(false);
         quit.gameObject.SetActive(true);
         play.gameObject.SetActive(true);

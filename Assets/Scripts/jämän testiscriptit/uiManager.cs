@@ -23,6 +23,7 @@ public class uiManager : MonoBehaviour
     public Button map;
     public GameObject wantToQuit;
     public Image mapButton;
+    public GameObject soundEffects;
     //public bool doubleSpeed;
 
     public static uiManager instance;
@@ -45,6 +46,7 @@ public class uiManager : MonoBehaviour
         //Color spriteColor = mapButton.color;
         //spriteColor.a = 1f;
         //mapButton.color = spriteColor;
+        soundEffects = GameObject.FindGameObjectWithTag("SoundEffects");
 
     }
 
@@ -117,6 +119,7 @@ public class uiManager : MonoBehaviour
     }
     public void ContinueGame()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         if (pressNumber == 0)
         {
             GameManager.instance.levelNumber[GameManager.instance.selectedNumber] = starAmount;
@@ -129,6 +132,7 @@ public class uiManager : MonoBehaviour
     }
     public void returnMapMenu()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         Color spriteColor = mapButton.color;
         spriteColor.a = 0.7f;
         mapButton.color = spriteColor;
@@ -145,6 +149,7 @@ public class uiManager : MonoBehaviour
     }
     public void restart()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         if (pressNumber == 0)
         {
             GameManager.instance.pauseState = false;
@@ -164,6 +169,7 @@ public class uiManager : MonoBehaviour
     }
     public void gamePause()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         if (!GameManager.instance.pauseState)
         {
             GameManager.instance.pauseState = true;
@@ -172,11 +178,13 @@ public class uiManager : MonoBehaviour
     }
     public void gameContinue()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         GameManager.instance.pauseState = false;
         menu.gameObject.SetActive(false);
     }
     public void quitGame()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         wantToQuit.gameObject.SetActive(true);
 //#if UNITY_EDITOR
 //        UnityEditor.EditorApplication.isPlaying = false;
@@ -186,13 +194,22 @@ public class uiManager : MonoBehaviour
     }
     public void yes()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayLoseSound();
+
+
+        Invoke("QuitYes", 3f);
+       
+        
+    }
+    public void QuitYes()
+    {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
-        Application.Quit();
     }
     public void no()
     {
         wantToQuit.gameObject.SetActive(false);
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
     }
 }

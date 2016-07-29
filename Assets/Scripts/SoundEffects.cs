@@ -7,6 +7,8 @@ public class SoundEffects : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip dogWoof;
     public AudioClip clickSound;
+    public AudioClip goalSound;
+    public AudioClip loseSound;
     public Button playButton;
     bool played;
     public bool soundEffects;
@@ -58,6 +60,24 @@ public class SoundEffects : MonoBehaviour
         if (!played && soundEffects)
         {
             audioSource.clip = clickSound;
+            audioSource.Play();
+            played = true;
+        }
+    }
+    public void PlayGoalSound()
+    {
+        if (!played && soundEffects)
+        {
+            audioSource.clip = goalSound;
+            audioSource.Play();
+            played = true;
+        }
+    }
+    public void PlayLoseSound()
+    {
+        if (!played && soundEffects)
+        {
+            audioSource.clip = loseSound;
             audioSource.Play();
             played = true;
         }
