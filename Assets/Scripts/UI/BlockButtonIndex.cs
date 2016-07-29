@@ -19,6 +19,27 @@ public class BlockButtonIndex : MonoBehaviour
     {
         switch (bs.smallBlocks)
         {
+            case 10:
+                indexes[0].GetComponent<Image>().sprite = indexSprites[10];
+                break;
+            case 9:
+                indexes[0].GetComponent<Image>().sprite = indexSprites[9];
+                break;
+            case 8:
+                indexes[0].GetComponent<Image>().sprite = indexSprites[8];
+                break;
+            case 7:
+                indexes[0].GetComponent<Image>().sprite = indexSprites[7];
+                break;
+            case 6:
+                indexes[0].GetComponent<Image>().sprite = indexSprites[6];
+                break;
+            case 5:
+                indexes[0].GetComponent<Image>().sprite = indexSprites[5];
+                break;
+            case 4:
+                indexes[0].GetComponent<Image>().sprite = indexSprites[4];
+                break;
             case 3:
                 indexes[0].GetComponent<Image>().sprite = indexSprites[3];
                 break;
@@ -34,6 +55,27 @@ public class BlockButtonIndex : MonoBehaviour
         }
         switch (bs.mediumBlocks)
         {
+            case 10:
+                indexes[1].GetComponent<Image>().sprite = indexSprites[10];
+                break;
+            case 9:
+                indexes[1].GetComponent<Image>().sprite = indexSprites[9];
+                break;
+            case 8:
+                indexes[1].GetComponent<Image>().sprite = indexSprites[8];
+                break;
+            case 7:
+                indexes[1].GetComponent<Image>().sprite = indexSprites[7];
+                break;
+            case 6:
+                indexes[1].GetComponent<Image>().sprite = indexSprites[6];
+                break;
+            case 5:
+                indexes[1].GetComponent<Image>().sprite = indexSprites[5];
+                break;
+            case 4:
+                indexes[1].GetComponent<Image>().sprite = indexSprites[4];
+                break;
             case 3:
                 indexes[1].GetComponent<Image>().sprite = indexSprites[3];
                 break;
@@ -49,6 +91,27 @@ public class BlockButtonIndex : MonoBehaviour
         }
         switch (bs.longBlocks)
         {
+            case 10:
+                indexes[2].GetComponent<Image>().sprite = indexSprites[10];
+                break;
+            case 9:
+                indexes[2].GetComponent<Image>().sprite = indexSprites[9];
+                break;
+            case 8:
+                indexes[2].GetComponent<Image>().sprite = indexSprites[8];
+                break;
+            case 7:
+                indexes[2].GetComponent<Image>().sprite = indexSprites[7];
+                break;
+            case 6:
+                indexes[2].GetComponent<Image>().sprite = indexSprites[6];
+                break;
+            case 5:
+                indexes[2].GetComponent<Image>().sprite = indexSprites[5];
+                break;
+            case 4:
+                indexes[2].GetComponent<Image>().sprite = indexSprites[4];
+                break;
             case 3:
                 indexes[2].GetComponent<Image>().sprite = indexSprites[3];
                 break;
