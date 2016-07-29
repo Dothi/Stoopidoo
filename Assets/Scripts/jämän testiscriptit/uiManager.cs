@@ -71,29 +71,94 @@ public class uiManager : MonoBehaviour
         if (level == "Jonna Forest 1")
         {
             threeStar = 4;
-            twoStar = 6;  
+            twoStar = 5;
         }
-        if(level == "JonnaTestMobile")
+        if (level == "JonnaTestMobile")
+        {
+            threeStar = 5;
+            twoStar = 6;
+        }
+        if (level == "Forest level 3")
         {
             threeStar = 6;
             twoStar = 7;
         }
-            if (BlockSpawner.instance.blocksUsed <= threeStar)
-            {
-                ThreeStars();
-                Debug.Log(BlockSpawner.instance.blocksUsed);
-
-            }
-            else if (BlockSpawner.instance.blocksUsed <= twoStar)
-            {
-                Debug.Log(BlockSpawner.instance.blocksUsed);
-                TwoStars();
-            }
-            else
-            {
-                Debug.Log(BlockSpawner.instance.blocksUsed);
+        if (level == "Winter level 1")
+        {
+            threeStar = 6;
+            twoStar = 7;
+        }
+        if (level == "winter level 2")
+        {
+            threeStar = 6;
+            twoStar = 7;
+        }
+        if (level == "Winter level 3")
+        {
+            threeStar = 11;
+            twoStar = 12;
+        }
+        if (level == "Japan level 1")
+        {
+            threeStar = 3;
+            twoStar = 4;
+        }
+        if (level == "Japan level 4")
+        {
+            threeStar = 2;
+            twoStar = 4;
+        }
+        if (level == "Japan level 5")
+        {
+            threeStar = 4;
+            twoStar = 6;
+        }
+        if (level == "Desert level 1")
+        {
+            threeStar = 3;
+            twoStar = 4;
+        }
+        if (level == "Desert level 2")
+        {
+            threeStar = 4;
+            twoStar = 5;
+        }
+        if (level == "Desert level 3")
+        {
+            threeStar = 4;
+            twoStar = 5;
+        }
+        if (level == "Lava level 1")
+        {
+            threeStar = 8;
+            twoStar = 10;
+        }
+        if (level == "Lava level 3")
+        {
+            threeStar = 13;
+            twoStar = 16;
+        }
+        if (level == "Lava level 4")
+        {
+            threeStar = 8;
+            twoStar = 10;
+        }
+        if (BlockSpawner.instance.blocksUsed <= threeStar)
+        {
             ThreeStars();
-            }        
+            Debug.Log(BlockSpawner.instance.blocksUsed + "Blocks used");
+
+        }
+        else if (BlockSpawner.instance.blocksUsed <= twoStar)
+        {
+            Debug.Log(BlockSpawner.instance.blocksUsed + "Blocks used");
+            TwoStars();
+        }
+        else
+        {
+            Debug.Log(BlockSpawner.instance.blocksUsed + "blocks used");
+            OneStar();
+        }
     }
 
     public void ThreeStars()
@@ -206,7 +271,7 @@ public class uiManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
-        
+        Application.Quit();
     }
     public void no()
     {
