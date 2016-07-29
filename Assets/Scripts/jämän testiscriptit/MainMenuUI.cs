@@ -10,12 +10,14 @@ public class MainMenuUI : MonoBehaviour
     public GameObject wantToQuit;
     public GameObject kajaklogo;
     public GameObject soundEffects;
+    GameManager gm;
     //public Button closeSettings;
     public Toggle music, sound;
     float timer;
     // Use this for initialization
     void Start()
     {
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         soundEffects = GameObject.FindGameObjectWithTag("SoundEffects");
         timer = 0f;
     }
@@ -30,19 +32,19 @@ public class MainMenuUI : MonoBehaviour
 
         if (sound.isOn)
         {
-            soundEffects.GetComponent<SoundEffects>().soundEffects = true;
+            gm.soundEffects = true;
         }
         else
         {
-            soundEffects.GetComponent<SoundEffects>().soundEffects = false;
+            gm.soundEffects = false;
         }
         if (music.isOn)
         {
-            soundEffects.GetComponent<SoundEffects>().music = true;
+            gm.music = true;
         }
         else
         {
-            soundEffects.GetComponent<SoundEffects>().music = false;
+            gm.music = false;
         }
     }
     public void Credits()

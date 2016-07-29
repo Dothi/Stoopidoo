@@ -11,12 +11,12 @@ public class SoundEffects : MonoBehaviour
     public AudioClip loseSound;
     public Button playButton;
     bool played;
-    public bool soundEffects;
-    public bool music;
+    GameManager gm;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         played = false;
         
     }
@@ -29,13 +29,13 @@ public class SoundEffects : MonoBehaviour
         }
         if (playButton != null)
         {
-            if (!playButton.interactable && soundEffects)
+            if (!playButton.interactable && gm.soundEffects)
             {
                 PlayWoof();
                 played = true;
             }
         }
-        if (music)
+        if (gm.music)
         {
             transform.GetChild(0).gameObject.SetActive(true);
         }
@@ -47,7 +47,7 @@ public class SoundEffects : MonoBehaviour
 
     public void PlayWoof()
     {
-        if (!played && soundEffects)
+        if (!played && gm.soundEffects)
         {
             audioSource.clip = dogWoof;
             audioSource.Play();
@@ -57,7 +57,7 @@ public class SoundEffects : MonoBehaviour
     }
     public void PlayMenuButtonSound()
     {
-        if (!played && soundEffects)
+        if (!played && gm.soundEffects)
         {
             audioSource.clip = clickSound;
             audioSource.Play();
@@ -66,7 +66,7 @@ public class SoundEffects : MonoBehaviour
     }
     public void PlayGoalSound()
     {
-        if (!played && soundEffects)
+        if (!played && gm.soundEffects)
         {
             audioSource.clip = goalSound;
             audioSource.Play();
@@ -75,7 +75,7 @@ public class SoundEffects : MonoBehaviour
     }
     public void PlayLoseSound()
     {
-        if (!played && soundEffects)
+        if (!played && gm.soundEffects)
         {
             audioSource.clip = loseSound;
             audioSource.Play();

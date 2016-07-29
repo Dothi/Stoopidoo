@@ -16,11 +16,13 @@ public class Tutorial : MonoBehaviour {
     public GameObject goal;
     public GameObject WholeScreen;
     public GameObject SkipTutorial;
+    public GameObject soundEffects;
     public int tutorialNumber;
     public bool tutorialDone;
     public Button buttonNext;
     public SpriteRenderer darken;
     SpriteRenderer player;
+    
 	// Use this for initialization
 	void Start () {
         tuto = GetComponent<SpriteRenderer>();
@@ -29,6 +31,7 @@ public class Tutorial : MonoBehaviour {
         spriteColor.a = 1f;
         darken.color = spriteColor;
         player = GameObject.Find("Player").GetComponent<SpriteRenderer>();
+        soundEffects = GameObject.FindGameObjectWithTag("SoundEffects");
         tutorialDone = false;
 	}
 	
@@ -118,6 +121,7 @@ public class Tutorial : MonoBehaviour {
 
     public void nextButton()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         //if (!tutorialDone)
         //{
             if (tutorialNumber < tutorial.Length)
@@ -128,6 +132,7 @@ public class Tutorial : MonoBehaviour {
     }
     public void skipButton()
     {
+        soundEffects.GetComponent<SoundEffects>().PlayMenuButtonSound();
         GameManager.instance.pauseState = false;
         tutorialDone = true;
         tuto.enabled = false;

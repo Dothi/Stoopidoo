@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public bool pauseState;
     public bool doubleSpeed;
     public bool logo = true;
+    public bool soundEffects;
+    public bool music;
     void Awake()
     {
         if (instance != null && instance != this)

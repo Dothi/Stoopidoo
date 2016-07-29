@@ -26,6 +26,7 @@ public class uiManager : MonoBehaviour
     public GameObject soundEffects;
     public Image Settingsimage;
     public Toggle music, sound;
+    public GameManager gm;
     //public bool doubleSpeed;
 
     public static uiManager instance;
@@ -49,6 +50,24 @@ public class uiManager : MonoBehaviour
         //spriteColor.a = 1f;
         //mapButton.color = spriteColor;
         soundEffects = GameObject.FindGameObjectWithTag("SoundEffects");
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+        if (gm.soundEffects)
+        {
+            sound.isOn = true;
+        }
+        else
+        {
+            sound.isOn = false;
+        }
+        if (gm.music)
+        {
+            music.isOn = true;
+        }
+        else
+        {
+            music.isOn = false;
+        }
 
     }
 
@@ -67,19 +86,19 @@ public class uiManager : MonoBehaviour
         }
         if (sound.isOn)
         {
-            soundEffects.GetComponent<SoundEffects>().soundEffects = true;
+            gm.soundEffects = true;
         }
         else
         {
-            soundEffects.GetComponent<SoundEffects>().soundEffects = false;
+            gm.soundEffects = false;
         }
         if (music.isOn)
         {
-            soundEffects.GetComponent<SoundEffects>().music = true;
+            gm.music = true;
         }
         else
         {
-            soundEffects.GetComponent<SoundEffects>().music = false;
+            gm.music = false;
         }
     }
 
