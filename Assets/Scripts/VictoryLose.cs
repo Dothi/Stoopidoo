@@ -30,7 +30,7 @@ public class VictoryLose : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	if(win)
+	if(win && !lose)
         {
             
             if (!goalSoundPlayed)
@@ -46,7 +46,7 @@ public class VictoryLose : MonoBehaviour {
                 Debug.Log("peli paussille ny");
             }
         }
-    if(lose)
+    if(lose && !win)
         {
             if (!loseSoundPlayed)
             {
