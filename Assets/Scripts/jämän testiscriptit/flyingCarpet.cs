@@ -15,6 +15,7 @@ public class flyingCarpet : MonoBehaviour {
     public bool up, down, left, right, moving, playerMove, moved;
     int upcount, downcount, leftcount, rightcount = 0;
     public float timer;
+    public int timetowait;
 	// Use this for initialization
 	void Start () {
         Player = GameObject.Find("Player");
@@ -29,7 +30,14 @@ public class flyingCarpet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        if(!GameManager.instance.doubleSpeed)
+        {
+            timetowait = 3;
+        }
+        if(GameManager.instance.doubleSpeed)
+        {
+            timetowait = 6;
+        }
         if (!playerMove)
         {
             Movement.instance.moving = false;
@@ -62,7 +70,7 @@ public class flyingCarpet : MonoBehaviour {
             //Movement.instance.moving = false;
             playerMove = false;
             timer += Time.deltaTime;
-            if(timer >= 3 && !moving)
+            if (timer >= timetowait && !moving)
             {
                 playerMove = true;
                 Movement.instance.moving = true;

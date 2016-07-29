@@ -47,7 +47,7 @@ public class Movement : MonoBehaviour
         myRB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         bs = GameObject.FindGameObjectWithTag("BlockSpawner").GetComponent<BlockSpawner>();
-        timer = 5f;
+        timer = 10f;
         moving = false;
         movingRight = true;
         isTouchingWall = false;

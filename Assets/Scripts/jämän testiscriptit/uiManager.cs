@@ -22,6 +22,7 @@ public class uiManager : MonoBehaviour
     int threeStar, twoStar, oneStar, pressNumber;
     public Button map;
     public GameObject wantToQuit;
+    public Image mapButton;
     //public bool doubleSpeed;
 
     public static uiManager instance;
@@ -41,6 +42,9 @@ public class uiManager : MonoBehaviour
     {
         Victory.gameObject.SetActive(false);
         pressNumber = 0;
+        //Color spriteColor = mapButton.color;
+        //spriteColor.a = 1f;
+        //mapButton.color = spriteColor;
 
     }
 
@@ -125,6 +129,9 @@ public class uiManager : MonoBehaviour
     }
     public void returnMapMenu()
     {
+        Color spriteColor = mapButton.color;
+        spriteColor.a = 0.7f;
+        mapButton.color = spriteColor;
         map.interactable = false;
         GameManager.instance.sceneLoader("MenuMap");
         GameManager.instance.continued = true;

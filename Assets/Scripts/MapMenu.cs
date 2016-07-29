@@ -31,10 +31,12 @@ public class MapMenu : MonoBehaviour
     float TimeitTakesToFade = 2;
     float fadeValue = 1;
     bool faded;
+    bool levelselected;
     //public bool themeClicked;
     //public int clickCounter = 0;
     void Awake()
     {
+        levelselected = false;
         pressNumber = 0;
         //themeClicked = false;
         //levelPos.z = -10;
@@ -430,17 +432,19 @@ public class MapMenu : MonoBehaviour
 
             }
             //showStars();
-            if (levelSelect)
+            if (levelSelect && !levelselected)
             {
                 for (int j = 0; j < 3; j++)
                 {
                     if (ray & ray.collider == gameLevel[j].GetComponent<CircleCollider2D>())
                     {
+                        levelselected = true;
                         GameManager.instance.camPos = Camera.main.transform.position;
                         if (theme == 0)
                         {
                             if (j == 0)
                             {
+                                
                                 GameManager.instance.selectedNumber = 0;
                                 GameManager.instance.sceneLoader("Jonna Forest 1");
                                 //GameManager.instance.sceneLoader("Winter1 leve 2");

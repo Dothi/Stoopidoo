@@ -23,20 +23,28 @@ public class MainMenuUI : MonoBehaviour {
 	}
     public void Credits()
     {
+        quit.gameObject.SetActive(false);
         credits.gameObject.SetActive(true);
         backbutton.gameObject.SetActive(true);
     }
     public void BackButton()
     {
+        quit.gameObject.SetActive(true);
         credits.gameObject.SetActive(false);
         backbutton.gameObject.SetActive(false);
     }
     public void Settings()
     {
+        quit.interactable = false;
+        info.interactable = false;
+        play.interactable = false;
         settings.gameObject.SetActive(true);
     }
     public void CloseSettings()
     {
+        quit.interactable = true;
+        info.interactable = true;
+        play.interactable = true;
         settings.gameObject.SetActive(false);
     }
     public void QuitGame()
