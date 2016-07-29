@@ -115,7 +115,10 @@ public class BlockSpawner : MonoBehaviour
 
                 else if (myTouches.Length == 2)
                 {
-                    Rotate();
+                    if (spawn.gameObject.layer != LayerMask.NameToLayer("Hurricane") && spawn.gameObject.layer != LayerMask.NameToLayer("Darude"))
+                    {
+                        Rotate();
+                    }
                 }
                /* else if (myTouches.Length == 1 && !isHit && isDragging && myTouches[0].phase == TouchPhase.Moved)
                 {
@@ -149,12 +152,15 @@ public class BlockSpawner : MonoBehaviour
                             v2 = myTouches[0].position - myTouches[1].position;
                         }
                         var newAngle = Mathf.Atan2(v2.y, v2.x);
-                        spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                        
+                            spawn.transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
 
-                        //testishaiba
 
-                        Vector3 newPos = new Vector3((myTouches[1].position.x + myTouches[0].position.x) / 2, (myTouches[1].position.y + myTouches[0].position.y) / 2, -Camera.main.transform.position.z - 5f);
-                        spawn.transform.position = Camera.main.ScreenToWorldPoint(newPos);
+                            //testishaiba
+
+                            Vector3 newPos = new Vector3((myTouches[1].position.x + myTouches[0].position.x) / 2, (myTouches[1].position.y + myTouches[0].position.y) / 2, -Camera.main.transform.position.z - 5f);
+                            spawn.transform.position = Camera.main.ScreenToWorldPoint(newPos);
+                        
 
                         // var deltaAngle = Mathf.DeltaAngle(newAngle, spawn.transform.rotation.z);
                         // oldAngle = newAngle;
