@@ -206,6 +206,7 @@ public class uiManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+        
     }
     public void no()
     {
