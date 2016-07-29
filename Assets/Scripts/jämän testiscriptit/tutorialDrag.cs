@@ -66,21 +66,24 @@ public class tutorialDrag : MonoBehaviour {
 
                     newAngle = Mathf.Atan2(v2.y, v2.x);
                     transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+
+                    Vector3 newPos = new Vector3((Input.touches[1].position.x + Input.touches[0].position.x) / 2, (Input.touches[1].position.y + Input.touches[0].position.y) / 2, -Camera.main.transform.position.z - 5f);
+                    transform.position = Camera.main.ScreenToWorldPoint(newPos);
                 }
-                else if (Input.touches.Length == 2 && isHit)
-                {
-                    v2 = Input.touches[0].position - Input.touches[1].position;
-                    if(v2.x < 0)
-                    {
-                        newAngle = Mathf.Atan2(-v2.y, -v2.x);
-                        transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
-                    }
-                    else
-                    {
-                        newAngle = Mathf.Atan2(v2.y, v2.x);
-                        transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
-                    }
-                }
+                //else if (Input.touches.Length == 2)
+                //{
+                //    v2 = Input.touches[0].position - Input.touches[1].position;
+                //    if(v2.x < 0)
+                //    {
+                //        newAngle = Mathf.Atan2(-v2.y, -v2.x);
+                //        transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                //    }
+                //    else
+                //    {
+                //        newAngle = Mathf.Atan2(v2.y, v2.x);
+                //        transform.rotation = Quaternion.EulerAngles(0f, 0f, newAngle);
+                //    }
+                //}
 
                     
                     Debug.Log("vasemmalla puolen");
