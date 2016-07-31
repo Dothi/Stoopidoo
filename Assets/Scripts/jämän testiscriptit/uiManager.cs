@@ -152,8 +152,8 @@ public class uiManager : MonoBehaviour
         }
         if (level == "Desert level 1")
         {
-            threeStar = 3;
-            twoStar = 4;
+            threeStar = 4;
+            twoStar = 5;
         }
         if (level == "Desert level 2")
         {
@@ -162,8 +162,8 @@ public class uiManager : MonoBehaviour
         }
         if (level == "Desert level 3")
         {
-            threeStar = 4;
-            twoStar = 5;
+            threeStar = 5;
+            twoStar = 6;
         }
         if (level == "Lava level 1")
         {
