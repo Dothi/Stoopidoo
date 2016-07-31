@@ -152,8 +152,8 @@ public class uiManager : MonoBehaviour
         }
         if (level == "Desert level 1")
         {
-            threeStar = 4;
-            twoStar = 5;
+            threeStar = 5;
+            twoStar = 6;
         }
         if (level == "Desert level 2")
         {
